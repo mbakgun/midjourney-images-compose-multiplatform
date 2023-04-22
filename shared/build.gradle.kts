@@ -1,0 +1,127 @@
+plugins {
+    kotlin("multiplatform")
+    kotlin("native.cocoapods")
+    id("com.android.library")
+    id("org.jetbrains.compose")
+    kotlin("plugin.serialization") version "1.8.20"
+}
+
+kotlin {
+    android()
+
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
+
+    cocoapods {
+        version = "1.0.0"
+        summary = "MidJourney Shared Module"
+        homepage = "Link to the Shared Module homepage"
+        ios.deploymentTarget = "14.1"
+        podfile = project.file("../iosApp/Podfile")
+        framework {
+            baseName = "shared"
+            isStatic = true
+        }
+        extraSpecAttributes["resources"] =
+            "['src/commonMain/resources/**', 'src/iosMain/resources/**']"
+    }
+
+    sourceSets {
+        val ktorVersion = "2.2.4"
+        val koinVersion = "3.2.0"
+
+        val commonMain by getting {
+            dependencies {
+                implementation(compose.runtime)
+                implementation(compose.foundation)
+                implementation(compose.material)
+
+                //sharedVm
+                implementation("com.rickclephas.kmm:kmm-viewmodel-core:1.0.0-ALPHA-6")
+
+                //di
+                api("io.insert-koin:koin-core:$koinVersion")
+
+                //network
+                implementation("io.ktor:ktor-client-core:$ktorVersion")
+                implementation("io.ktor:ktor-client-json:$ktorVersion")
+                implementation("io.ktor:ktor-client-logging:$ktorVersion")
+                implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
+                implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.5.0")
+
+                //imageloading
+                implementation("io.github.qdsfdhvh:image-loader:1.4.0")
+
+                //coroutines
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4") {
+                    version {
+                        strictly("1.6.4")
+                    }
+                }
+            }
+        }
+        val androidMain by getting {
+            dependencies {
+                api("io.insert-koin:koin-android:$koinVersion")
+                implementation("io.ktor:ktor-client-android:$ktorVersion")
+            }
+        }
+        val iosX64Main by getting
+        val iosArm64Main by getting
+        val iosSimulatorArm64Main by getting
+        val iosMain by creating {
+            dependsOn(commonMain)
+            iosX64Main.dependsOn(this)
+            iosArm64Main.dependsOn(this)
+            iosSimulatorArm64Main.dependsOn(this)
+
+            dependencies {
+                implementation("io.ktor:ktor-client-ios:$ktorVersion")
+            }
+        }
+
+        val commonTest by getting {
+            dependencies {
+                implementation(kotlin("test-common"))
+                implementation(kotlin("test-annotations-common"))
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
+                implementation("io.insert-koin:koin-test:$koinVersion")
+                implementation("app.cash.turbine:turbine:0.12.3")
+            }
+        }
+
+        val androidInstrumentedTest by getting {
+            dependencies {
+                implementation("androidx.compose.ui:ui-test-junit4:1.4.2")
+                implementation("androidx.compose.ui:ui-test-manifest:1.4.2")
+            }
+        }
+    }
+}
+
+android {
+    compileSdk = (findProperty("android.compileSdk") as String).toInt()
+    namespace = "com.myapplication.common"
+
+    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
+    sourceSets["main"].res.srcDirs("src/androidMain/res")
+    sourceSets["main"].resources.srcDirs("src/commonMain/resources")
+
+    defaultConfig {
+        minSdk = (findProperty("android.minSdk") as String).toInt()
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+    kotlin {
+        jvmToolchain(11)
+    }
+}
+
+kotlin.sourceSets.all {
+    languageSettings.optIn("kotlin.experimental.ExperimentalObjCName")
+}
