@@ -79,6 +79,7 @@ Please feel free to open an issue or send a pull request; any contributions will
 
 * Linkedin: https://www.linkedin.com/in/mbakgun
 * Twitter: https://twitter.com/mbakguns
+* Mastodon: https://androiddev.social/@mbakgun
 
 License
 -----------------

@@ -85,6 +85,7 @@ sağlık ✌️
 
 * Linkedin: https://www.linkedin.com/in/mbakgun
 * Twitter: https://twitter.com/mbakguns
+* Mastodon: https://androiddev.social/@mbakgun
 
 License
 -----------------

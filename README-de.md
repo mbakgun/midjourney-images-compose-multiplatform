@@ -79,6 +79,7 @@ Bitte zögern Sie nicht, ein Problem zu eröffnen oder einen Pull Request zu sen
 
 * Linkedin: https://www.linkedin.com/in/mbakgun
 * Twitter: https://twitter.com/mbakguns
+* Mastodon: https://androiddev.social/@mbakgun
 
 License
 -----------------
