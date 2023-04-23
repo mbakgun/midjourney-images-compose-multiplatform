@@ -69,7 +69,7 @@ Die für die Anwendung verwendete API ist [mj.mbkgun.com](https://mj.mbakgun.com
 
 ## Medium
 
-Für weitere Informationen schauen Sie sich den [Medium](https://medium.com/@mbakgun/mj-compose-multiplatform) Beitrag an.
+Für weitere Informationen schauen Sie sich den [Medium](https://mbakgun.medium.com/mj-compose-multiplatform-e6f737b3cd18) Beitrag an.
 
 ## Beiträge 👏
 

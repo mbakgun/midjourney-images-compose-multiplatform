@@ -74,7 +74,7 @@ Uygulama için kullanılan API, [mj.mbkgun.com](https://mj.mbakgun.com/) şeklin
 
 ## Medium
 
-Daha fazla bilgi için [Medium](https://medium.com/@mbakgun/mj-compose-multiplatform) yazısına göz atabilirsiniz.
+Daha fazla bilgi için [Medium](https://mbakgun.medium.com/mj-compose-multiplatform-e6f737b3cd18) yazısına göz atabilirsiniz.
 
 ## Katkı 👏
 
