@@ -1,4 +1,5 @@
 # MidJourney Images Compose Multiplatform Mobile Application
+[![Android Weekly #567](https://androidweekly.net/issues/issue-567/badge)](https://androidweekly.net/issues/issue-567)
 
 This application is developed to display the images created by MidJourney. The application is developed with Compose Multiplatform and works on Android and iOS platforms.
 
