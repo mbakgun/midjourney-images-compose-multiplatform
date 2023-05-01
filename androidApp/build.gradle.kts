@@ -13,7 +13,7 @@ kotlin {
                 api("androidx.activity:activity-compose:1.7.1")
                 api("androidx.appcompat:appcompat:1.6.1")
                 api("androidx.core:core-ktx:1.10.0")
-                implementation("com.rickclephas.kmm:kmm-viewmodel-core:1.0.0-ALPHA-6")
+                implementation("com.rickclephas.kmm:kmm-viewmodel-core:1.0.0-ALPHA-7")
             }
         }
     }
