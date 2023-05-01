@@ -1,5 +1,6 @@
 # MidJourney Images Compose Multiplatform Mobile Application
 [![Android Weekly #567](https://androidweekly.net/issues/issue-567/badge)](https://androidweekly.net/issues/issue-567)
+<a href=""><img alt="Kotlin Weekly" src="image-assets/kotlin-weekly.svg"/></a>
 
 Bu uygulama, çoklu platform desteği ile MidJourney'ın oluşturduğu resimleri göstermek için geliştirilmiştir. Uygulama,
 Compose Multiplatform ile geliştirilmiştir. Uygulama, Android, iOS platformlarında çalışmaktadır.
