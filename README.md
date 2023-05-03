@@ -57,7 +57,7 @@ The application has UI tests and unit tests. Unit tests are written with fake da
 
 ## API
 
-The API used for the application is [mj.mbkgun.com](https://mj.akgns.com/).
+The API used for the application is [mj.akgns.com](https://mj.akgns.com/).
 
 ## Future Plans
 

@@ -62,7 +62,7 @@ androidTest paketi altında yazılmıştır.
 
 ## API
 
-Uygulama için kullanılan API, [mj.mbkgun.com](https://mj.akgns.com/) şeklindedir.
+Uygulama için kullanılan API, [mj.akgns.com](https://mj.akgns.com/) şeklindedir.
 
 ## Gelecek Planlar
 
