@@ -30,7 +30,7 @@ class SuccessMjImagesDataSource : MjImagesDataSource.Remote {
             mjImageResponses = listOf(
                 MjImageResponse(
                     date = "2023-21-04",
-                    imageUrl = "https://mj.mbakgun.com",
+                    imageUrl = "https://mj.akgns.com",
                     ratio = 1.0,
                 )
             ),

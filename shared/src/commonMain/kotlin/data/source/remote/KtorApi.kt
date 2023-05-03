@@ -21,7 +21,7 @@ abstract class KtorApi {
      */
     fun HttpRequestBuilder.apiUrl(path: String) {
         url {
-            takeFrom("https://mj.mbakgun.com")
+            takeFrom("https://mj.akgns.com")
             path(path)
         }
     }

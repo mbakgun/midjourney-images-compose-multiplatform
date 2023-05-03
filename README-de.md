@@ -57,7 +57,7 @@ Die Anwendung verfügt über UI-Tests und Unit-Tests. Unit-Tests werden unter de
 
 ## API
 
-Die für die Anwendung verwendete API ist [mj.mbkgun.com](https://mj.mbakgun.com/).
+Die für die Anwendung verwendete API ist [mj.mbkgun.com](https://mj.akgns.com/).
 
 ## Zukünftige Pläne
 

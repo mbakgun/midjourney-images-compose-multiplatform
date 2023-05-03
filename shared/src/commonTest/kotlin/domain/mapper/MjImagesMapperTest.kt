@@ -109,7 +109,7 @@ class MjImagesMapperTest {
             mjImageResponses = listOf(
                 mockMjImageResponse(
                     date = "2023-21-04",
-                    imageUrl = "https://mj.mbakgun.com",
+                    imageUrl = "https://mj.akgns.com",
                     ratio = 1.0
                 )
             )
@@ -122,7 +122,7 @@ class MjImagesMapperTest {
             listOf(
                 MjImage(
                     date = "2023-21-04",
-                    imageUrl = "https://mj.mbakgun.com",
+                    imageUrl = "https://mj.akgns.com",
                     ratio = 1.0
                 )
             ),
@@ -137,12 +137,12 @@ class MjImagesMapperTest {
             mjImageResponses = listOf(
                 mockMjImageResponse(
                     date = "2023-21-04",
-                    imageUrl = "https://mj.mbakgun.com",
+                    imageUrl = "https://mj.akgns.com",
                     ratio = 1.0
                 ),
                 mockMjImageResponse(
                     date = "2023-21-04",
-                    imageUrl = "https://mj.mbakgun.com/images",
+                    imageUrl = "https://mj.akgns.com/images",
                     ratio = 1.0
                 )
             )
@@ -155,12 +155,12 @@ class MjImagesMapperTest {
             listOf(
                 MjImage(
                     date = "2023-21-04",
-                    imageUrl = "https://mj.mbakgun.com",
+                    imageUrl = "https://mj.akgns.com",
                     ratio = 1.0
                 ),
                 MjImage(
                     date = "2023-21-04",
-                    imageUrl = "https://mj.mbakgun.com/images",
+                    imageUrl = "https://mj.akgns.com/images",
                     ratio = 1.0
                 )
             ),
