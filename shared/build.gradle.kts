@@ -95,7 +95,7 @@ kotlin {
         val androidInstrumentedTest by getting {
             dependencies {
                 implementation("androidx.compose.ui:ui-test-junit4:1.4.3")
-                implementation("androidx.compose.ui:ui-test-manifest:1.4.2")
+                implementation("androidx.compose.ui:ui-test-manifest:1.4.3")
             }
         }
     }
