@@ -13,7 +13,7 @@ class MjImagesMapper constructor(
     suspend fun mapMjImages(
         response: MjImagesResponse
     ): MjImages =
-        withContext(dispatcherProvider.io) {
+        withContext(dispatcherProvider.default) {
             MjImages(
                 currentPage = response.currentPage ?: 0,
                 images = mapImages(response),

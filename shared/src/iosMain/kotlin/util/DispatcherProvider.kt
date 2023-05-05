@@ -8,5 +8,6 @@ internal actual fun getDispatcherProvider(): DispatcherProvider = IosDispatcherP
 private class IosDispatcherProvider : DispatcherProvider {
     override val main = Dispatchers.Main
     override val io = Dispatchers.IO
+    override val default = Dispatchers.Default
     override val unconfined = Dispatchers.Unconfined
 }
