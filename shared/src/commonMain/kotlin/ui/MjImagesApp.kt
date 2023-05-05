@@ -38,35 +38,38 @@ import util.generateImageLoader
 fun MjImagesApp(
     viewModel: MjImagesViewModel
 ) {
+    CompositionLocalProvider(
+        LocalImageLoader provides generateImageLoader()
+    ) {
+        val images: MjImages by viewModel.images.collectAsState()
+        val state: State by viewModel.state.collectAsState()
+        val onRefresh = { viewModel.refreshImages() }
+        val onLoadMore: () -> Unit = { viewModel.loadMore() }
 
-    val images: MjImages by viewModel.images.collectAsState()
-    val state: State by viewModel.state.collectAsState()
-    val onRefresh = { viewModel.refreshImages() }
-    val onLoadMore: () -> Unit = { viewModel.loadMore() }
+        MaterialTheme {
+            val isRefreshing = state == State.LOADING
+            val pullRefreshState = rememberPullRefreshState(isRefreshing, { onRefresh() })
 
-    MaterialTheme {
-        val isRefreshing = state == State.LOADING
-        val pullRefreshState = rememberPullRefreshState(isRefreshing, { onRefresh() })
+            Box(
+                Modifier
+                    .fillMaxSize()
+                    .pullRefresh(state = pullRefreshState)
+            ) {
+                when (state) {
+                    State.ERROR -> ErrorScreen(onRefresh)
+                    State.EMPTY -> EmptyScreen(onRefresh)
+                    else -> MjImagesList(
+                        onLoadMore,
+                        images,
+                    )
+                }
 
-        Box(
-            Modifier
-                .fillMaxSize()
-                .pullRefresh(state = pullRefreshState)
-        ) {
-            when (state) {
-                State.ERROR -> ErrorScreen(onRefresh)
-                State.EMPTY -> EmptyScreen(onRefresh)
-                else -> MjImagesList(
-                    onLoadMore,
-                    images,
+                PullRefreshIndicator(
+                    refreshing = isRefreshing,
+                    state = pullRefreshState,
+                    modifier = Modifier.align(Alignment.TopCenter).testTag("pullRefreshIndicator")
                 )
             }
-
-            PullRefreshIndicator(
-                refreshing = isRefreshing,
-                state = pullRefreshState,
-                modifier = Modifier.align(Alignment.TopCenter).testTag("pullRefreshIndicator")
-            )
         }
     }
 }
@@ -107,30 +110,26 @@ fun MjImageItem(
         elevation = 8.dp,
         shape = RoundedCornerShape(8.dp)
     ) {
-        CompositionLocalProvider(
-            LocalImageLoader provides generateImageLoader()
-        ) {
-            val painter = rememberAsyncImagePainter(
-                image.imageUrl,
-                contentScale = contentScale
-            )
-            val imageRequestState = painter.requestState
+        val painter = rememberAsyncImagePainter(
+            image.imageUrl,
+            contentScale = contentScale
+        )
+        val imageRequestState = painter.requestState
 
-            val transition by animateFloatAsState(
-                targetValue = if (imageRequestState is ImageRequestState.Success) 1f else 0f
-            )
+        val transition by animateFloatAsState(
+            targetValue = if (imageRequestState is ImageRequestState.Success) 1f else 0f
+        )
 
-            Image(
-                painter,
-                contentDescription = null,
-                modifier = Modifier
-                    .scale(.8f + (.2f * transition))
-                    .alpha(min(1f, transition / .2f))
-                    .blur(if (transition < .8f) 8.dp else 0.dp)
-                    .height(height),
-                contentScale = contentScale
-            )
-        }
+        Image(
+            painter,
+            contentDescription = null,
+            modifier = Modifier
+                .scale(.8f + (.2f * transition))
+                .alpha(min(1f, transition / .2f))
+                .blur(if (transition < .8f) 8.dp else 0.dp)
+                .height(height),
+            contentScale = contentScale
+        )
     }
 }
 

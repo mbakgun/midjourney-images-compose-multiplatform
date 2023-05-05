@@ -61,7 +61,7 @@ Die für die Anwendung verwendete API ist [mj.akgns.com](https://mj.akgns.com/).
 
 ## Zukünftige Pläne
 
-- [ ] Verbesserung des Bildladeprozesses
+- [x] Verbesserung des Bildladeprozesses
 - [ ] Langzeit und Bildfreigabe
 - [ ] Erstellen einer Webversion der Anwendung
 

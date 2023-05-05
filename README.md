@@ -61,7 +61,7 @@ The API used for the application is [mj.akgns.com](https://mj.akgns.com/).
 
 ## Future Plans
 
-- [ ] Improvement of the image-loading process
+- [x] Improvement of the image-loading process
 - [ ] LongClick and image sharing
 - [ ] Creating a web version of the application
 

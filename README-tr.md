@@ -66,7 +66,7 @@ Uygulama için kullanılan API, [mj.akgns.com](https://mj.akgns.com/) şeklinded
 
 ## Gelecek Planlar
 
-- [ ] Image loading işleminin iyileştirilmesi
+- [x] Image loading işleminin iyileştirilmesi
 - [ ] LongClick ve Görüntü Paylaşımı
 - [ ] Uygulamanın web sürümünün oluşturulması
 
