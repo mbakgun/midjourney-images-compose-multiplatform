@@ -7,17 +7,16 @@ import com.seiko.imageloader.cache.memory.maxSizePercent
 import com.seiko.imageloader.component.setupDefaultComponents
 import com.seiko.imageloader.util.DebugLogger
 import com.seiko.imageloader.util.LogPriority
-import kotlinx.coroutines.plus
 import okio.FileSystem
 
 @Composable
-actual fun generateImageLoader(): ImageLoader {
-    val scope = rememberCoroutineScope().plus(getDispatcherProvider().io)
-
-    return ImageLoader {
+actual fun generateImageLoader(): ImageLoader =
+    ImageLoader(
+        requestCoroutineContext = rememberCoroutineScope().coroutineContext,
+    ) {
         logger = DebugLogger(LogPriority.DEBUG)
         components {
-            setupDefaultComponents(scope)
+            setupDefaultComponents(imageScope)
         }
         interceptor {
 
@@ -31,4 +30,3 @@ actual fun generateImageLoader(): ImageLoader {
             }
         }
     }
-}
