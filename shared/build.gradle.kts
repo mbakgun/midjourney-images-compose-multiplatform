@@ -88,7 +88,7 @@ kotlin {
                 implementation(kotlin("test-annotations-common"))
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.0")
                 implementation("io.insert-koin:koin-test:$koinVersion")
-                implementation("app.cash.turbine:turbine:0.12.3")
+                implementation("app.cash.turbine:turbine:0.13.0")
             }
         }
 
