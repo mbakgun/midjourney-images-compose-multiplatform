@@ -49,7 +49,7 @@ kotlin {
                 implementation("io.ktor:ktor-client-logging:$ktorVersion")
                 implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
                 implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.5.0")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.5.1")
 
                 //imageloading
                 implementation("io.github.qdsfdhvh:image-loader:1.4.0")
