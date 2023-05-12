@@ -6,11 +6,9 @@ import domain.model.MjImage
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import util.getDispatcherProvider
 
-@OptIn(ExperimentalCoroutinesApi::class)
 class MjImagesMapperTest {
 
     private lateinit var mapper: MjImagesMapper

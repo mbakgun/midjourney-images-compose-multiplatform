@@ -55,9 +55,9 @@ kotlin {
                 implementation("io.github.qdsfdhvh:image-loader:1.4.1")
 
                 //coroutines
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.0") {
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1") {
                     version {
-                        strictly("1.7.0")
+                        strictly("1.7.1")
                     }
                 }
             }
@@ -86,7 +86,7 @@ kotlin {
             dependencies {
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.0")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1")
                 implementation("io.insert-koin:koin-test:$koinVersion")
                 implementation("app.cash.turbine:turbine:0.13.0")
             }
