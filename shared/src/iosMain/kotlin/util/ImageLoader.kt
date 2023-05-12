@@ -5,8 +5,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import com.seiko.imageloader.ImageLoader
 import com.seiko.imageloader.cache.memory.maxSizePercent
 import com.seiko.imageloader.component.setupDefaultComponents
-import com.seiko.imageloader.util.DebugLogger
-import com.seiko.imageloader.util.LogPriority
 import okio.FileSystem
 
 @Composable
@@ -14,7 +12,6 @@ actual fun generateImageLoader(): ImageLoader =
     ImageLoader(
         requestCoroutineContext = rememberCoroutineScope().coroutineContext,
     ) {
-        logger = DebugLogger(LogPriority.DEBUG)
         components {
             setupDefaultComponents(imageScope)
         }
