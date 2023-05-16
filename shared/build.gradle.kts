@@ -52,7 +52,7 @@ kotlin {
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.5.1")
 
                 //imageloading
-                implementation("io.github.qdsfdhvh:image-loader:1.4.1")
+                implementation("io.github.qdsfdhvh:image-loader:1.4.2")
 
                 //coroutines
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1") {
