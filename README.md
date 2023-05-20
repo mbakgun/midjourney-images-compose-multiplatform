@@ -61,8 +61,7 @@ The API used for the application is [mj.akgns.com](https://mj.akgns.com/).
 
 ## Future Plans
 
-- [x] Improvement of the image-loading process
-- [ ] Creating a web version of the application
+- [] Improvement of the image-loading process 
 
 ## Translations
 - [Türkçe](/README-tr.md)
