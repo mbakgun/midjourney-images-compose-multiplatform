@@ -16,9 +16,8 @@ import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.draw.blur
-import androidx.compose.ui.draw.scale
+import androidx.compose.ui.graphics.BlurEffect
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.platform.testTag
@@ -30,7 +29,6 @@ import com.seiko.imageloader.rememberAsyncImagePainter
 import domain.model.MjImage
 import domain.model.MjImages
 import domain.model.State
-import kotlin.math.min
 import util.generateImageLoader
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -101,18 +99,12 @@ fun MjImageItem(
     val uriHandler = LocalUriHandler.current
 
     Surface(
-        modifier = Modifier
-            .padding(4.dp)
-            .fillMaxWidth()
-            .clickable(
-                onClick = { uriHandler.openUri(image.imageUrl) },
-            ),
-        elevation = 8.dp,
-        shape = RoundedCornerShape(8.dp)
+        modifier = Modifier.padding(4.dp).fillMaxWidth().clickable(
+            onClick = { uriHandler.openUri(image.imageUrl) },
+        ), elevation = 8.dp, shape = RoundedCornerShape(8.dp)
     ) {
         val painter = rememberAsyncImagePainter(
-            image.imageUrl,
-            contentScale = contentScale
+            image.imageUrl, contentScale = contentScale
         )
         val imageRequestState = painter.requestState
 
@@ -120,16 +112,14 @@ fun MjImageItem(
             targetValue = if (imageRequestState is ImageRequestState.Success) 1f else 0f
         )
 
-        Image(
-            painter,
-            contentDescription = null,
-            modifier = Modifier
-                .scale(.8f + (.2f * transition))
-                .alpha(min(1f, transition / .2f))
-                .blur(if (transition < .8f) 8.dp else 0.dp)
-                .height(height),
-            contentScale = contentScale
-        )
+        Image(painter, contentDescription = null, modifier = Modifier.graphicsLayer {
+            val animatedValue: Float = .8f + (.2f * transition)
+            val blurValue: Float = if (transition == 1f) 1f else 24f + (.2f * transition)
+            scaleX = animatedValue
+            scaleY = animatedValue
+            alpha = animatedValue
+            renderEffect = BlurEffect(blurValue, blurValue)
+        }.height(height), contentScale = contentScale)
     }
 }
 
