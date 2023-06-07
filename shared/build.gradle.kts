@@ -28,6 +28,7 @@ kotlin {
     sourceSets {
         val ktorVersion = "2.3.1"
         val koinVersion = "3.4.2"
+        val koinTestVersion = "3.4.1"
 
         val commonMain by getting {
             dependencies {
@@ -85,7 +86,7 @@ kotlin {
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1")
-                implementation("io.insert-koin:koin-test:$koinVersion")
+                implementation("io.insert-koin:koin-test:$koinTestVersion")
                 implementation("app.cash.turbine:turbine:0.13.0")
             }
         }
