@@ -121,7 +121,6 @@ class MjImagesViewModelTest : KoinTest {
     }
 
     @Test
-    @Ignore
     fun `when fetch images gets error then state should be updated`() = runTest {
         // given
         setupDataSource(ErrorMjImagesDataSource())
