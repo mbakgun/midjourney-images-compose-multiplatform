@@ -54,7 +54,7 @@ kotlin {
                 implementation("io.github.qdsfdhvh:image-loader:1.5.1")
 
                 //coroutines
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1") {
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.2") {
                     version {
                         strictly("1.7.1")
                     }
