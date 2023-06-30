@@ -4,7 +4,6 @@ import app.cash.turbine.test
 import data.source.MjImagesDataSource
 import di.initKoin
 import domain.model.State
-import fakes.EmptyMjImagesDataSource
 import fakes.ErrorMjImagesDataSource
 import fakes.SuccessMjImagesDataSource
 import kotlin.test.AfterTest
@@ -52,8 +51,8 @@ class MjImagesViewModelTest : KoinTest {
         val viewModel = get<MjImagesViewModel>()
 
         // then
-        viewModel.state.test {
-            assertEquals(State.CONTENT, awaitItem())
+        viewModel.state.onEach {
+            assertEquals(State.CONTENT, it)
         }
     }
 
@@ -66,9 +65,21 @@ class MjImagesViewModelTest : KoinTest {
         val viewModel = get<MjImagesViewModel>()
 
         // then
-        viewModel.images.test {
-            assertEquals(1, awaitItem().images.size)
+        viewModel.images.onEach {
+            assertEquals(1, it.images.size)
         }
+    }
+
+    @Test
+    fun `when fetch images called then initial state should be loading`() = runTest {
+        // given
+        setupDataSource(SuccessMjImagesDataSource())
+
+        // when
+        val viewModel = get<MjImagesViewModel>()
+
+        // then
+        assertEquals(State.LOADING, viewModel.state.value)
     }
 
     @Test
@@ -100,10 +111,12 @@ class MjImagesViewModelTest : KoinTest {
         val viewModel = get<MjImagesViewModel>()
 
         // then
-        viewModel.state.onEach {
-            assertEquals(State.CONTENT, it)
+        viewModel.state.test {
+            assertEquals(State.CONTENT, awaitItem())
 
             viewModel.loadMore()
+
+            expectNoEvents()
         }
     }
 
@@ -118,20 +131,6 @@ class MjImagesViewModelTest : KoinTest {
         // then
         viewModel.state.onEach {
             assertEquals(State.ERROR, it)
-        }
-    }
-
-    @Test
-    fun `when fetch images gets empty then state should be updated`() = runTest {
-        // given
-        setupDataSource(EmptyMjImagesDataSource())
-
-        // when
-        val viewModel = get<MjImagesViewModel>()
-
-        // then
-        viewModel.state.onEach {
-            assertEquals(State.EMPTY, it)
         }
     }
 
