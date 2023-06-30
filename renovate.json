@@ -3,7 +3,11 @@
   "extends": [
     "config:base"
   ],
-  "automerge": true,
-  "automergeType": "pr",
-  "automergeStrategy": "rebase"
+  "packageRules": [
+    {
+      "automerge": true,
+      "automergeType": "pr",
+      "automergeStrategy": "rebase"
+    }
+  ]
 }
