@@ -17,10 +17,13 @@ jobs:
             distribution: 'temurin'
             java-version: 11
 
-        - name: assembleDebug
+        - name: Assemble Debug
           uses: eskatos/gradle-command-action@v2
           with:
             arguments: assembleDebug
+
+        - name: Run Unit Tests
+          run: ./gradlew test --stacktrace
 
         - name: Upload artifact
           uses: actions/upload-artifact@v3
