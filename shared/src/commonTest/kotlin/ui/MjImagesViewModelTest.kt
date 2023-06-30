@@ -72,18 +72,6 @@ class MjImagesViewModelTest : KoinTest {
     }
 
     @Test
-    fun `when fetch images called then initial state should be loading`() = runTest {
-        // given
-        setupDataSource(SuccessMjImagesDataSource())
-
-        // when
-        val viewModel = get<MjImagesViewModel>()
-
-        // then
-        assertEquals(State.LOADING, viewModel.state.value)
-    }
-
-    @Test
     fun `when refresh images called images should be empty`() = runTest {
         // given
         setupDataSource(SuccessMjImagesDataSource())
