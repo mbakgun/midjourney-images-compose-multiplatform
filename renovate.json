@@ -5,5 +5,5 @@
   ],
   "automerge": true,
   "automergeType": "pr",
-  "automergeStrict": true
+  "automergeStrategy": "rebase"
 }
