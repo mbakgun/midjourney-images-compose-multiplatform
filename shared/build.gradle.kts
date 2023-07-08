@@ -37,7 +37,7 @@ kotlin {
                 implementation(compose.material)
 
                 //sharedVm
-                api("com.rickclephas.kmm:kmm-viewmodel-core:1.0.0-ALPHA-10")
+                api("com.rickclephas.kmm:kmm-viewmodel-core:1.0.0-ALPHA-11")
 
                 //di
                 api("io.insert-koin:koin-core:$koinVersion")
