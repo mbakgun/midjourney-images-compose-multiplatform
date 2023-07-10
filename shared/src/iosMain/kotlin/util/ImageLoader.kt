@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import com.seiko.imageloader.ImageLoader
 import com.seiko.imageloader.cache.memory.maxSizePercent
+import com.seiko.imageloader.component.ComponentRegistryBuilder
 import com.seiko.imageloader.component.setupDefaultComponents
 import okio.FileSystem
 
@@ -12,9 +13,7 @@ actual fun generateImageLoader(): ImageLoader =
     ImageLoader(
         requestCoroutineContext = rememberCoroutineScope().coroutineContext,
     ) {
-        components {
-            setupDefaultComponents(imageScope)
-        }
+        components(ComponentRegistryBuilder::setupDefaultComponents)
         interceptor {
 
             memoryCacheConfig {
