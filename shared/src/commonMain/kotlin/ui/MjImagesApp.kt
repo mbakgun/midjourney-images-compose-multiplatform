@@ -23,9 +23,10 @@ import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.seiko.imageloader.ImageRequestState
 import com.seiko.imageloader.LocalImageLoader
-import com.seiko.imageloader.rememberAsyncImagePainter
+import com.seiko.imageloader.model.ImageResult
+import com.seiko.imageloader.rememberImageAction
+import com.seiko.imageloader.rememberImageActionPainter
 import domain.model.MjImage
 import domain.model.MjImages
 import domain.model.State
@@ -103,16 +104,18 @@ fun MjImageItem(
             onClick = { uriHandler.openUri(image.imageUrl) },
         ), elevation = 8.dp, shape = RoundedCornerShape(8.dp)
     ) {
-        val painter = rememberAsyncImagePainter(
-            image.imageUrl, contentScale = contentScale
+
+        val action by rememberImageAction(
+            url = image.imageUrl
         )
-        val imageRequestState = painter.requestState
+
+        val painter = rememberImageActionPainter(action)
 
         val transition by animateFloatAsState(
-            targetValue = if (imageRequestState is ImageRequestState.Success) 1f else 0f
+            targetValue = if (action is ImageResult) 1f else 0f
         )
 
-        Image(painter, contentDescription = null, modifier = Modifier.graphicsLayer {
+        Image(painter = painter, contentDescription = null, modifier = Modifier.graphicsLayer {
             val animatedValue: Float = .8f + (.2f * transition)
             val blurValue: Float = if (transition == 1f) 1f else 24f + (.2f * transition)
             scaleX = animatedValue
