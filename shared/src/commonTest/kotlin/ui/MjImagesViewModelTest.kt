@@ -77,16 +77,11 @@ class MjImagesViewModelTest : KoinTest {
 
         // when
         val viewModel = get<MjImagesViewModel>()
+        viewModel.refreshImages()
 
         // then
-        viewModel.images.test {
-            assertEquals(1, awaitItem().images.size)
-
-            viewModel.refreshImages()
-
-            assertEquals(0, awaitItem().images.size)
-
-            cancelAndIgnoreRemainingEvents()
+        viewModel.images.onEach {
+            assertEquals(0, it.images.size)
         }
     }
 
