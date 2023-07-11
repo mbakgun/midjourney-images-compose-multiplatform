@@ -4,6 +4,7 @@ import app.cash.turbine.test
 import data.source.MjImagesDataSource
 import di.initKoin
 import domain.model.State
+import fakes.EmptyMjImagesDataSource
 import fakes.ErrorMjImagesDataSource
 import fakes.SuccessMjImagesDataSource
 import kotlin.test.AfterTest
@@ -114,6 +115,20 @@ class MjImagesViewModelTest : KoinTest {
         // then
         viewModel.state.onEach {
             assertEquals(State.ERROR, it)
+        }
+    }
+
+    @Test
+    fun `when fetch images gets empty result then images should be updated`() = runTest {
+        // given
+        setupDataSource(EmptyMjImagesDataSource())
+
+        // when
+        val viewModel = get<MjImagesViewModel>()
+
+        // then
+        viewModel.images.onEach {
+            assertEquals(0, it.images.size)
         }
     }
 
