@@ -3,11 +3,10 @@ on:
   pull_request:
   merge_group:
 jobs:
-  gradle:
-    strategy:
-      matrix:
-        os: [macos-latest]
-    runs-on: ${{ matrix.os }}
+  ui-tests:
+    runs-on: macos-latest
+    timeout-minutes: 10
+
     steps:
       - uses: actions/checkout@v3
 
@@ -18,6 +17,25 @@ jobs:
           distribution: 'adopt'
           cache: 'gradle'
 
+      - name: Run instrumented tests
+        uses: ReactiveCircus/android-emulator-runner@v2.28.0
+        with:
+          api-level: 29
+          script: ./gradlew connectedCheck
+
+  unit-tests-detekt-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set Java 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: 17
+
       - name: Run Detekt
         uses: eskatos/gradle-command-action@v2
         with:
@@ -25,12 +43,6 @@ jobs:
 
       - name: Run Unit Tests
         run: ./gradlew test --stacktrace
-
-      - name: Run instrumented tests
-        uses: ReactiveCircus/android-emulator-runner@v2.28.0
-        with:
-          api-level: 29
-          script: ./gradlew connectedCheck
 
       - name: Assemble Debug
         uses: eskatos/gradle-command-action@v2
