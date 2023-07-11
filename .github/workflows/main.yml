@@ -22,16 +22,10 @@ jobs:
         with:
           arguments: detekt
 
+      - name: Run Unit Tests
+        run: ./gradlew test --stacktrace
+
       - name: Assemble Debug
         uses: eskatos/gradle-command-action@v2
         with:
           arguments: assembleDebug
-
-      - name: Run Unit Tests
-        run: ./gradlew test --stacktrace
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: app
-          path: app/build/outputs/apk/debug/app-debug.apk
