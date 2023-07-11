@@ -8,15 +8,25 @@ import di.initKoin
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
+import java.io.IOException
 
 // init koin - mock response - return viewModel
-fun initKoinAndMockViewModel(context: Context): MjImagesViewModel =
+fun initKoinAndMockViewModel(
+    context: Context,
+    dataSource: MjImagesDataSource.Remote? = null
+): MjImagesViewModel =
     initKoin {
         androidContext(androidContext = context)
-        modules(
-            module { factory<MjImagesDataSource.Remote> { SuccessMjImagesDataSource() } },
-            module { viewModel { MjImagesViewModel(get()) } }
-        )
+        if (dataSource != null) {
+            modules(
+                module { factory { dataSource } },
+                module { viewModel { MjImagesViewModel(get()) } }
+            )
+        } else {
+            modules(
+                module { viewModel { MjImagesViewModel(get()) } }
+            )
+        }
     }.koin.get()
 
 class SuccessMjImagesDataSource : MjImagesDataSource.Remote {
@@ -37,4 +47,26 @@ class SuccessMjImagesDataSource : MjImagesDataSource.Remote {
             pageSize = null,
             totalImages = null,
         )
+}
+
+class EmptyMjImagesDataSource : MjImagesDataSource.Remote {
+
+    override suspend fun getImages(
+        page: Int
+    ): MjImagesResponse =
+        MjImagesResponse(
+            currentPage = 0,
+            totalPages = 0,
+            mjImageResponses = null,
+            pageSize = null,
+            totalImages = null,
+        )
+}
+
+class ErrorMjImagesDataSource : MjImagesDataSource.Remote {
+
+    override suspend fun getImages(
+        page: Int
+    ): MjImagesResponse =
+        throw IOException("Unknown")
 }
