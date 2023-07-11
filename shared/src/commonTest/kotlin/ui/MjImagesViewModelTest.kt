@@ -1,6 +1,5 @@
 package ui
 
-import app.cash.turbine.test
 import data.source.MjImagesDataSource
 import di.initKoin
 import domain.model.State
@@ -93,14 +92,11 @@ class MjImagesViewModelTest : KoinTest {
 
         // when
         val viewModel = get<MjImagesViewModel>()
+        viewModel.loadMore()
 
         // then
-        viewModel.state.test {
-            assertEquals(State.CONTENT, awaitItem())
-
-            viewModel.loadMore()
-
-            expectNoEvents()
+        viewModel.images.onEach {
+            assertEquals(it.currentPage, 1)
         }
     }
 

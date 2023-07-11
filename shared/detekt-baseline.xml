@@ -23,7 +23,7 @@
     <ID>UnusedPrivateProperty:build.gradle.kts$val androidInstrumentedTest by getting { dependencies { implementation(libs.androidxUiTestJunit4) implementation(libs.androidxUiTestManifest) } }</ID>
     <ID>UnusedPrivateProperty:build.gradle.kts$val androidMain by getting { dependencies { api(libs.koin) implementation(libs.ktorClient) } }</ID>
     <ID>UnusedPrivateProperty:build.gradle.kts$val androidMain by getting { dependencies { implementation(project(":shared")) api(libs.androidxActivityCompose) api(libs.androidxAppcompat) api(libs.androidxCoreKtx) } }</ID>
-    <ID>UnusedPrivateProperty:build.gradle.kts$val commonTest by getting { dependencies { implementation(kotlin("test-common")) implementation(kotlin("test-annotations-common")) implementation(libs.kotlinxCoroutinesTest) implementation(libs.koinTest) implementation(libs.turbine) } }</ID>
+    <ID>UnusedPrivateProperty:build.gradle.kts$val commonTest by getting { dependencies { implementation(kotlin("test-common")) implementation(kotlin("test-annotations-common")) implementation(libs.kotlinxCoroutinesTest) implementation(libs.koinTest) } }</ID>
     <ID>UnusedPrivateProperty:build.gradle.kts$val iosMain by creating { dependsOn(commonMain) iosX64Main.dependsOn(this) iosArm64Main.dependsOn(this) iosSimulatorArm64Main.dependsOn(this) dependencies { implementation(libs.ktorClientIos) } }</ID>
   </CurrentIssues>
 </SmellBaseline>
