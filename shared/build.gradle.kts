@@ -3,8 +3,8 @@ plugins {
     kotlin("native.cocoapods")
     id("com.android.library")
     id("org.jetbrains.compose")
-    kotlin("plugin.serialization") version "1.8.22"
-    id("io.gitlab.arturbosch.detekt") version "1.23.0"
+    alias(libs.plugins.detekt)
+    alias(libs.plugins.serialization)
 }
 
 kotlin {
@@ -27,10 +27,6 @@ kotlin {
     }
 
     sourceSets {
-        val ktorVersion = "2.3.2"
-        val koinVersion = "3.4.2"
-        val koinTestVersion = "3.4.1"
-
         val commonMain by getting {
             dependencies {
                 implementation(compose.runtime)
@@ -38,30 +34,30 @@ kotlin {
                 implementation(compose.material)
 
                 //sharedVm
-                api("com.rickclephas.kmm:kmm-viewmodel-core:1.0.0-ALPHA-11")
+                api(libs.kmmViewmodelCore)
 
                 //di
-                api("io.insert-koin:koin-core:$koinVersion")
+                api(libs.koinCore)
 
                 //network
-                implementation("io.ktor:ktor-client-core:$ktorVersion")
-                implementation("io.ktor:ktor-client-json:$ktorVersion")
-                implementation("io.ktor:ktor-client-logging:$ktorVersion")
-                implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
-                implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.5.1")
+                implementation(libs.ktorClientCore)
+                implementation(libs.ktorClientJson)
+                implementation(libs.ktorClientLogging)
+                implementation(libs.ktorClientContentNegotiation)
+                implementation(libs.ktorSerializationKotlinxJson)
+                implementation(libs.kotlinxSerializationCore)
 
                 //imageloading
-                implementation("io.github.qdsfdhvh:image-loader:1.6.0")
+                implementation(libs.imageLoader)
 
                 //coroutines
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.2")
+                implementation(libs.kotlinxCoroutinesCore)
             }
         }
         val androidMain by getting {
             dependencies {
-                api("io.insert-koin:koin-android:$koinVersion")
-                implementation("io.ktor:ktor-client-android:$ktorVersion")
+                api(libs.koin)
+                implementation(libs.ktorClient)
             }
         }
         val iosX64Main by getting
@@ -74,7 +70,7 @@ kotlin {
             iosSimulatorArm64Main.dependsOn(this)
 
             dependencies {
-                implementation("io.ktor:ktor-client-ios:$ktorVersion")
+                implementation(libs.ktorClientIos)
             }
         }
 
@@ -82,16 +78,16 @@ kotlin {
             dependencies {
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.2")
-                implementation("io.insert-koin:koin-test:$koinTestVersion")
-                implementation("app.cash.turbine:turbine:1.0.0")
+                implementation(libs.kotlinxCoroutinesTest)
+                implementation(libs.koinTest)
+                implementation(libs.turbine)
             }
         }
 
         val androidInstrumentedTest by getting {
             dependencies {
-                implementation("androidx.compose.ui:ui-test-junit4:1.4.3")
-                implementation("androidx.compose.ui:ui-test-manifest:1.4.3")
+                implementation(libs.androidxUiTestJunit4)
+                implementation(libs.androidxUiTestManifest)
             }
         }
     }
