@@ -20,10 +20,10 @@
     <ID>MagicNumber:MjImagesApp.kt$.8f</ID>
     <ID>MagicNumber:MjImagesApp.kt$24f</ID>
     <ID>MagicNumber:MjImagesList.kt$180</ID>
-    <ID>UnusedPrivateProperty:build.gradle.kts$val androidInstrumentedTest by getting { dependencies { implementation("androidx.compose.ui:ui-test-junit4:1.4.3") implementation("androidx.compose.ui:ui-test-manifest:1.4.3") } }</ID>
-    <ID>UnusedPrivateProperty:build.gradle.kts$val androidMain by getting { dependencies { api("io.insert-koin:koin-android:$koinVersion") implementation("io.ktor:ktor-client-android:$ktorVersion") } }</ID>
-    <ID>UnusedPrivateProperty:build.gradle.kts$val androidMain by getting { dependencies { implementation(project(":shared")) api("androidx.activity:activity-compose:1.7.2") api("androidx.appcompat:appcompat:1.6.1") api("androidx.core:core-ktx:1.10.1") } }</ID>
-    <ID>UnusedPrivateProperty:build.gradle.kts$val commonTest by getting { dependencies { implementation(kotlin("test-common")) implementation(kotlin("test-annotations-common")) implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.2") implementation("io.insert-koin:koin-test:$koinTestVersion") implementation("app.cash.turbine:turbine:1.0.0") } }</ID>
-    <ID>UnusedPrivateProperty:build.gradle.kts$val iosMain by creating { dependsOn(commonMain) iosX64Main.dependsOn(this) iosArm64Main.dependsOn(this) iosSimulatorArm64Main.dependsOn(this) dependencies { implementation("io.ktor:ktor-client-ios:$ktorVersion") } }</ID>
+    <ID>UnusedPrivateProperty:build.gradle.kts$val androidInstrumentedTest by getting { dependencies { implementation(libs.androidxUiTestJunit4) implementation(libs.androidxUiTestManifest) } }</ID>
+    <ID>UnusedPrivateProperty:build.gradle.kts$val androidMain by getting { dependencies { api(libs.koin) implementation(libs.ktorClient) } }</ID>
+    <ID>UnusedPrivateProperty:build.gradle.kts$val androidMain by getting { dependencies { implementation(project(":shared")) api(libs.androidxActivityCompose) api(libs.androidxAppcompat) api(libs.androidxCoreKtx) } }</ID>
+    <ID>UnusedPrivateProperty:build.gradle.kts$val commonTest by getting { dependencies { implementation(kotlin("test-common")) implementation(kotlin("test-annotations-common")) implementation(libs.kotlinxCoroutinesTest) implementation(libs.koinTest) implementation(libs.turbine) } }</ID>
+    <ID>UnusedPrivateProperty:build.gradle.kts$val iosMain by creating { dependsOn(commonMain) iosX64Main.dependsOn(this) iosArm64Main.dependsOn(this) iosSimulatorArm64Main.dependsOn(this) dependencies { implementation(libs.ktorClientIos) } }</ID>
   </CurrentIssues>
 </SmellBaseline>
