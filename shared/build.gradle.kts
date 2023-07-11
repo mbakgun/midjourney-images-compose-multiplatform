@@ -4,6 +4,7 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.compose")
     kotlin("plugin.serialization") version "1.8.22"
+    id("io.gitlab.arturbosch.detekt") version "1.23.0"
 }
 
 kotlin {
@@ -119,4 +120,11 @@ android {
         debugImplementation(compose.uiTooling)
     }
     buildFeatures { compose = true }
+}
+
+detekt {
+    source.from(files(rootProject.rootDir))
+    parallel = true
+    autoCorrect = true
+    buildUponDefaultConfig = true
 }

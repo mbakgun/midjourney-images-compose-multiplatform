@@ -3,6 +3,7 @@ package fakes
 import data.source.MjImagesDataSource
 import data.source.remote.model.MjImageResponse
 import data.source.remote.model.MjImagesResponse
+import okio.IOException
 
 class EmptyMjImagesDataSource : MjImagesDataSource.Remote {
 
@@ -43,6 +44,6 @@ class ErrorMjImagesDataSource : MjImagesDataSource.Remote {
     override suspend fun getImages(
         page: Int
     ): MjImagesResponse =
-        throw Exception("Error")
+        throw IOException("Error")
 
 }
