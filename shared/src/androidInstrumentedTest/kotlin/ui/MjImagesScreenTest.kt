@@ -6,37 +6,81 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import domain.model.State
+import org.junit.After
 import org.junit.Rule
 import org.junit.Test
+import org.koin.core.context.stopKoin
 
 class MjImagesScreenTest {
 
     @get:Rule
     val composeTestRule = createComposeRule()
 
+    @After
+    fun tearDown() {
+        stopKoin()
+    }
+
     @Test
-    fun testEmptyScreen() {
-        val message = "No images"
+    fun testEmptyScreenUi() {
+        var viewModel: MjImagesViewModel? = null
 
         composeTestRule.setContent {
-            EmptyScreen(onRefresh = { })
+            MjImagesApp(initKoinAndMockViewModel(
+                LocalContext.current,
+                EmptyMjImagesDataSource()
+            ).also { viewModel = it })
         }
 
         composeTestRule
-            .onNodeWithText(message)
+            .waitUntil(3000) {
+                viewModel?.state?.value == State.EMPTY
+            }
+
+        composeTestRule
+            .onNodeWithText("No images")
             .assertIsDisplayed()
     }
 
     @Test
-    fun testErrorScreen() {
-        val message = "Error"
+    fun testErrorScreenUi() {
+        var viewModel: MjImagesViewModel? = null
 
         composeTestRule.setContent {
-            ErrorScreen(onRefresh = { })
+            MjImagesApp(initKoinAndMockViewModel(
+                LocalContext.current,
+                ErrorMjImagesDataSource()
+            ).also { viewModel = it })
         }
 
         composeTestRule
-            .onNodeWithText(message)
+            .waitUntil(3000) {
+                viewModel?.state?.value == State.ERROR
+            }
+
+        composeTestRule
+            .onNodeWithText("Error")
+            .assertIsDisplayed()
+    }
+
+    @Test
+    fun testMjImagesScreenUi() {
+        var viewModel: MjImagesViewModel? = null
+
+        composeTestRule.setContent {
+            MjImagesApp(initKoinAndMockViewModel(
+                LocalContext.current,
+                SuccessMjImagesDataSource()
+            ).also { viewModel = it })
+        }
+
+        composeTestRule
+            .waitUntil(3000) {
+                viewModel?.state?.value == State.CONTENT
+            }
+
+        composeTestRule
+            .onNodeWithTag("imagesGrid")
             .assertIsDisplayed()
     }
 
@@ -45,14 +89,13 @@ class MjImagesScreenTest {
         var viewModel: MjImagesViewModel? = null
 
         composeTestRule.setContent {
-            with(initKoinAndMockViewModel(LocalContext.current)) {
-                viewModel = this
-                MjImagesApp(this)
-            }
+            MjImagesApp(initKoinAndMockViewModel(
+                LocalContext.current,
+            ).also { viewModel = it })
         }
 
         composeTestRule
-            .waitUntil(3000) {
+            .waitUntil(5000) {
                 viewModel?.state?.value == State.CONTENT
             }
 

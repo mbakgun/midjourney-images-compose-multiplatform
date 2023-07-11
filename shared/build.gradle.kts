@@ -80,7 +80,6 @@ kotlin {
                 implementation(kotlin("test-annotations-common"))
                 implementation(libs.kotlinxCoroutinesTest)
                 implementation(libs.koinTest)
-                implementation(libs.turbine)
             }
         }
 
