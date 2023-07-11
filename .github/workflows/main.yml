@@ -11,11 +11,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Set Java 17
+      - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
-          distribution: 'temurin'
           java-version: 17
+          distribution: 'adopt'
+          cache: 'gradle'
 
       - name: Run Detekt
         uses: eskatos/gradle-command-action@v2
@@ -25,10 +26,8 @@ jobs:
       - name: Run Unit Tests
         run: ./gradlew test --stacktrace
 
-      - name: Make Gradle executable
-        run: chmod +x ./gradlew
       - name: Run instrumented tests
-        uses: ReactiveCircus/android-emulator-runner@v2.13.0
+        uses: ReactiveCircus/android-emulator-runner@v2.28.0
         with:
           api-level: 29
           script: ./gradlew connectedCheck
