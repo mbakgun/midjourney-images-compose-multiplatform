@@ -1,11 +1,8 @@
 package ui
 
 import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.combinedClickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.interaction.collectIsPressedAsState
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -35,6 +32,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.BlurEffect
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.platform.testTag
@@ -51,6 +49,7 @@ import com.vanpra.composematerialdialogs.rememberMaterialDialogState
 import domain.model.MjImage
 import domain.model.MjImages
 import domain.model.State
+import kotlinx.coroutines.delay
 import util.generateImageLoader
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -120,26 +119,19 @@ expect fun PlatformSpecificMjImagesGrid(
     onPreviewVisibilityChanged: @Composable (isVisible: Boolean, imageUrl: String) -> Unit,
 )
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun MjImageItem(
     image: MjImage,
     height: Dp,
     contentScale: ContentScale,
     onPreviewVisibilityChanged: @Composable (isVisible: Boolean, imageUrl: String) -> Unit,
-    interactionSource: MutableInteractionSource =
-        remember(::MutableInteractionSource),
 ) {
     val uriHandler = LocalUriHandler.current
-    val isPressed by interactionSource.collectIsPressedAsState()
-    var isCloseable by remember { mutableStateOf(false) }
+    var isLongPressed by remember { mutableStateOf(false) }
 
-    if (isCloseable) {
+    if (isLongPressed) {
         onPreviewVisibilityChanged.invoke(true, image.imageUrl)
-    }
-
-    if (isPressed.not() && isCloseable) {
-        isCloseable = false
+    } else {
         onPreviewVisibilityChanged.invoke(false, image.imageUrl)
     }
 
@@ -147,12 +139,19 @@ fun MjImageItem(
         modifier = Modifier
             .padding(4.dp)
             .fillMaxWidth()
-            .combinedClickable(
-                interactionSource = interactionSource,
-                indication = null,
-                onClick = { uriHandler.openUri(image.imageUrl) },
-                onLongClick = { isCloseable = true }
-            ),
+            .pointerInput(Unit) {
+                detectTapGestures(
+                    onTap = {
+                        if (!isLongPressed)
+                            uriHandler.openUri(image.imageUrl)
+                    },
+                    onPress = {
+                        delay(200)
+                        isLongPressed = true
+                        tryAwaitRelease()
+                        isLongPressed = false
+                    })
+            },
         elevation = 8.dp,
         shape = RoundedCornerShape(8.dp)
     ) {
@@ -176,7 +175,6 @@ fun MjImageItem(
             renderEffect = BlurEffect(blurValue, blurValue)
         }.height(height), contentScale = contentScale)
     }
-
 }
 
 @Composable
