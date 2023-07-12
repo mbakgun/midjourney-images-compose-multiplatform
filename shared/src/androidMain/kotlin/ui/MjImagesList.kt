@@ -18,6 +18,7 @@ actual fun PlatformSpecificMjImagesGrid(
     onLoadMore: () -> Unit,
     images: MjImages,
     modifier: Modifier,
+    onPreviewVisibilityChanged: @Composable (isVisible: Boolean, imageUrl: String) -> Unit,
 ) {
     LazyVerticalStaggeredGrid(
         state = rememberLazyStaggeredGridState().apply {
@@ -32,7 +33,8 @@ actual fun PlatformSpecificMjImagesGrid(
             MjImageItem(
                 image,
                 (180 * image.ratio).dp,
-                ContentScale.FillWidth
+                ContentScale.FillWidth,
+                onPreviewVisibilityChanged,
             )
         }
     }

@@ -16,6 +16,7 @@ actual fun PlatformSpecificMjImagesGrid(
     onLoadMore: () -> Unit,
     images: MjImages,
     modifier: Modifier,
+    onPreviewVisibilityChanged: @Composable (isVisible: Boolean, imageUrl: String) -> Unit,
 ) {
     LazyVerticalGrid(
         state = rememberLazyGridState().apply {
@@ -30,7 +31,8 @@ actual fun PlatformSpecificMjImagesGrid(
             MjImageItem(
                 image,
                 300.dp,
-                ContentScale.Crop
+                ContentScale.Crop,
+                onPreviewVisibilityChanged
             )
         }
     }
