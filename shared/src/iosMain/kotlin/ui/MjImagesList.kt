@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import domain.model.MjImage
 import domain.model.MjImages
 import util.OnBottomReached
 
@@ -16,6 +17,7 @@ actual fun PlatformSpecificMjImagesGrid(
     onLoadMore: () -> Unit,
     images: MjImages,
     modifier: Modifier,
+    onPreviewVisibilityChanged: @Composable (isVisible: Boolean, imageUrl: String) -> Unit,
 ) {
     LazyVerticalGrid(
         state = rememberLazyGridState().apply {
@@ -25,12 +27,14 @@ actual fun PlatformSpecificMjImagesGrid(
         modifier = modifier,
     ) {
         items(
-            images.images,
+            items = images.images,
+            key = MjImage::imageUrl
         ) { image ->
             MjImageItem(
                 image,
                 300.dp,
-                ContentScale.Crop
+                ContentScale.Crop,
+                onPreviewVisibilityChanged
             )
         }
     }
