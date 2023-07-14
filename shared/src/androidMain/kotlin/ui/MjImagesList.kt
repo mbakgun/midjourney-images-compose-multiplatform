@@ -35,7 +35,7 @@ actual fun PlatformSpecificMjImagesGrid(
             MjImageItem(
                 image,
                 (180 * image.ratio).dp,
-                ContentScale.FillWidth,
+                ContentScale.Crop,
                 onPreviewVisibilityChanged,
             )
         }
