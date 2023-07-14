@@ -5,15 +5,18 @@ import com.rickclephas.kmm.viewmodel.coroutineScope
 import domain.model.MjImages
 import domain.model.State
 import domain.usecase.MjImagesFetchUseCase
+import domain.usecase.MjImagesUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.launch
 
 class MjImagesViewModel(
     private val fetchUseCase: MjImagesFetchUseCase,
+    private val useCase: MjImagesUseCase,
 ) : KMMViewModel() {
 
     private val _state = MutableStateFlow(State.LOADING)
@@ -56,5 +59,14 @@ class MjImagesViewModel(
                 _state.value = State.ERROR
             }
             .launchIn(viewModelScope.coroutineScope)
+    }
+
+    suspend fun isEligibleToShowSnackBar(): Boolean =
+        useCase.isEligibleToShowSnackMessage()
+
+    suspend fun setSnackMessageShown() {
+        viewModelScope.coroutineScope.launch {
+            useCase.setSnackMessageShown()
+        }
     }
 }

@@ -103,4 +103,25 @@ class MjImagesScreenTest {
             .onNodeWithTag("imagesGrid")
             .assertIsDisplayed()
     }
+
+    @Test
+    fun testMjImagesSnackMessage() {
+        var viewModel: MjImagesViewModel? = null
+
+        composeTestRule.setContent {
+            MjImagesApp(initKoinAndMockViewModel(
+                LocalContext.current,
+                SuccessMjImagesDataSource()
+            ).also { viewModel = it })
+        }
+
+        composeTestRule
+            .waitUntil(3000) {
+                viewModel?.state?.value == State.CONTENT
+            }
+
+        composeTestRule
+            .onNodeWithText(SNACK_MESSAGE)
+            .assertIsDisplayed()
+    }
 }

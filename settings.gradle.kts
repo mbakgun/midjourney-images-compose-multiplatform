@@ -1,4 +1,4 @@
-rootProject.name = "MidJourney Images Compose Multiplatform"
+rootProject.name = "MidJourneyImagesComposeMultiplatform"
 
 include(":androidApp")
 include(":shared")
@@ -15,13 +15,8 @@ pluginManagement {
         val agpVersion = "8.0.2"
         val composeVersion = "1.4.1"
 
-        kotlin("jvm").version(kotlinVersion)
         kotlin("multiplatform").version(kotlinVersion)
-        kotlin("android").version(kotlinVersion)
-
-        id("com.android.application").version(agpVersion)
         id("com.android.library").version(agpVersion)
-
         id("org.jetbrains.compose").version(composeVersion)
     }
 }

@@ -55,6 +55,9 @@ kotlin {
 
                 //coroutines
                 implementation(libs.kotlinxCoroutinesCore)
+
+                // local
+                implementation(libs.multiplatformSettings)
             }
         }
         val androidMain by getting {
