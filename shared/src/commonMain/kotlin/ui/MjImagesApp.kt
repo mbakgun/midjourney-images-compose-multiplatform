@@ -14,11 +14,14 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
+import androidx.compose.material.ScaffoldState
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
@@ -62,34 +65,44 @@ fun MjImagesApp(
     ) {
         val images: MjImages by viewModel.images.collectAsState()
         val state: State by viewModel.state.collectAsState()
-        val onRefresh = { viewModel.refreshImages() }
-        val onLoadMore: () -> Unit = { viewModel.loadMore() }
+        val onRefresh = viewModel::refreshImages
 
         MaterialTheme {
-            val isRefreshing = state == State.LOADING
-            val pullRefreshState = rememberPullRefreshState(isRefreshing, { onRefresh() })
+            val scaffoldState: ScaffoldState = rememberScaffoldState()
 
-            Box(
-                Modifier
-                    .fillMaxSize()
-                    .pullRefresh(state = pullRefreshState)
-            ) {
-                when (state) {
-                    State.ERROR -> ErrorScreen(onRefresh)
-                    State.EMPTY -> EmptyScreen(onRefresh)
-                    else -> MjImagesList(
-                        onLoadMore,
-                        images,
-                    ) { isPreviewVisible, imageUrl ->
-                        PreviewDialog(isPreviewVisible, imageUrl)
-                    }
+            LaunchedEffect(Unit) {
+                if (viewModel.isEligibleToShowSnackBar()) {
+                    scaffoldState.snackbarHostState.showSnackbar(SNACK_MESSAGE)
+                    viewModel.setSnackMessageShown()
                 }
-                PullRefreshIndicator(
-                    refreshing = isRefreshing,
-                    state = pullRefreshState,
-                    modifier = Modifier.align(Alignment.TopCenter)
-                        .testTag("pullRefreshIndicator")
-                )
+            }
+
+            Scaffold(scaffoldState = scaffoldState) {
+                val isRefreshing = state == State.LOADING
+                val pullRefreshState = rememberPullRefreshState(isRefreshing, onRefresh)
+
+                Box(
+                    Modifier
+                        .fillMaxSize()
+                        .pullRefresh(state = pullRefreshState)
+                ) {
+                    when (state) {
+                        State.ERROR -> ErrorScreen(onRefresh)
+                        State.EMPTY -> EmptyScreen(onRefresh)
+                        else -> MjImagesList(
+                            viewModel::loadMore,
+                            images,
+                        ) { isPreviewVisible, imageUrl ->
+                            PreviewDialog(isPreviewVisible, imageUrl)
+                        }
+                    }
+                    PullRefreshIndicator(
+                        refreshing = isRefreshing,
+                        state = pullRefreshState,
+                        modifier = Modifier.align(Alignment.TopCenter)
+                            .testTag("pullRefreshIndicator")
+                    )
+                }
             }
         }
     }
@@ -281,3 +294,6 @@ fun PreviewImage(imageUrl: String) {
         }.padding(24.dp).fillMaxSize()
     )
 }
+
+const val SNACK_MESSAGE = "1) Click image to open in browser\n" +
+        "2) Long click to preview image"

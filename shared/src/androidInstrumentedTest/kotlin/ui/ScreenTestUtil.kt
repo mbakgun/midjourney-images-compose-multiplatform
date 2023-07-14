@@ -20,11 +20,11 @@ fun initKoinAndMockViewModel(
         if (dataSource != null) {
             modules(
                 module { factory { dataSource } },
-                module { viewModel { MjImagesViewModel(get()) } }
+                module { viewModel { MjImagesViewModel(get(), get()) } }
             )
         } else {
             modules(
-                module { viewModel { MjImagesViewModel(get()) } }
+                module { viewModel { MjImagesViewModel(get(), get()) } }
             )
         }
     }.koin.get()

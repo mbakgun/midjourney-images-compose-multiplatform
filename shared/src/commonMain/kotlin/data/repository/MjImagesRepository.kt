@@ -9,6 +9,7 @@ import org.koin.core.component.get
 
 class MjImagesRepository : KoinComponent {
 
+    private val localSource: MjImagesDataSource.Local = get()
     private val remoteSource: MjImagesDataSource.Remote = get()
 
     fun getImages(
@@ -17,5 +18,12 @@ class MjImagesRepository : KoinComponent {
         emit(
             remoteSource.getImages(page)
         )
+    }
+
+    suspend fun isEligibleToShowSnackMessage(): Boolean =
+        localSource.isEligibleToShowSnackMessage()
+
+    suspend fun setSnackMessageShown() {
+        localSource.setSnackMessageShown()
     }
 }

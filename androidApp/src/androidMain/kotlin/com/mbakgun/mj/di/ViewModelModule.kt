@@ -5,5 +5,5 @@ import org.koin.dsl.module
 import ui.MjImagesViewModel
 
 val viewModelModule = module {
-    viewModel { MjImagesViewModel(get()) }
+    viewModel { MjImagesViewModel(get(), get()) }
 }

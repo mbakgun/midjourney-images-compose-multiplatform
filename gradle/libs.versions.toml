@@ -30,6 +30,7 @@ kotlinxCoroutinesCore = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-cor
 kotlinxCoroutinesTest = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref="kotlinxCoroutines" }
 kotlinxSerializationCore = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version="1.5.1" }
 composeMaterialDialogsCore = { module = "ca.gosyer:compose-material-dialogs-core", version="0.9.3" }
+multiplatformSettings = { module = "com.russhwolf:multiplatform-settings-no-arg", version="1.0.0" }
 
 
 

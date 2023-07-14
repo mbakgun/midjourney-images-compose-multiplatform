@@ -5,6 +5,7 @@ import di.initKoin
 import domain.model.State
 import fakes.EmptyMjImagesDataSource
 import fakes.ErrorMjImagesDataSource
+import fakes.MjImagesLocalFakeDataSource
 import fakes.SuccessMjImagesDataSource
 import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
@@ -30,7 +31,8 @@ class MjImagesViewModelTest : KoinTest {
     fun setUp() {
         initKoin {
             modules(module {
-                factory { MjImagesViewModel(get()) }
+                factory { MjImagesViewModel(get(), get()) }
+                factory<MjImagesDataSource.Local> { MjImagesLocalFakeDataSource() }
             })
         }
         Dispatchers.setMain(getDispatcherProvider().unconfined)

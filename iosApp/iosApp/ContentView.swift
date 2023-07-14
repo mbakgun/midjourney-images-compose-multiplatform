@@ -5,7 +5,10 @@ import shared
 struct ComposeView: UIViewControllerRepresentable {
     
     func makeUIViewController(context: Context) -> UIViewController {
-        let viewModel = MjImagesViewModel.init(fetchUseCase: MjImagesFetchUseCase.init())
+        let viewModel = MjImagesViewModel.init(
+        fetchUseCase: MjImagesFetchUseCase.init(),
+        useCase: MjImagesUseCase.init()
+        )
         return Main_iosKt.MainViewController(viewModel: viewModel)
     }
     
