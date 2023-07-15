@@ -25,7 +25,11 @@ class MjImagesViewModel(
     private val _images = MutableStateFlow(MjImages())
     val images: StateFlow<MjImages> = _images
 
+    private val _useDarkTheme: MutableStateFlow<Boolean> = MutableStateFlow(false)
+    val useDarkTheme: StateFlow<Boolean> = _useDarkTheme
+
     init {
+        checkTheme()
         fetchImages()
     }
 
@@ -65,8 +69,19 @@ class MjImagesViewModel(
         useCase.isEligibleToShowSnackMessage()
 
     suspend fun setSnackMessageShown() {
+        useCase.setSnackMessageShown()
+    }
+
+    fun setDarkMode(isEnabled: Boolean) {
         viewModelScope.coroutineScope.launch {
-            useCase.setSnackMessageShown()
+            _useDarkTheme.emit(isEnabled)
+            useCase.setDarkMode(isEnabled)
+        }
+    }
+
+    private fun checkTheme() {
+        viewModelScope.coroutineScope.launch {
+            _useDarkTheme.emit(useCase.isDarkModeEnabled())
         }
     }
 }

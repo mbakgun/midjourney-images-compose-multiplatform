@@ -32,6 +32,7 @@ kotlin {
                 implementation(compose.runtime)
                 implementation(compose.foundation)
                 implementation(compose.material)
+                implementation(compose.materialIconsExtended)
 
                 //sharedVm
                 api(libs.kmmViewmodelCore)

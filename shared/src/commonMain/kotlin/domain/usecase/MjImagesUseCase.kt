@@ -14,4 +14,11 @@ class MjImagesUseCase : KoinComponent {
     suspend fun setSnackMessageShown() {
         repository.setSnackMessageShown()
     }
+
+    suspend fun isDarkModeEnabled(): Boolean =
+        repository.isDarkModeEnabled()
+
+    suspend fun setDarkMode(enabled: Boolean) {
+        repository.setDarkMode(enabled)
+    }
 }

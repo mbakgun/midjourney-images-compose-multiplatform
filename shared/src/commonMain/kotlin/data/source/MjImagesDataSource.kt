@@ -7,8 +7,9 @@ interface MjImagesDataSource {
     interface Local {
 
         suspend fun isEligibleToShowSnackMessage(): Boolean
-
         suspend fun setSnackMessageShown()
+        suspend fun isDarkModeEnabled(): Boolean
+        suspend fun setDarkMode(enabled: Boolean)
     }
 
     interface Remote {
