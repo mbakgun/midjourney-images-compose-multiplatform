@@ -21,7 +21,19 @@ class MjImagesLocalDataSource constructor(
         }
     }
 
+    override suspend fun isDarkModeEnabled(): Boolean =
+        withContext(dispatcherProvider.io) {
+            settings.getBoolean(DARK_MODE_KEY, false)
+        }
+
+    override suspend fun setDarkMode(enabled: Boolean) {
+        withContext(dispatcherProvider.io) {
+            settings[DARK_MODE_KEY] = enabled
+        }
+    }
+
     companion object {
         private const val SNACK_MESSAGE_KEY = "SNACK_MESSAGE_KEY"
+        private const val DARK_MODE_KEY = "DARK_MODE_KEY"
     }
 }

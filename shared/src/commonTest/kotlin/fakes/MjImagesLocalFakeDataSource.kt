@@ -8,4 +8,8 @@ class MjImagesLocalFakeDataSource : MjImagesDataSource.Local {
         true
 
     override suspend fun setSnackMessageShown() = Unit
+
+    override suspend fun isDarkModeEnabled(): Boolean = false
+
+    override suspend fun setDarkMode(enabled: Boolean) = Unit
 }
