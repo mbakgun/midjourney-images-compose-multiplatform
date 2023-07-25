@@ -2,7 +2,7 @@
 androidxUiTest = "1.4.3"
 koin = "3.4.2"
 ktorClient = "2.3.2"
-kotlinxCoroutines = "1.7.2"
+kotlinxCoroutines = "1.7.3"
 
 [plugins]
 detekt = { id = "io.gitlab.arturbosch.detekt", version = "1.23.0" }
