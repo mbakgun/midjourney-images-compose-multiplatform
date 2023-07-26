@@ -29,4 +29,3 @@ fun LazyStaggeredGridState.OnBottomReached(
             }
     }
 }
-

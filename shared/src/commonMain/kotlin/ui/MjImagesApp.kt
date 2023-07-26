@@ -1,6 +1,7 @@
 package ui
 
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectDragGestures
@@ -15,6 +16,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
+import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
+import androidx.compose.foundation.lazy.staggeredgrid.items
+import androidx.compose.foundation.lazy.staggeredgrid.rememberLazyStaggeredGridState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ExperimentalMaterialApi
@@ -67,6 +72,7 @@ import domain.model.State
 import kotlin.math.roundToInt
 import kotlinx.coroutines.delay
 import ui.theme.AppTheme
+import util.OnBottomReached
 import util.generateImageLoader
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -143,15 +149,35 @@ fun MjImagesList(
     )
 }
 
-// for now, unfortunately we need don't have LazyStaggeredGridMeasureResult in iOS Compose,
-// we need to use LazyGrid instead
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
-expect fun PlatformSpecificMjImagesGrid(
+fun PlatformSpecificMjImagesGrid(
     onLoadMore: () -> Unit,
     images: MjImages,
-    modifier: Modifier = Modifier,
     onPreviewVisibilityChanged: @Composable (isVisible: Boolean, imageUrl: String) -> Unit,
-)
+    modifier: Modifier = Modifier,
+) {
+    LazyVerticalStaggeredGrid(
+        state = rememberLazyStaggeredGridState().apply {
+            OnBottomReached(onLoadMore::invoke)
+        },
+        columns = StaggeredGridCells.Fixed(2),
+        modifier = modifier,
+    ) {
+        items(
+            items = images.images,
+            key = MjImage::imageUrl
+        ) { image ->
+            MjImageItem(
+                image,
+                (180 * image.ratio).dp,
+                ContentScale.Crop,
+                onPreviewVisibilityChanged,
+            )
+        }
+    }
+}
+
 
 @Composable
 fun MjImageItem(
