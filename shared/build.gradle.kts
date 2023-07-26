@@ -117,11 +117,6 @@ android {
     kotlin {
         jvmToolchain(11)
     }
-
-    dependencies {
-        debugImplementation(compose.uiTooling)
-    }
-    buildFeatures { compose = true }
 }
 
 detekt {
