@@ -8,13 +8,15 @@
     <ID>FunctionNaming:MjImagesApp.kt$@Composable fun EmptyScreen( onRefresh: () -&gt; Unit )</ID>
     <ID>FunctionNaming:MjImagesApp.kt$@Composable fun ErrorScreen( onRefresh: () -&gt; Unit )</ID>
     <ID>FunctionNaming:MjImagesApp.kt$@Composable fun MjImageItem( image: MjImage, height: Dp, contentScale: ContentScale, onPreviewVisibilityChanged: @Composable (isVisible: Boolean, imageUrl: String) -&gt; Unit, )</ID>
-    <ID>FunctionNaming:MjImagesApp.kt$@Composable fun MjImagesList( onLoadMore: () -&gt; Unit, images: MjImages, onPreviewVisibilityChanged: @Composable (isVisible: Boolean, imageUrl: String) -&gt; Unit, )</ID>
+    <ID>FunctionNaming:MjImagesApp.kt$@Composable fun MjImagesList( images: MjImages, state: LazyStaggeredGridState, onLoadMore: () -&gt; Unit, onPreviewVisibilityChanged: @Composable (isVisible: Boolean, imageUrl: String) -&gt; Unit, )</ID>
     <ID>FunctionNaming:MjImagesApp.kt$@Composable fun PreviewDialog( isPreviewVisible: Boolean, imageUrl: String, dialogState: MaterialDialogState = rememberMaterialDialogState() )</ID>
     <ID>FunctionNaming:MjImagesApp.kt$@Composable fun PreviewImage(imageUrl: String)</ID>
-    <ID>FunctionNaming:MjImagesApp.kt$@OptIn(ExperimentalFoundationApi::class) @Composable fun PlatformSpecificMjImagesGrid( onLoadMore: () -&gt; Unit, images: MjImages, onPreviewVisibilityChanged: @Composable (isVisible: Boolean, imageUrl: String) -&gt; Unit, modifier: Modifier = Modifier, )</ID>
+    <ID>FunctionNaming:MjImagesApp.kt$@Composable fun ScrollToTopButton( onClick: () -&gt; Unit, modifier: Modifier = Modifier )</ID>
+    <ID>FunctionNaming:MjImagesApp.kt$@OptIn(ExperimentalFoundationApi::class) @Composable fun PlatformSpecificMjImagesGrid( images: MjImages, modifier: Modifier = Modifier, state: LazyStaggeredGridState, onPreviewVisibilityChanged: @Composable (isVisible: Boolean, imageUrl: String) -&gt; Unit, onLoadMore: () -&gt; Unit, )</ID>
     <ID>FunctionNaming:MjImagesApp.kt$@OptIn(ExperimentalMaterialApi::class) @Composable fun MjImagesApp( viewModel: MjImagesViewModel )</ID>
     <ID>FunctionNaming:Theme.kt$@Composable fun AppTheme( useDarkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -&gt; Unit )</ID>
     <ID>FunctionNaming:main.ios.kt$fun MainViewController(viewModel: MjImagesViewModel): UIViewController</ID>
+    <ID>LongMethod:MjImagesApp.kt$@OptIn(ExperimentalMaterialApi::class) @Composable fun MjImagesApp( viewModel: MjImagesViewModel )</ID>
     <ID>MagicNumber:Colors.kt$0xFF1F1B16</ID>
     <ID>MagicNumber:Colors.kt$0xFF3E2D16</ID>
     <ID>MagicNumber:Colors.kt$0xFF452B00</ID>

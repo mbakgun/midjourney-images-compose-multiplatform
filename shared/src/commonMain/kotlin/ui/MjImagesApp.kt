@@ -1,6 +1,11 @@
+@file:OptIn(ExperimentalFoundationApi::class)
+
 package ui
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -16,12 +21,15 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.staggeredgrid.LazyStaggeredGridState
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.foundation.lazy.staggeredgrid.rememberLazyStaggeredGridState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
@@ -30,6 +38,7 @@ import androidx.compose.material.ScaffoldState
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.rounded.DarkMode
 import androidx.compose.material.icons.rounded.LightMode
 import androidx.compose.material.pullrefresh.PullRefreshIndicator
@@ -40,14 +49,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.BlurEffect
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
@@ -71,6 +83,7 @@ import domain.model.MjImages
 import domain.model.State
 import kotlin.math.roundToInt
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import ui.theme.AppTheme
 import util.OnBottomReached
 import util.generateImageLoader
@@ -91,6 +104,14 @@ fun MjImagesApp(
             val onRefresh = viewModel::refreshImages
 
             val scaffoldState: ScaffoldState = rememberScaffoldState()
+            val listState = rememberLazyStaggeredGridState()
+            val scope = rememberCoroutineScope()
+
+            val showButton by remember {
+                derivedStateOf {
+                    listState.firstVisibleItemIndex > 0
+                }
+            }
 
             LaunchedEffect(Unit) {
                 if (viewModel.isEligibleToShowSnackBar()) {
@@ -112,8 +133,9 @@ fun MjImagesApp(
                         State.ERROR -> ErrorScreen(onRefresh)
                         State.EMPTY -> EmptyScreen(onRefresh)
                         else -> MjImagesList(
-                            viewModel::loadMore,
-                            images,
+                            onLoadMore = viewModel::loadMore,
+                            images = images,
+                            state = listState,
                         ) { isPreviewVisible, imageUrl ->
                             PreviewDialog(isPreviewVisible, imageUrl)
                         }
@@ -124,6 +146,18 @@ fun MjImagesApp(
                         modifier = Modifier.align(Alignment.TopCenter)
                             .testTag("pullRefreshIndicator")
                     )
+
+                    AnimatedVisibility(
+                        visible = showButton,
+                        enter = fadeIn(),
+                        exit = fadeOut(),
+                    ) {
+                        ScrollToTopButton(onClick = {
+                            scope.launch {
+                                listState.animateScrollToItem(0)
+                            }
+                        })
+                    }
 
                     DraggableThemeSelection(
                         useDarkTheme,
@@ -137,30 +171,31 @@ fun MjImagesApp(
 
 @Composable
 fun MjImagesList(
-    onLoadMore: () -> Unit,
     images: MjImages,
+    state: LazyStaggeredGridState,
+    onLoadMore: () -> Unit,
     onPreviewVisibilityChanged: @Composable (isVisible: Boolean, imageUrl: String) -> Unit,
 ) {
     PlatformSpecificMjImagesGrid(
         onLoadMore = onLoadMore,
         images = images,
         modifier = Modifier.fillMaxSize().testTag("imagesGrid"),
-        onPreviewVisibilityChanged = onPreviewVisibilityChanged
+        onPreviewVisibilityChanged = onPreviewVisibilityChanged,
+        state = state,
     )
 }
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun PlatformSpecificMjImagesGrid(
-    onLoadMore: () -> Unit,
+    state: LazyStaggeredGridState,
     images: MjImages,
     onPreviewVisibilityChanged: @Composable (isVisible: Boolean, imageUrl: String) -> Unit,
+    onLoadMore: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     LazyVerticalStaggeredGrid(
-        state = rememberLazyStaggeredGridState().apply {
-            OnBottomReached(onLoadMore::invoke)
-        },
+        state = state.apply { OnBottomReached(onLoadMore::invoke) },
         columns = StaggeredGridCells.Fixed(2),
         modifier = modifier,
     ) {
@@ -375,6 +410,31 @@ fun DraggableThemeSelection(
                         indication = null
                     ) { onClick(useDarkTheme.not()) }
             )
+        }
+    }
+}
+
+@Composable
+fun ScrollToTopButton(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Box(
+        modifier
+            .fillMaxSize()
+            .padding(bottom = 24.dp, end = 25.dp), Alignment.BottomEnd
+    ) {
+        Button(
+            onClick = { onClick() }, modifier = Modifier
+                .shadow(10.dp, shape = CircleShape)
+                .clip(shape = CircleShape)
+                .size(65.dp),
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = MaterialTheme.colors.background,
+                contentColor = MaterialTheme.colors.onSurface,
+            )
+        ) {
+            Icon(Icons.Filled.KeyboardArrowUp, "arrow up")
         }
     }
 }
