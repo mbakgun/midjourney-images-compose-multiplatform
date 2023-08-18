@@ -47,6 +47,24 @@ After the project is built, the iOS application can be run on any emulator or de
 
 <br><img src="image-assets/ios.gif" width="240" alt="android-compose"/>
 
+## Wear OS Application
+
+After the project is built, the Wear OS application can be run on any emulator or device.
+
+<br><img src="image-assets/wearos.png" alt="android-compose"/>
+
+## Android TV Application
+
+After the project is built, the Android TV application can be run on any emulator or device.
+
+<br><img src="image-assets/television.gif" alt="android-compose"/>
+
+## Android Automotive Application
+
+After the project is built, the Android Automotive application can be run on any emulator (requires Android Studio Hedgehog) or device.
+
+<br><img src="image-assets/automotive.gif" alt="android-compose"/>
+
 ## Testing
 
 The application has UI tests and unit tests. Unit tests are written with fake data under the common package. UI tests are written under the androidTest package.
@@ -63,7 +81,8 @@ The API used for the application is [mj.akgns.com](https://mj.akgns.com/).
 
 ## Future Plans
 
-- [] Improvement of the image-loading process 
+- [] K2 Compiler
+- [] Compose Multiplatform 1.5.0
 
 ## Translations
 - [Türkçe](/README-tr.md)
