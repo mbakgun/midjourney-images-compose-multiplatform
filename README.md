@@ -75,7 +75,7 @@ For more information, check out the [Medium](https://mbakgun.medium.com/mj-compo
 
 ## Contributions 👏
 
-Please feel free to open an issue or send a pull request; any contributions will be appreciated! Thank you in advance.
+Please feel free to open an issue; any contributions will be appreciated! Thank you in advance.
 
 ## Contact
 
