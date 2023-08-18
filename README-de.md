@@ -47,6 +47,24 @@ Nachdem das Projekt erstellt wurde, kann die iOS-Anwendung auf jedem Emulator od
 
 <br><img src="image-assets/ios.gif" width="240" alt="android-compose"/>
 
+## Wear OS Anwendung
+
+Nach dem Build des Projekts kann die Wear OS Anwendung auf jedem Emulator oder Gerät ausgeführt werden.
+
+<br><img src="image-assets/wearos.png" alt="android-compose"/>
+
+## Android TV Anwendung
+
+Nach dem Build des Projekts kann die Android TV Anwendung auf jedem Emulator oder Gerät ausgeführt werden.
+
+<br><img src="image-assets/television.gif" alt="android-compose"/>
+
+## Android Automotive Anwendung
+
+Nach dem Build des Projekts kann die Android Automotive Anwendung auf jedem Emulator (erfordert Android Studio Hedgehog) oder Gerät ausgeführt werden.
+
+<br><img src="image-assets/automotive.gif" alt="android-compose"/>
+
 ## Tests
 
 Die Anwendung verfügt über UI-Tests und Unit-Tests. Unit-Tests werden unter dem gemeinsamen Paket mit Fake-Daten geschrieben. UI-Tests werden unter dem androidTest-Paket geschrieben.

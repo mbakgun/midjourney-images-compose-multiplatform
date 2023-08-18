@@ -61,13 +61,13 @@ Proje build edildikten sonra Wear OS uygulaması herhangi bir emulator veya ciha
 
 Proje build edildikten sonra Android TV uygulaması herhangi bir emulator veya cihaz üzerinde çalıştırılabilir.
 
-<br><video src="image-assets/television.mov"/>
+<br><img src="image-assets/television.gif" alt="android-compose"/>
 
 ## Android Automotive Application
 
 Proje build edildikten sonra Android Automotive uygulaması herhangi bir emulator(Android Studio Hedgehog gerektirir) veya cihaz üzerinde çalıştırılabilir.
 
-<br><video src="image-assets/automotive.mov"/>
+<br><img src="image-assets/automotive.gif" alt="android-compose"/>
 
 ## Test
 
