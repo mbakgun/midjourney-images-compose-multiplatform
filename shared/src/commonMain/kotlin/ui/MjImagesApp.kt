@@ -425,10 +425,11 @@ fun ScrollToTopButton(
             .padding(bottom = 24.dp, end = 25.dp), Alignment.BottomEnd
     ) {
         Button(
-            onClick = { onClick() }, modifier = Modifier
+            onClick = { onClick() },
+            modifier = Modifier
                 .shadow(10.dp, shape = CircleShape)
                 .clip(shape = CircleShape)
-                .size(65.dp),
+                .size(50.dp),
             colors = ButtonDefaults.buttonColors(
                 backgroundColor = MaterialTheme.colors.background,
                 contentColor = MaterialTheme.colors.onSurface,

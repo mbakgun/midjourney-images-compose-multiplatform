@@ -2,6 +2,7 @@ rootProject.name = "MidJourneyImagesComposeMultiplatform"
 
 include(":androidApp")
 include(":shared")
+include(":wearApp")
 
 pluginManagement {
     repositories {
