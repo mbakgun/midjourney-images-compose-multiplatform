@@ -51,6 +51,24 @@ veya Xcode kullanılabilir.
 
 <br><img src="image-assets/ios.gif" width="240" alt="android-compose"/>
 
+## Wear OS Application
+
+Proje build edildikten sonra Wear OS uygulaması herhangi bir emulator veya cihaz üzerinde çalıştırılabilir. 
+
+<br><img src="image-assets/wearos.png" alt="android-compose"/>
+
+## Android TV Application
+
+Proje build edildikten sonra Android TV uygulaması herhangi bir emulator veya cihaz üzerinde çalıştırılabilir.
+
+<br><video src="image-assets/television.mov"/>
+
+## Android Automotive Application
+
+Proje build edildikten sonra Android Automotive uygulaması herhangi bir emulator(Android Studio Hedgehog gerektirir) veya cihaz üzerinde çalıştırılabilir.
+
+<br><video src="image-assets/automotive.mov"/>
+
 ## Test
 
 Uygulama ui test ve unit testlere sahiptir. Unit testler common paket altında, fake data ile yazılmıştır. UI testler ise
@@ -68,7 +86,8 @@ Uygulama için kullanılan API, [mj.akgns.com](https://mj.akgns.com/) şeklinded
 
 ## Gelecek Planlar
 
-- [] Image loading işleminin iyileştirilmesi
+- [] K2 Compiler
+- [] Compose Multiplatform 1.5.0
 
 ## Çeviri
 - [İngilizce](/README.md) 

@@ -63,7 +63,8 @@ The API used for the application is [mj.akgns.com](https://mj.akgns.com/).
 
 ## Future Plans
 
-- [] Improvement of the image-loading process 
+- [] K2 Compiler
+- [] Compose Multiplatform 1.5.0
 
 ## Translations
 - [Türkçe](/README-tr.md)
