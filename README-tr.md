@@ -80,7 +80,7 @@ Daha fazla bilgi için [Medium](https://mbakgun.medium.com/mj-compose-multiplatf
 
 ## Katkı 👏
 
-Lütfen issue açmak veya pull request göndermekte özgür hissedin; her türlü katkı memnuniyetle karşılanacaktır! Şimdiden elinize
+Lütfen issue açmakta özgür hissedin; her türlü katkı memnuniyetle karşılanacaktır! Şimdiden elinize
 sağlık ✌️
 
 ## İletişim

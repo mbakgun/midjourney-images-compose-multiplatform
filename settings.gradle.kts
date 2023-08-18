@@ -4,6 +4,7 @@ include(":androidApp")
 include(":shared")
 include(":wearApp")
 include(":televisionApp")
+include(":automotiveApp")
 
 pluginManagement {
     repositories {
@@ -30,3 +31,4 @@ dependencyResolutionManagement {
         maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
     }
 }
+include(":automotiveApp")
