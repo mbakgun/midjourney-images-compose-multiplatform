@@ -3,6 +3,7 @@ rootProject.name = "MidJourneyImagesComposeMultiplatform"
 include(":androidApp")
 include(":shared")
 include(":wearApp")
+include(":televisionApp")
 
 pluginManagement {
     repositories {
