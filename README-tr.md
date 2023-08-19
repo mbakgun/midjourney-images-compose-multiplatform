@@ -23,8 +23,7 @@ Kotlin ve Jetpack Compose kullanılarak MVVM konseptinde geliştirtirildi. Netwo
 <div style="text-align: center;"><img src="image-assets/venn.png" alt="decisions"></div>
 
 Consumer App'ler herhangi bir komplex yapıya sahip değildir. Ortak ui layer'ı kullanırlar(viewModel dahil) ve
-MjImagesApp'i oluşturmakla sorumludurlar. [MjImagesApp](https://github.com/mbakgun/midjourney-images-compose-multiplatform/blob/e640ac5893478fa0b0b3ed6e71f2b3b66765ce0d/shared/src/commonMain/kotlin/ui/MjImagesApp.kt#L38-L38) ve bu Composable'nin dependency'si [MjImagesViewModel](https://github.com/mbakgun/midjourney-images-compose-multiplatform/blob/e640ac5893478fa0b0b3ed6e71f2b3b66765ce0d/shared/src/commonMain/kotlin/ui/MjImagesViewModel.kt#L15-L15), Android ve
-iOS platformlarında ortak çalışır.
+MjImagesApp'i oluşturmakla sorumludurlar. [MjImagesApp](https://github.com/mbakgun/midjourney-images-compose-multiplatform/blob/e640ac5893478fa0b0b3ed6e71f2b3b66765ce0d/shared/src/commonMain/kotlin/ui/MjImagesApp.kt#L38-L38) ve bu Composable'nin dependency'si [MjImagesViewModel](https://github.com/mbakgun/midjourney-images-compose-multiplatform/blob/e640ac5893478fa0b0b3ed6e71f2b3b66765ce0d/shared/src/commonMain/kotlin/ui/MjImagesViewModel.kt#L15-L15), Tüm platformlarda ortak çalışır.
 
 ## Gereksinimler
 
@@ -59,7 +58,7 @@ Proje build edildikten sonra Wear OS uygulaması herhangi bir emulator veya ciha
 ./gradlew :wearApp:assembleDebug
 ```
 
-<br><img src="image-assets/wearos.png" alt="android-compose"/>
+<img src="image-assets/wearos.png" alt="android-compose"/>
 
 ## Android TV Application
 
@@ -69,7 +68,7 @@ Proje build edildikten sonra Android TV uygulaması herhangi bir emulator veya c
 ./gradlew :televisionApp:assembleDebug
 ```
 
-<br><img src="image-assets/television.gif" alt="android-compose"/>
+<img src="image-assets/television.gif" alt="android-compose"/>
 
 ## Android Automotive Application
 
@@ -79,7 +78,7 @@ Proje build edildikten sonra Android Automotive uygulaması herhangi bir emulato
 ./gradlew :automotiveApp:assembleDebug
 ```
 
-<br><img src="image-assets/automotive.gif" alt="android-compose"/>
+<img src="image-assets/automotive.gif" alt="android-compose"/>
 
 ## Test
 

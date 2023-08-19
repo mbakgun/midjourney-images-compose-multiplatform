@@ -21,7 +21,7 @@ Application developed in the MVVM concept using Kotlin and Jetpack Compose. Netw
 
 <div style="text-align: center;"><img src="image-assets/venn.png" alt="decisions"></div>
 
-Consumer apps do not have any complex structures or operations. They use the common UI layer (including ViewModel) and are responsible for creating [MjImagesApp](https://github.com/mbakgun/midjourney-images-compose-multiplatform/blob/e640ac5893478fa0b0b3ed6e71f2b3b66765ce0d/shared/src/commonMain/kotlin/ui/MjImagesApp.kt#L38-L38). MjImagesApp and the dependency of this Composable, [MjImagesViewModel](https://github.com/mbakgun/midjourney-images-compose-multiplatform/blob/e640ac5893478fa0b0b3ed6e71f2b3b66765ce0d/shared/src/commonMain/kotlin/ui/MjImagesViewModel.kt#L15-L15), works as same on Android and iOS platforms.
+Consumer apps do not have any complex structures or operations. They use the common UI layer (including ViewModel) and are responsible for creating [MjImagesApp](https://github.com/mbakgun/midjourney-images-compose-multiplatform/blob/e640ac5893478fa0b0b3ed6e71f2b3b66765ce0d/shared/src/commonMain/kotlin/ui/MjImagesApp.kt#L38-L38). MjImagesApp and the dependency of this Composable, [MjImagesViewModel](https://github.com/mbakgun/midjourney-images-compose-multiplatform/blob/e640ac5893478fa0b0b3ed6e71f2b3b66765ce0d/shared/src/commonMain/kotlin/ui/MjImagesViewModel.kt#L15-L15), works as same on all platforms.
 
 ## Requirements
 
@@ -55,7 +55,7 @@ After the project is built, the Wear OS application can be run on any emulator o
 ./gradlew :wearApp:assembleDebug
 ```
 
-<br><img src="image-assets/wearos.png" alt="android-compose"/>
+<img src="image-assets/wearos.png" alt="android-compose"/>
 
 ## Android TV Application
 
@@ -65,7 +65,7 @@ After the project is built, the Android TV application can be run on any emulato
 ./gradlew :televisionApp:assembleDebug
 ```
 
-<br><img src="image-assets/television.gif" alt="android-compose"/>
+<img src="image-assets/television.gif" alt="android-compose"/>
 
 ## Android Automotive Application
 
@@ -75,7 +75,7 @@ After the project is built, the Android Automotive application can be run on any
 ./gradlew :automotiveApp:assembleDebug
 ```
 
-<br><img src="image-assets/automotive.gif" alt="android-compose"/>
+<img src="image-assets/automotive.gif" alt="android-compose"/>
 
 ## Testing
 
