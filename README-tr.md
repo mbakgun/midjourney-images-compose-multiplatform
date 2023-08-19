@@ -3,7 +3,7 @@
 <a href="https://mailchi.mp/kotlinweekly/kotlin-weekly-352"><img alt="Kotlin Weekly" src="image-assets/kotlin-weekly.svg"/></a>
 
 Bu uygulama, çoklu platform desteği ile MidJourney'ın oluşturduğu resimleri göstermek için geliştirilmiştir. Uygulama,
-Compose Multiplatform ile geliştirilmiştir. Uygulama, Android, iOS platformlarında çalışmaktadır.
+Compose Multiplatform ile geliştirilmiştir. Uygulama, Android, iOS, Wear OS, Android Automotive, Android TV platformlarında çalışmaktadır.
 
 <p align="center"><img src="image-assets/1.gif" alt="kmm-compose-header" /><br><br></p>
 Kotlin ve Jetpack Compose kullanılarak MVVM konseptinde geliştirtirildi. Network request state'leri, endless pagination, image loading ve image caching işlemleri yapılmıştır.
@@ -53,7 +53,11 @@ veya Xcode kullanılabilir.
 
 ## Wear OS Application
 
-Proje build edildikten sonra Wear OS uygulaması herhangi bir emulator veya cihaz üzerinde çalıştırılabilir. 
+Proje build edildikten sonra Wear OS uygulaması herhangi bir emulator veya cihaz üzerinde çalıştırılabilir.
+
+```bash
+./gradlew :wearApp:assembleDebug
+```
 
 <br><img src="image-assets/wearos.png" alt="android-compose"/>
 
@@ -61,11 +65,19 @@ Proje build edildikten sonra Wear OS uygulaması herhangi bir emulator veya ciha
 
 Proje build edildikten sonra Android TV uygulaması herhangi bir emulator veya cihaz üzerinde çalıştırılabilir.
 
+```bash
+./gradlew :televisionApp:assembleDebug
+```
+
 <br><img src="image-assets/television.gif" alt="android-compose"/>
 
 ## Android Automotive Application
 
 Proje build edildikten sonra Android Automotive uygulaması herhangi bir emulator(Android Studio Hedgehog gerektirir) veya cihaz üzerinde çalıştırılabilir.
+
+```bash
+./gradlew :automotiveApp:assembleDebug
+```
 
 <br><img src="image-assets/automotive.gif" alt="android-compose"/>
 
@@ -84,13 +96,8 @@ androidTest paketi altında yazılmıştır.
 
 Uygulama için kullanılan API, [mj.akgns.com](https://mj.akgns.com/) şeklindedir.
 
-## Gelecek Planlar
-
-- [] K2 Compiler
-- [] Compose Multiplatform 1.5.0
-
 ## Çeviri
-- [İngilizce](/README.md) 
+- [İngilizce](/README.md)
 - [Almanca](/README-de.md)
 
 ## Medium

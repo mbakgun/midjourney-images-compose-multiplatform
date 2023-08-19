@@ -2,7 +2,7 @@
 [![Android Weekly #567](https://androidweekly.net/issues/issue-567/badge)](https://androidweekly.net/issues/issue-567)
 <a href="https://mailchi.mp/kotlinweekly/kotlin-weekly-352"><img alt="Kotlin Weekly" src="image-assets/kotlin-weekly.svg"/></a>
 
-This application is developed to display the images created by MidJourney. The application is developed with Compose Multiplatform and works on Android and iOS platforms.
+This application is developed to display the images created by MidJourney. The application is developed with Compose Multiplatform and works on Android, iOS, Wear OS, Android Automotive, Android TV platforms.
 
 <p align="center"><img src="image-assets/1.gif" alt="kmm-compose-header" /><br><br></p>
 Application developed in the MVVM concept using Kotlin and Jetpack Compose. Network request states, endless pagination, image loading, and image caching processes were performed.
@@ -51,17 +51,29 @@ After the project is built, the iOS application can be run on any emulator or de
 
 After the project is built, the Wear OS application can be run on any emulator or device.
 
+```bash
+./gradlew :wearApp:assembleDebug
+```
+
 <br><img src="image-assets/wearos.png" alt="android-compose"/>
 
 ## Android TV Application
 
 After the project is built, the Android TV application can be run on any emulator or device.
 
+```bash
+./gradlew :televisionApp:assembleDebug
+```
+
 <br><img src="image-assets/television.gif" alt="android-compose"/>
 
 ## Android Automotive Application
 
 After the project is built, the Android Automotive application can be run on any emulator (requires Android Studio Hedgehog) or device.
+
+```bash
+./gradlew :automotiveApp:assembleDebug
+```
 
 <br><img src="image-assets/automotive.gif" alt="android-compose"/>
 
@@ -78,11 +90,6 @@ The application has UI tests and unit tests. Unit tests are written with fake da
 ## API
 
 The API used for the application is [mj.akgns.com](https://mj.akgns.com/).
-
-## Future Plans
-
-- [] K2 Compiler
-- [] Compose Multiplatform 1.5.0
 
 ## Translations
 - [Türkçe](/README-tr.md)

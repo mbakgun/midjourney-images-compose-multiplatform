@@ -2,7 +2,7 @@
 [![Android Weekly #567](https://androidweekly.net/issues/issue-567/badge)](https://androidweekly.net/issues/issue-567)
 <a href="https://mailchi.mp/kotlinweekly/kotlin-weekly-352"><img alt="Kotlin Weekly" src="image-assets/kotlin-weekly.svg"/></a>
 
-Diese Anwendung wurde entwickelt, um die Bilder von MidJourney anzuzeigen. Die Anwendung wurde mit Compose Multiplatform entwickelt und funktioniert auf Android- und iOS-Plattformen.
+Diese Anwendung wurde entwickelt, um die Bilder von MidJourney anzuzeigen. Die Anwendung wurde mit Compose Multiplatform entwickelt. Die Anwendung läuft auf den Plattformen Android, iOS, Wear OS, Android Automotive, Android TV
 
 <p align="center"><img src="image-assets/1.gif" alt="kmm-compose-header" /><br><br></p>
 Die Anwendung wurde im MVVM-Konzept mit Kotlin und Jetpack Compose entwickelt. Es wurden Netzwerkanforderungszustände, Endlos-Pagination, Bildladeprozesse und Bildcaching durchgeführt.
@@ -51,17 +51,29 @@ Nachdem das Projekt erstellt wurde, kann die iOS-Anwendung auf jedem Emulator od
 
 Nach dem Build des Projekts kann die Wear OS Anwendung auf jedem Emulator oder Gerät ausgeführt werden.
 
+```bash
+./gradlew :wearApp:assembleDebug
+```
+
 <br><img src="image-assets/wearos.png" alt="android-compose"/>
 
 ## Android TV Anwendung
 
 Nach dem Build des Projekts kann die Android TV Anwendung auf jedem Emulator oder Gerät ausgeführt werden.
 
+```bash
+./gradlew :televisionApp:assembleDebug
+```
+
 <br><img src="image-assets/television.gif" alt="android-compose"/>
 
 ## Android Automotive Anwendung
 
 Nach dem Build des Projekts kann die Android Automotive Anwendung auf jedem Emulator (erfordert Android Studio Hedgehog) oder Gerät ausgeführt werden.
+
+```bash
+./gradlew :automotiveApp:assembleDebug
+```
 
 <br><img src="image-assets/automotive.gif" alt="android-compose"/>
 
@@ -78,11 +90,6 @@ Die Anwendung verfügt über UI-Tests und Unit-Tests. Unit-Tests werden unter de
 ## API
 
 Die für die Anwendung verwendete API ist [mj.akgns.com](https://mj.akgns.com/).
-
-## Zukünftige Pläne
-
-- [] K2 Compiler
-- [] Compose Multiplatform 1.5.0
 
 ## Übersetzungen
 - [Englisch](/README.md)
