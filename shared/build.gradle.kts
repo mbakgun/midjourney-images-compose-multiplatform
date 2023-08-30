@@ -51,9 +51,6 @@ kotlin {
                 //imageloading
                 implementation(libs.imageLoader)
 
-                // KMP Dialogs
-                implementation(libs.composeMaterialDialogsCore)
-
                 //coroutines
                 implementation(libs.kotlinxCoroutinesCore)
 

@@ -8,6 +8,7 @@ import domain.usecase.MjImagesFetchUseCase
 import domain.usecase.MjImagesUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -20,13 +21,16 @@ class MjImagesViewModel(
 ) : KMMViewModel() {
 
     private val _state = MutableStateFlow(State.LOADING)
-    val state: StateFlow<State> = _state
+    val state: StateFlow<State> = _state.asStateFlow()
 
     private val _images = MutableStateFlow(MjImages())
-    val images: StateFlow<MjImages> = _images
+    val images: StateFlow<MjImages> = _images.asStateFlow()
 
     private val _useDarkTheme: MutableStateFlow<Boolean> = MutableStateFlow(false)
-    val useDarkTheme: StateFlow<Boolean> = _useDarkTheme
+    val useDarkTheme: StateFlow<Boolean> = _useDarkTheme.asStateFlow()
+
+    private val _dialogPreviewUrl: MutableStateFlow<String> = MutableStateFlow("")
+    val dialogPreviewUrl: StateFlow<String> = _dialogPreviewUrl.asStateFlow()
 
     init {
         checkTheme()
@@ -82,6 +86,18 @@ class MjImagesViewModel(
     private fun checkTheme() {
         viewModelScope.coroutineScope.launch {
             _useDarkTheme.emit(useCase.isDarkModeEnabled())
+        }
+    }
+
+    fun showPreviewDialog(imageUrl: String) {
+        viewModelScope.coroutineScope.launch {
+            _dialogPreviewUrl.emit(imageUrl)
+        }
+    }
+
+    fun dismissPreviewDialog() {
+        viewModelScope.coroutineScope.launch {
+            _dialogPreviewUrl.emit("")
         }
     }
 }
