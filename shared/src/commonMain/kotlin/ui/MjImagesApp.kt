@@ -9,8 +9,8 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.gestures.detectDragGestures
-import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -38,6 +38,7 @@ import androidx.compose.material.ScaffoldState
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.rounded.DarkMode
 import androidx.compose.material.icons.rounded.LightMode
@@ -61,7 +62,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.BlurEffect
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
@@ -70,19 +70,16 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Popup
+import androidx.compose.ui.window.PopupProperties
 import com.seiko.imageloader.LocalImageLoader
 import com.seiko.imageloader.model.ImageResult
 import com.seiko.imageloader.rememberImageAction
 import com.seiko.imageloader.rememberImageActionPainter
-import com.vanpra.composematerialdialogs.MaterialDialog
-import com.vanpra.composematerialdialogs.MaterialDialogProperties
-import com.vanpra.composematerialdialogs.MaterialDialogState
-import com.vanpra.composematerialdialogs.rememberMaterialDialogState
 import domain.model.MjImage
 import domain.model.MjImages
 import domain.model.State
 import kotlin.math.roundToInt
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import ui.theme.AppTheme
 import util.OnBottomReached
@@ -101,6 +98,7 @@ fun MjImagesApp(
 
             val images: MjImages by viewModel.images.collectAsState()
             val state: State by viewModel.state.collectAsState()
+            val previewUrl by viewModel.dialogPreviewUrl.collectAsState()
             val onRefresh = viewModel::refreshImages
 
             val scaffoldState: ScaffoldState = rememberScaffoldState()
@@ -136,8 +134,8 @@ fun MjImagesApp(
                             onLoadMore = viewModel::loadMore,
                             images = images,
                             state = listState,
-                        ) { isPreviewVisible, imageUrl ->
-                            PreviewDialog(isPreviewVisible, imageUrl)
+                        ) { imageUrl ->
+                            viewModel.showPreviewDialog(imageUrl)
                         }
                     }
                     PullRefreshIndicator(
@@ -163,6 +161,13 @@ fun MjImagesApp(
                         useDarkTheme,
                         viewModel::setDarkMode
                     )
+
+                    if (previewUrl.isNotEmpty()) {
+                        PreviewDialog(
+                            imageUrl = previewUrl,
+                            onDismissed = viewModel::dismissPreviewDialog
+                        )
+                    }
                 }
             }
         }
@@ -174,23 +179,22 @@ fun MjImagesList(
     images: MjImages,
     state: LazyStaggeredGridState,
     onLoadMore: () -> Unit,
-    onPreviewVisibilityChanged: @Composable (isVisible: Boolean, imageUrl: String) -> Unit,
+    showPreviewDialog: (imageUrl: String) -> Unit,
 ) {
     PlatformSpecificMjImagesGrid(
         onLoadMore = onLoadMore,
         images = images,
         modifier = Modifier.fillMaxSize().testTag("imagesGrid"),
-        onPreviewVisibilityChanged = onPreviewVisibilityChanged,
+        showPreviewDialog = showPreviewDialog,
         state = state,
     )
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun PlatformSpecificMjImagesGrid(
     state: LazyStaggeredGridState,
     images: MjImages,
-    onPreviewVisibilityChanged: @Composable (isVisible: Boolean, imageUrl: String) -> Unit,
+    showPreviewDialog: (imageUrl: String) -> Unit,
     onLoadMore: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -204,49 +208,34 @@ fun PlatformSpecificMjImagesGrid(
             key = MjImage::imageUrl
         ) { image ->
             MjImageItem(
-                image,
-                (180 * image.ratio).dp,
-                ContentScale.Crop,
-                onPreviewVisibilityChanged,
+                image = image,
+                height = (180 * image.ratio).dp,
+                contentScale = ContentScale.Crop,
+                showPreviewDialog = showPreviewDialog,
             )
         }
     }
 }
 
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun MjImageItem(
     image: MjImage,
     height: Dp,
     contentScale: ContentScale,
-    onPreviewVisibilityChanged: @Composable (isVisible: Boolean, imageUrl: String) -> Unit,
+    showPreviewDialog: (imageUrl: String) -> Unit,
 ) {
     val uriHandler = LocalUriHandler.current
-    var isLongPressed by remember { mutableStateOf(false) }
-
-    if (isLongPressed) {
-        onPreviewVisibilityChanged.invoke(true, image.imageUrl)
-    } else {
-        onPreviewVisibilityChanged.invoke(false, image.imageUrl)
-    }
 
     Surface(
         modifier = Modifier
             .padding(4.dp)
             .fillMaxWidth()
-            .pointerInput(Unit) {
-                detectTapGestures(
-                    onTap = {
-                        if (!isLongPressed)
-                            uriHandler.openUri(image.imageUrl)
-                    },
-                    onPress = {
-                        delay(200)
-                        isLongPressed = true
-                        tryAwaitRelease()
-                        isLongPressed = false
-                    })
-            },
+            .combinedClickable(
+                onClick = { uriHandler.openUri(image.imageUrl) },
+                onLongClick = { showPreviewDialog.invoke(image.imageUrl) },
+            ),
         elevation = 8.dp,
         shape = RoundedCornerShape(8.dp)
     ) {
@@ -332,23 +321,36 @@ fun ErrorScreen(
 
 @Composable
 fun PreviewDialog(
-    isPreviewVisible: Boolean,
     imageUrl: String,
-    dialogState: MaterialDialogState = rememberMaterialDialogState()
+    onDismissed: () -> Unit,
 ) {
-    if (isPreviewVisible) {
-        MaterialDialog(
-            dialogState = dialogState,
-            backgroundColor = Color.Transparent,
-            elevation = 0.dp,
-            properties = MaterialDialogProperties(
-                resizable = false
-            )
-        ) { PreviewImage(imageUrl) }
-        LaunchedEffect(imageUrl) {
-            dialogState.show()
+    Popup(
+        onDismissRequest = {
+            onDismissed()
+        },
+        properties = PopupProperties(
+            focusable = true
+        ),
+        content = {
+            Box(contentAlignment = Alignment.TopEnd) {
+                PreviewImage(imageUrl)
+                Button(
+                    onClick = { onDismissed() },
+                    modifier = Modifier
+                        .padding(24.dp)
+                        .shadow(10.dp, shape = CircleShape)
+                        .clip(shape = CircleShape)
+                        .size(50.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        backgroundColor = MaterialTheme.colors.background,
+                        contentColor = MaterialTheme.colors.onSurface,
+                    )
+                ) {
+                    Icon(Icons.Filled.Close, "close")
+                }
+            }
         }
-    }
+    )
 }
 
 @Composable
@@ -365,6 +367,7 @@ fun PreviewImage(imageUrl: String) {
     Image(
         painter = painter,
         contentDescription = null,
+        contentScale = ContentScale.Crop,
         modifier = Modifier.graphicsLayer {
             val animatedValue: Float = .8f + (.2f * transition)
             val blurValue: Float =
@@ -373,7 +376,7 @@ fun PreviewImage(imageUrl: String) {
             scaleY = animatedValue
             alpha = animatedValue
             renderEffect = BlurEffect(blurValue, blurValue)
-        }.padding(24.dp).fillMaxSize()
+        }.fillMaxSize()
     )
 }
 

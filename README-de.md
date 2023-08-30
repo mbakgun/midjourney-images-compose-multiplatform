@@ -16,7 +16,6 @@ Die Anwendung wurde im MVVM-Konzept mit Kotlin und Jetpack Compose entwickelt. E
 - [Kotlinx Coroutines](https://kotlinlang.org/docs/coroutines-overview.html)
 - [Compose ImageLoader](https://github.com/qdsfdhvh/compose-imageloader)
 - [KMM-ViewModel](https://github.com/rickclephas/KMM-ViewModel)
-- [Compose Material Dialogs](https://github.com/vanpra/compose-material-dialogs)
 - [Multiplatform Settings](https://github.com/russhwolf/multiplatform-settings)
 
 <div style="text-align: center;"><img src="image-assets/venn.png" alt="decisions"></div>
