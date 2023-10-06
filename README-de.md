@@ -1,6 +1,7 @@
 # MidJourney Images Compose Multiplatform Mobile Application
 [![Android Weekly #567](https://androidweekly.net/issues/issue-567/badge)](https://androidweekly.net/issues/issue-567)
 <a href="https://mailchi.mp/kotlinweekly/kotlin-weekly-352"><img alt="Kotlin Weekly" src="image-assets/kotlin-weekly.svg"/></a>
+#### Vorgestellt auf [Google Dev Bibliothek](https://devlibrary.withgoogle.com/products/android/repos/mbakgun-midjourney-images-compose-multiplatform)
 
 Diese Anwendung wurde entwickelt, um die Bilder von MidJourney anzuzeigen. Die Anwendung wurde mit Compose Multiplatform entwickelt. Die Anwendung läuft auf den Plattformen Android, iOS, Wear OS, Android Automotive, Android TV
 
