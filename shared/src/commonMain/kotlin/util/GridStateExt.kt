@@ -1,14 +1,14 @@
 package util
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.lazy.staggeredgrid.LazyStaggeredGridState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.snapshotFlow
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.filter
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun LazyStaggeredGridState.OnBottomReached(
     loadMore: () -> Unit
@@ -24,8 +24,8 @@ fun LazyStaggeredGridState.OnBottomReached(
 
     LaunchedEffect(shouldLoadMore) {
         snapshotFlow { shouldLoadMore.value }
-            .collect {
-                if (it) loadMore()
-            }
+            .distinctUntilChanged()
+            .filter { it }
+            .collect { loadMore() }
     }
 }

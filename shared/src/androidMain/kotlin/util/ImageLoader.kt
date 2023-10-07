@@ -1,29 +1,36 @@
 package util
 
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalContext
+import android.content.Context
 import com.seiko.imageloader.ImageLoader
 import com.seiko.imageloader.cache.memory.maxSizePercent
 import com.seiko.imageloader.component.setupDefaultComponents
+import com.seiko.imageloader.defaultImageResultMemoryCache
+import com.seiko.imageloader.option.Options
+import com.seiko.imageloader.option.androidContext
 import okio.Path.Companion.toOkioPath
 
-@Composable
-actual fun generateImageLoader(): ImageLoader {
-    val context = LocalContext.current
+lateinit var appContext: Context
 
+actual fun generateImageLoader(): ImageLoader {
     return ImageLoader {
+        options {
+            playAnimate = false
+            premultipliedAlpha = false
+            retryIfDiskDecodeError = false
+            imageConfig = Options.ImageConfig.ALPHA_8
+            androidContext(appContext)
+        }
         components {
-            setupDefaultComponents(context)
+            setupDefaultComponents(appContext)
         }
         interceptor {
-
+            defaultImageResultMemoryCache()
             memoryCacheConfig {
-                maxSizePercent(context, 0.55)
+                maxSizePercent(appContext, 0.25)
             }
-
             diskCacheConfig {
-                directory(context.cacheDir.resolve("image_cache").toOkioPath())
-                maxSizeBytes(1024 * 1024 * 100)
+                directory(appContext.cacheDir.resolve("image_cache").toOkioPath())
+                maxSizeBytes(512L * 1024 * 1024)
             }
         }
     }

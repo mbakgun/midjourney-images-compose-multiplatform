@@ -62,12 +62,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.BlurEffect
+import androidx.compose.ui.graphics.FilterQuality
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Popup
@@ -91,7 +91,7 @@ fun MjImagesApp(
     viewModel: MjImagesViewModel
 ) {
     CompositionLocalProvider(
-        LocalImageLoader provides generateImageLoader()
+        LocalImageLoader provides remember { generateImageLoader() },
     ) {
         val useDarkTheme by viewModel.useDarkTheme.collectAsState(false)
         AppTheme(useDarkTheme = useDarkTheme) {
@@ -119,8 +119,12 @@ fun MjImagesApp(
             }
 
             Scaffold(scaffoldState = scaffoldState) {
-                val isRefreshing = state == State.LOADING
-                val pullRefreshState = rememberPullRefreshState(isRefreshing, onRefresh)
+                val isRefreshing = remember {
+                    derivedStateOf {
+                        state == State.LOADING
+                    }
+                }
+                val pullRefreshState = rememberPullRefreshState(isRefreshing.value, onRefresh)
 
                 Box(
                     Modifier
@@ -139,7 +143,7 @@ fun MjImagesApp(
                         }
                     }
                     PullRefreshIndicator(
-                        refreshing = isRefreshing,
+                        refreshing = isRefreshing.value,
                         state = pullRefreshState,
                         modifier = Modifier.align(Alignment.TopCenter)
                             .testTag("pullRefreshIndicator")
@@ -209,8 +213,6 @@ fun PlatformSpecificMjImagesGrid(
         ) { image ->
             MjImageItem(
                 image = image,
-                height = (180 * image.ratio).dp,
-                contentScale = ContentScale.Crop,
                 showPreviewDialog = showPreviewDialog,
             )
         }
@@ -222,16 +224,16 @@ fun PlatformSpecificMjImagesGrid(
 @Composable
 fun MjImageItem(
     image: MjImage,
-    height: Dp,
-    contentScale: ContentScale,
     showPreviewDialog: (imageUrl: String) -> Unit,
 ) {
     val uriHandler = LocalUriHandler.current
+    val height = remember { derivedStateOf((180 * image.ratio)::dp) }
 
     Surface(
         modifier = Modifier
             .padding(4.dp)
             .fillMaxWidth()
+            .height(height.value)
             .combinedClickable(
                 onClick = { uriHandler.openUri(image.imageUrl) },
                 onLongClick = { showPreviewDialog.invoke(image.imageUrl) },
@@ -244,7 +246,7 @@ fun MjImageItem(
             url = image.imageUrl
         )
 
-        val painter = rememberImageActionPainter(action)
+        val painter = rememberImageActionPainter(action, filterQuality = FilterQuality.None)
 
         val transition by animateFloatAsState(
             targetValue = if (action is ImageResult) 1f else 0f
@@ -257,7 +259,7 @@ fun MjImageItem(
             scaleY = animatedValue
             alpha = animatedValue
             renderEffect = BlurEffect(blurValue, blurValue)
-        }.height(height), contentScale = contentScale)
+        }, contentScale = ContentScale.Crop)
     }
 }
 
