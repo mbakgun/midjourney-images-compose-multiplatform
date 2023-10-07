@@ -26,7 +26,7 @@ class MjImagesScreenTest {
         var viewModel: MjImagesViewModel? = null
 
         composeTestRule.setContent {
-            MjImagesApp(initKoinAndMockViewModel(
+            MjImagesApp(initAppAndMockViewModel(
                 LocalContext.current,
                 EmptyMjImagesDataSource()
             ).also { viewModel = it })
@@ -47,7 +47,7 @@ class MjImagesScreenTest {
         var viewModel: MjImagesViewModel? = null
 
         composeTestRule.setContent {
-            MjImagesApp(initKoinAndMockViewModel(
+            MjImagesApp(initAppAndMockViewModel(
                 LocalContext.current,
                 ErrorMjImagesDataSource()
             ).also { viewModel = it })
@@ -68,7 +68,7 @@ class MjImagesScreenTest {
         var viewModel: MjImagesViewModel? = null
 
         composeTestRule.setContent {
-            MjImagesApp(initKoinAndMockViewModel(
+            MjImagesApp(initAppAndMockViewModel(
                 LocalContext.current,
                 SuccessMjImagesDataSource()
             ).also { viewModel = it })
@@ -89,7 +89,7 @@ class MjImagesScreenTest {
         var viewModel: MjImagesViewModel? = null
 
         composeTestRule.setContent {
-            MjImagesApp(initKoinAndMockViewModel(
+            MjImagesApp(initAppAndMockViewModel(
                 LocalContext.current,
             ).also { viewModel = it })
         }
@@ -109,7 +109,7 @@ class MjImagesScreenTest {
         var viewModel: MjImagesViewModel? = null
 
         composeTestRule.setContent {
-            MjImagesApp(initKoinAndMockViewModel(
+            MjImagesApp(initAppAndMockViewModel(
                 LocalContext.current,
                 SuccessMjImagesDataSource()
             ).also { viewModel = it })
