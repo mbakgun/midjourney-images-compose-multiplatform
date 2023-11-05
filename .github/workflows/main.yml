@@ -48,8 +48,11 @@ jobs:
         uses: eskatos/gradle-command-action@v2
         with:
           arguments: assembleDebug
+
   iOS-build:
     runs-on: macos-latest
+    timeout-minutes: 20
+
     steps:
       - uses: actions/checkout@v4
 
@@ -62,23 +65,12 @@ jobs:
         run: ./gradlew :shared:compileKotlinIosSimulatorArm64
 
       - name: iOS set up
-        description: Sets up Kotlin Native and Cocoapods
-        runs:
-          using: "composite"
-          steps:
-            - shell: bash
-              run: ./gradlew :shared:generateDummyFramework
-
-            - name: Set up cocoapods
-              uses: maxim-lobanov/setup-cocoapods@v1
-              with:
-                version: latest
-
-            - shell: bash
-              name: Install Dependencies
-              run: |
-                cd iosApp
-                pod install --verbose
+        run: |
+          ./gradlew :shared:generateDummyFramework
+          echo "Set up cocoapods"
+          echo "Install Dependencies"
+          cd iosApp
+          pod install --verbose
 
       - name: Build iOS app
         run: xcodebuild build -workspace iosApp/iosApp.xcworkspace -configuration Debug -scheme iosApp -sdk iphoneos -destination name='iPhone 14' -verbose
