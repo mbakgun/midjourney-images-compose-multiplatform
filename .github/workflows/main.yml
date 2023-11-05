@@ -62,4 +62,4 @@ jobs:
         run: ./gradlew :shared:compileKotlinIosSimulatorArm64
 
       - name: Build iOS app
-        run: xcodebuild -workspace midjourney-images-compose-multiplatform/iosApp/iosApp.xcworkspace -configuration Debug -scheme iosApp -sdk iphonesimulator
+        run: xcodebuild -workspace iosApp/iosApp.xcworkspace -configuration Debug -scheme iosApp -sdk iphonesimulator
