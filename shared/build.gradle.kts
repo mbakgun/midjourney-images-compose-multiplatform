@@ -122,3 +122,11 @@ detekt {
     autoCorrect = true
     buildUponDefaultConfig = true
 }
+
+kotlin {
+    sourceSets {
+        all {
+            languageSettings.optIn("kotlinx.cinterop.ExperimentalForeignApi")
+        }
+    }
+}

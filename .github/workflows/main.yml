@@ -59,7 +59,7 @@ jobs:
           java-version: 17
 
       - name: Build macOS shared code
-        run: ./gradlew :common:compileKotlinMacOSArm64
+        run: ./gradlew :shared:compileKotlinIosSimulatorArm64
 
       - name: Build iOS app
         run: xcodebuild -workspace midjourney-images-compose-multiplatform/iosApp/iosApp.xcodeproj/project.xcworkspace -configuration Debug -scheme midjourney-images-compose-multiplatform -sdk iphonesimulator
