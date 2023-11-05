@@ -65,12 +65,7 @@ jobs:
         run: ./gradlew :shared:compileKotlinIosSimulatorArm64
 
       - name: iOS set up
-        run: |
-          ./gradlew :shared:generateDummyFramework
-          echo "Set up cocoapods"
-          echo "Install Dependencies"
-          cd iosApp
-          pod install --verbose
+        run: ./gradlew :shared:generateDummyFramework
 
       - name: Build iOS app
         run: xcodebuild build -workspace iosApp/iosApp.xcworkspace -configuration Debug -scheme iosApp -sdk iphoneos -destination name='iPhone 14' -verbose
