@@ -5,7 +5,6 @@ import com.seiko.imageloader.ImageLoader
 import com.seiko.imageloader.cache.memory.maxSizePercent
 import com.seiko.imageloader.component.setupDefaultComponents
 import com.seiko.imageloader.defaultImageResultMemoryCache
-import com.seiko.imageloader.option.Options
 import com.seiko.imageloader.option.androidContext
 import okio.Path.Companion.toOkioPath
 
@@ -17,7 +16,6 @@ actual fun generateImageLoader(): ImageLoader {
             playAnimate = false
             premultipliedAlpha = false
             retryIfDiskDecodeError = false
-            imageConfig = Options.ImageConfig.ALPHA_8
             androidContext(appContext)
         }
         components {
