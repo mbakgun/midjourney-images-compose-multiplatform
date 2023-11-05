@@ -61,5 +61,10 @@ jobs:
       - name: Build macOS shared code
         run: ./gradlew :shared:compileKotlinIosSimulatorArm64
 
+      - name: pwd and ls with subdirectories
+        run: |
+          pwd
+          ls -R
+
       - name: Build iOS app
-        run: xcodebuild -workspace iosApp/iosApp.xcworkspace -configuration Debug -scheme iosApp -sdk iphonesimulator
+        run: xcodebuild -workspace /iosApp/iosApp.xcworkspace -configuration Debug -scheme iosApp -sdk iphonesimulator
