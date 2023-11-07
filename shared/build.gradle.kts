@@ -27,64 +27,50 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting {
-            dependencies {
-                implementation(compose.runtime)
-                implementation(compose.foundation)
-                implementation(compose.material)
-                implementation(compose.materialIconsExtended)
+        commonMain.dependencies {
+            implementation(compose.runtime)
+            implementation(compose.foundation)
+            implementation(compose.material)
+            implementation(compose.materialIconsExtended)
 
-                //sharedVm
-                api(libs.kmmViewmodelCore)
+            //sharedVm
+            api(libs.kmmViewmodelCore)
 
-                //di
-                api(libs.koinCore)
+            //di
+            api(libs.koinCore)
 
-                //network
-                implementation(libs.ktorClientCore)
-                implementation(libs.ktorClientJson)
-                implementation(libs.ktorClientLogging)
-                implementation(libs.ktorClientContentNegotiation)
-                implementation(libs.ktorSerializationKotlinxJson)
-                implementation(libs.kotlinxSerializationCore)
+            //network
+            implementation(libs.ktorClientCore)
+            implementation(libs.ktorClientJson)
+            implementation(libs.ktorClientLogging)
+            implementation(libs.ktorClientContentNegotiation)
+            implementation(libs.ktorSerializationKotlinxJson)
+            implementation(libs.kotlinxSerializationCore)
 
-                //imageloading
-                implementation(libs.imageLoader)
+            //imageloading
+            implementation(libs.imageLoader)
 
-                //coroutines
-                implementation(libs.kotlinxCoroutinesCore)
+            //coroutines
+            implementation(libs.kotlinxCoroutinesCore)
 
-                // local
-                implementation(libs.multiplatformSettings)
-            }
-        }
-        val androidMain by getting {
-            dependencies {
-                api(libs.koin)
-                implementation(libs.ktorClient)
-            }
-        }
-        val iosX64Main by getting
-        val iosArm64Main by getting
-        val iosSimulatorArm64Main by getting
-        val iosMain by creating {
-            dependsOn(commonMain)
-            iosX64Main.dependsOn(this)
-            iosArm64Main.dependsOn(this)
-            iosSimulatorArm64Main.dependsOn(this)
-
-            dependencies {
-                implementation(libs.ktorClientIos)
-            }
+            // local
+            implementation(libs.multiplatformSettings)
         }
 
-        val commonTest by getting {
-            dependencies {
-                implementation(kotlin("test-common"))
-                implementation(kotlin("test-annotations-common"))
-                implementation(libs.kotlinxCoroutinesTest)
-                implementation(libs.koinTest)
-            }
+        androidMain.dependencies {
+            api(libs.koin)
+            implementation(libs.ktorClient)
+        }
+
+        iosMain.dependencies {
+            implementation(libs.ktorClientIos)
+        }
+
+        commonTest.dependencies {
+            implementation(kotlin("test-common"))
+            implementation(kotlin("test-annotations-common"))
+            implementation(libs.kotlinxCoroutinesTest)
+            implementation(libs.koinTest)
         }
 
         val androidInstrumentedTest by getting {

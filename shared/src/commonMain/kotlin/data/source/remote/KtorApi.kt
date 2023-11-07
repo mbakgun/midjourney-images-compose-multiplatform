@@ -10,7 +10,6 @@ import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.http.path
 import io.ktor.http.takeFrom
 import io.ktor.serialization.kotlinx.json.json
-import kotlin.native.concurrent.SharedImmutable
 import kotlinx.serialization.json.Json
 
 abstract class KtorApi {
@@ -34,7 +33,6 @@ private val jsonConfiguration
         useAlternativeNames = false
     }
 
-@SharedImmutable
 private val httpClient = HttpClient {
     install(ContentNegotiation) {
         json(jsonConfiguration)
