@@ -9,7 +9,7 @@ detekt = { id = "io.gitlab.arturbosch.detekt", version = "1.23.3" }
 serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version = "1.9.20" }
 
 [libraries]
-androidxActivityCompose = { module = "androidx.activity:activity-compose", version="1.8.0" }
+androidxActivityCompose = { module = "androidx.activity:activity-compose", version="1.8.1" }
 androidxAppcompat = { module = "androidx.appcompat:appcompat", version="1.6.1" }
 androidxUiTestJunit4 = { module = "androidx.compose.ui:ui-test-junit4", version.ref="androidxUiTest" }
 androidxUiTestManifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref="androidxUiTest" }
