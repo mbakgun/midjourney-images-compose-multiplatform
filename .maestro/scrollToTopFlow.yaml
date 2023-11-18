@@ -1,0 +1,11 @@
+appId: com.mbakgun.mj
+---
+- runFlow: subflows/runAppAndWaitUntilListVisible.yaml
+- swipe:
+         direction: UP
+- swipe:
+    direction: UP
+- assertVisible: "arrow up"
+- tapOn: "arrow up"
+- assertNotVisible: "arrow up"
+- stopApp

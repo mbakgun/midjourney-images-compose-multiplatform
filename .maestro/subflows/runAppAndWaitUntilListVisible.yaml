@@ -1,0 +1,9 @@
+appId: com.mbakgun.mj
+---
+- launchApp
+- extendedWaitUntil:
+          visible: "pullRefreshIndicator"
+          timeout: 10000
+- extendedWaitUntil:
+      visible: "imagesGrid"
+      timeout: 10000

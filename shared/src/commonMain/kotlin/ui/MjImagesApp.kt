@@ -68,6 +68,8 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Popup
@@ -146,8 +148,8 @@ fun MjImagesApp(
                         refreshing = isRefreshing.value,
                         state = pullRefreshState,
                         modifier = Modifier.align(Alignment.TopCenter)
-                            .testTag("pullRefreshIndicator")
-                    )
+                            .semantics { contentDescription = "pullRefreshIndicator" }
+                            .testTag("pullRefreshIndicator"))
 
                     AnimatedVisibility(
                         visible = showButton,
@@ -188,7 +190,9 @@ fun MjImagesList(
     PlatformSpecificMjImagesGrid(
         onLoadMore = onLoadMore,
         images = images,
-        modifier = Modifier.fillMaxSize().testTag("imagesGrid"),
+        modifier = Modifier.fillMaxSize()
+            .semantics { contentDescription = "imagesGrid" }
+            .testTag("imagesGrid"),
         showPreviewDialog = showPreviewDialog,
         state = state,
     )
