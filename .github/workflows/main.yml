@@ -83,9 +83,9 @@ jobs:
       - uses: mobile-dev-inc/action-maestro-cloud@v1.1.1
         with:
           api-key: ${{ secrets.MAESTRO_CLOUD_API_KEY }}
-          app-file: androidApp/build/outputs/apk/debug/app-debug.apk
+          app-file: androidApp/build/outputs/apk/debug/androidApp-debug.apk
       - name: Upload APK
         uses: actions/upload-artifact@v1
         with:
           name: apk
-          path: androidApp/build/outputs/apk/debug/app-debug.apk
+          path: androidApp/build/outputs/apk/debug/androidApp-debug.apk
