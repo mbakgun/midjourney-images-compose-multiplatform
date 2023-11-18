@@ -3,7 +3,7 @@ on:
   pull_request:
   merge_group:
 jobs:
-  ui-tests:
+  compose-ui-tests:
     runs-on: macos-latest
     timeout-minutes: 25
 
@@ -23,7 +23,7 @@ jobs:
           api-level: 29
           script: ./gradlew connectedCheck
 
-  unit-tests-detekt-build:
+  unit-tests-and-detekt:
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
@@ -43,11 +43,6 @@ jobs:
 
       - name: Run Unit Tests
         run: ./gradlew test --stacktrace
-
-      - name: Assemble Debug
-        uses: eskatos/gradle-command-action@v2
-        with:
-          arguments: assembleDebug
 
   iOS-build:
     runs-on: macos-latest
@@ -70,7 +65,7 @@ jobs:
       - name: Build iOS app
         run: xcodebuild build -workspace iosApp/iosApp.xcworkspace -configuration Debug -scheme iosApp -sdk iphoneos -destination name='iPhone 14' -verbose
 
-  maestro-ui-tests:
+  maestro-ui-tests-and-upload-apk:
     runs-on: ubuntu-latest
     timeout-minutes: 20
 
@@ -78,12 +73,19 @@ jobs:
       app: androidApp/build/outputs/apk/debug
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-java@v3
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
         with:
-          java-version: 11
-          distribution: 'temurin'
+          java-version: 17
+          distribution: 'adopt'
+          cache: 'gradle'
       - run: ./gradlew :androidApp:assembleDebug
       - uses: mobile-dev-inc/action-maestro-cloud@v1.1.1
         with:
           api-key: ${{ secrets.MAESTRO_CLOUD_API_KEY }}
           app-file: androidApp/build/outputs/apk/debug/app-debug.apk
+      - name: Upload APK
+        uses: actions/upload-artifact@v1
+        with:
+          name: apk
+          path: androidApp/build/outputs/apk/debug/app-debug.apk
