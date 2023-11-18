@@ -149,7 +149,7 @@ fun MjImagesApp(
                         state = pullRefreshState,
                         modifier = Modifier.align(Alignment.TopCenter)
                             .semantics { contentDescription = "pullRefreshIndicator" }
-                            .testTag("pullRefreshIndicator")                    )
+                            .testTag("pullRefreshIndicator"))
 
                     AnimatedVisibility(
                         visible = showButton,
@@ -190,7 +190,9 @@ fun MjImagesList(
     PlatformSpecificMjImagesGrid(
         onLoadMore = onLoadMore,
         images = images,
-        modifier = Modifier.fillMaxSize().testTag("imagesGrid"),
+        modifier = Modifier.fillMaxSize()
+            .semantics { contentDescription = "imagesGrid" }
+            .testTag("imagesGrid"),
         showPreviewDialog = showPreviewDialog,
         state = state,
     )
