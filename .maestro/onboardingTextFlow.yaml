@@ -1,0 +1,5 @@
+appId: com.mbakgun.mj
+---
+- launchApp:
+   clearState: true
+- assertVisible: "1) Click image to open in browser\n2) Long click to preview image"

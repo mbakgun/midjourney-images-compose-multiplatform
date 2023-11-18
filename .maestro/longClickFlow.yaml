@@ -1,0 +1,8 @@
+appId: com.mbakgun.mj
+---
+- runFlow: subflows/runAppAndWaitUntilListVisible.yaml
+- longPressOn:
+    point: "25%,25%"
+- assertVisible: "close"
+- tapOn: "close"
+- assertNotVisible: "close"

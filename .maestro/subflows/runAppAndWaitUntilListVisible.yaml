@@ -1,0 +1,6 @@
+appId: com.mbakgun.mj
+---
+- launchApp
+- extendedWaitUntil:
+      notVisible: "pullRefreshIndicator"
+      timeout: 10000
