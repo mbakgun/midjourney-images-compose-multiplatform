@@ -1,7 +1,8 @@
 # MidJourney Images Compose Multiplatform Mobile Application
 [![Android Weekly #567](https://androidweekly.net/issues/issue-567/badge)](https://androidweekly.net/issues/issue-567)
 <a href="https://mailchi.mp/kotlinweekly/kotlin-weekly-352"><img alt="Kotlin Weekly" src="image-assets/kotlin-weekly.svg"/></a>
-#### Öne çıkanlar [Google Dev](https://devlibrary.withgoogle.com/products/android/repos/mbakgun-midjourney-images-compose-multiplatform)
+[![Build & Ship](https://github.com/mbakgun/midjourney-images-compose-multiplatform/actions/workflows/main.yml/badge.svg)](https://github.com/mbakgun/midjourney-images-compose-multiplatform/actions/workflows/main.yml)
+#### [Google Dev](https://devlibrary.withgoogle.com/products/android/repos/mbakgun-midjourney-images-compose-multiplatform) Öne Çıkanlar
 
 Bu uygulama, çoklu platform desteği ile MidJourney'ın oluşturduğu resimleri göstermek için geliştirilmiştir. Uygulama,
 Compose Multiplatform ile geliştirilmiştir. Uygulama, Android, iOS, Wear OS, Android Automotive, Android TV platformlarında çalışmaktadır.
@@ -82,13 +83,23 @@ Proje build edildikten sonra Android Automotive uygulaması herhangi bir emulato
 
 ## Test
 
-Uygulama ui test ve unit testlere sahiptir. Unit testler common paket altında, fake data ile yazılmıştır. UI testler ise
-androidTest paketi altında yazılmıştır.
+Uygulama compose ui test,maestro ui test ve unit testlere sahiptir. Unit testler common paket altında, fake data ile yazılmıştır. UI testler ise
+androidTest paketi altında yazılmıştır. Maestro testleri ise [maestro paketi](https://github.com/mbakgun/midjourney-images-compose-multiplatform/tree/master/.maestro) altında yazılmıştır.
 
 * Unit Testleri çalıştırmak için aşağıdaki komutu çalıştırın:
 
     ```bash
     ./gradlew :shared:cleanTestDebugUnitTest :shared:testDebugUnitTest
+    ```
+* Maestro Testleri çalıştırmak için aşağıdaki komutu çalıştırın:
+
+    ```bash
+    maestro test .maestro
+    ```
+* Android Instrumented UI testleri çalıştırmak için aşağıdaki komutu çalıştırın:
+
+    ```bash
+    ./gradlew :shared:connectedDebugAndroidTest
     ```
 
 ## API

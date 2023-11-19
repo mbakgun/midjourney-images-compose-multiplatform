@@ -1,8 +1,8 @@
 # MidJourney Images Compose Multiplatform Mobile Application
 [![Android Weekly #567](https://androidweekly.net/issues/issue-567/badge)](https://androidweekly.net/issues/issue-567)
 <a href="https://mailchi.mp/kotlinweekly/kotlin-weekly-352"><img alt="Kotlin Weekly" src="image-assets/kotlin-weekly.svg"/></a>
+[![Build & Ship](https://github.com/mbakgun/midjourney-images-compose-multiplatform/actions/workflows/main.yml/badge.svg)](https://github.com/mbakgun/midjourney-images-compose-multiplatform/actions/workflows/main.yml)
 #### Featured in [Google dev library](https://devlibrary.withgoogle.com/products/android/repos/mbakgun-midjourney-images-compose-multiplatform)
-
 
 This application is developed to display the images created by MidJourney. The application is developed with Compose Multiplatform and works on Android, iOS, Wear OS, Android Automotive, Android TV platforms.
 
@@ -80,12 +80,22 @@ After the project is built, the Android Automotive application can be run on any
 
 ## Testing
 
-The application has UI tests and unit tests. Unit tests are written with fake data under the common package. UI tests are written under the androidTest package.
+The application has Compose UI tests, Maestro UI tests, and unit tests. The unit tests are written under the common package with fake data. The UI tests are written under the androidTest package. The Maestro tests are written under the [maestro package](https://github.com/mbakgun/midjourney-images-compose-multiplatform/tree/master/.maestro).
 
 * To run the unit tests, run the following command:
 
     ```bash
     ./gradlew :shared:cleanTestDebugUnitTest :shared:testDebugUnitTest
+    ```
+* To run the Maestro Tests, execute the following command:
+
+   ```bash
+    maestro test .maestro
+    ```
+* To run the Android Instrumented UI tests, run the following command:
+
+    ```bash
+    ./gradlew :shared:connectedAndroidTest
     ```
 
 ## API
