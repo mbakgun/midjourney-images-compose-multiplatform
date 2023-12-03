@@ -9,6 +9,7 @@ plugins {
 
 kotlin {
     androidTarget()
+    jvm()
 
     iosX64()
     iosArm64()
@@ -64,6 +65,10 @@ kotlin {
 
         iosMain.dependencies {
             implementation(libs.ktorClientIos)
+        }
+
+        jvmMain.dependencies {
+            implementation(libs.ktorClientJvm)
         }
 
         commonTest.dependencies {

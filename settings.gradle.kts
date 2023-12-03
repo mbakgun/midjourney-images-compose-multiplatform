@@ -18,6 +18,7 @@ pluginManagement {
         val agpVersion = "8.2.0"
         val composeVersion = "1.5.11"
 
+        kotlin("jvm").version(kotlinVersion)
         kotlin("multiplatform").version(kotlinVersion)
         id("com.android.library").version(agpVersion)
         id("org.jetbrains.compose").version(composeVersion)
