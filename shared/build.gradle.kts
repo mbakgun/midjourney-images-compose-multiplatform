@@ -9,6 +9,7 @@ plugins {
 
 kotlin {
     androidTarget()
+    jvm()
 
     iosX64()
     iosArm64()
@@ -28,33 +29,33 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(compose.runtime)
-            implementation(compose.foundation)
-            implementation(compose.material)
-            implementation(compose.materialIconsExtended)
+                implementation(compose.runtime)
+                implementation(compose.foundation)
+                implementation(compose.material)
+                implementation(compose.materialIconsExtended)
 
-            //sharedVm
-            api(libs.kmmViewmodelCore)
+                //sharedVm
+                api(libs.kmmViewmodelCore)
 
-            //di
-            api(libs.koinCore)
+                //di
+                api(libs.koinCore)
 
-            //network
-            implementation(libs.ktorClientCore)
-            implementation(libs.ktorClientJson)
-            implementation(libs.ktorClientLogging)
-            implementation(libs.ktorClientContentNegotiation)
-            implementation(libs.ktorSerializationKotlinxJson)
-            implementation(libs.kotlinxSerializationCore)
+                //network
+                implementation(libs.ktorClientCore)
+                implementation(libs.ktorClientJson)
+                implementation(libs.ktorClientLogging)
+                implementation(libs.ktorClientContentNegotiation)
+                implementation(libs.ktorSerializationKotlinxJson)
+                implementation(libs.kotlinxSerializationCore)
 
-            //imageloading
-            implementation(libs.imageLoader)
+                //imageloading
+                implementation(libs.imageLoader)
 
-            //coroutines
-            implementation(libs.kotlinxCoroutinesCore)
+                //coroutines
+                implementation(libs.kotlinxCoroutinesCore)
 
-            // local
-            implementation(libs.multiplatformSettings)
+                // local
+                implementation(libs.multiplatformSettings)
         }
 
         androidMain.dependencies {
@@ -64,6 +65,10 @@ kotlin {
 
         iosMain.dependencies {
             implementation(libs.ktorClientIos)
+        }
+
+        jvmMain.dependencies {
+                implementation(libs.ktorClientJvm)
         }
 
         commonTest.dependencies {
