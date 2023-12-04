@@ -1,6 +1,7 @@
 rootProject.name = "MidJourneyImagesComposeMultiplatform"
 
 include(":androidApp")
+include(":desktopApp")
 include(":shared")
 include(":wearApp")
 include(":televisionApp")
