@@ -44,15 +44,15 @@ private val currentOperatingSystem: OperatingSystem
         }
     }
 
-private fun getCacheDir(): File = when (currentOperatingSystem) {
-    OperatingSystem.Windows -> File(System.getenv("AppData"), "$ApplicationName/cache")
-    OperatingSystem.Linux -> File(System.getProperty("user.home"), ".cache/$ApplicationName")
-    OperatingSystem.MacOS -> File(
-        System.getProperty("user.home"),
-        "Library/Caches/$ApplicationName"
-    )
-
-    else -> throw IllegalStateException("Unsupported operating system")
+private fun getCacheDir(): File {
+    val appName = "MidJourneyImagesComposeMultiplatform"
+    return when (currentOperatingSystem) {
+        OperatingSystem.Windows -> File(System.getenv("AppData"), "$appName/cache")
+        OperatingSystem.Linux -> File(System.getProperty("user.home"), ".cache/$appName")
+        OperatingSystem.MacOS -> File(
+            System.getProperty("user.home"),
+            "Library/Caches/$appName"
+        )
+        else -> throw IllegalStateException("Unsupported operating system")
+    }
 }
-
-private const val ApplicationName = "MidJourneyImagesComposeMultiplatform"
