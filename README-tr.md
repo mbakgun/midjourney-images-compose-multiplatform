@@ -81,6 +81,23 @@ Proje build edildikten sonra Android Automotive uygulaması herhangi bir emulato
 
 <img src="image-assets/automotive.gif" alt="android-compose"/>
 
+## Desktop Application
+
+Bu proje Windows, Debian ve MacOS için oluşturulabilir.
+
+```bash
+./gradlew desktopApp:run
+```
+
+### Dağıtım oluşturma
+
+```
+./gradlew :desktop:packageDistributionForCurrentOS
+# çıktılar desktopApp/build/compose/binaries dizinine yazılır
+```
+
+<img src="image-assets/desktop.gif" alt="desktop-compose"/>
+
 ## Test
 
 Uygulama compose ui test,maestro ui test ve unit testlere sahiptir. Unit testler common paket altında, fake data ile yazılmıştır. UI testler ise

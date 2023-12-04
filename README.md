@@ -78,6 +78,23 @@ After the project is built, the Android Automotive application can be run on any
 
 <img src="image-assets/automotive.gif" alt="android-compose"/>
 
+## Desktop Application
+
+This project can be built for Windows, Debian, and MacOS.
+
+```bash
+./gradlew desktopApp:run
+```
+
+### Building native desktop distribution
+
+```
+./gradlew :desktop:packageDistributionForCurrentOS
+# outputs are written to desktopApp/build/compose/binaries
+```
+
+<img src="image-assets/desktop.gif" alt="desktop-compose"/>
+
 ## Testing
 
 The application has Compose UI tests, Maestro UI tests, and unit tests. The unit tests are written under the common package with fake data. The UI tests are written under the androidTest package. The Maestro tests are written under the [maestro package](https://github.com/mbakgun/midjourney-images-compose-multiplatform/tree/master/.maestro).
