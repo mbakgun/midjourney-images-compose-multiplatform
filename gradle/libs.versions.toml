@@ -1,6 +1,6 @@
 [versions]
 androidxUiTest = "1.5.4"
-koin = "3.5.0"
+koin = "3.5.3"
 ktorClient = "2.3.7"
 kotlinxCoroutines = "1.7.3"
 
