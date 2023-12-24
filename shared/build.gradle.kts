@@ -54,7 +54,7 @@ kotlin {
                 //coroutines
                 implementation(libs.kotlinxCoroutinesCore)
 
-                // local
+                //local
                 implementation(libs.multiplatformSettings)
         }
 

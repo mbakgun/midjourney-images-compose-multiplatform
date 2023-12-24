@@ -187,29 +187,12 @@ fun MjImagesList(
     onLoadMore: () -> Unit,
     showPreviewDialog: (imageUrl: String) -> Unit,
 ) {
-    PlatformSpecificMjImagesGrid(
-        onLoadMore = onLoadMore,
-        images = images,
-        modifier = Modifier.fillMaxSize()
-            .semantics { contentDescription = "imagesGrid" }
-            .testTag("imagesGrid"),
-        showPreviewDialog = showPreviewDialog,
-        state = state,
-    )
-}
-
-@Composable
-fun PlatformSpecificMjImagesGrid(
-    state: LazyStaggeredGridState,
-    images: MjImages,
-    showPreviewDialog: (imageUrl: String) -> Unit,
-    onLoadMore: () -> Unit,
-    modifier: Modifier = Modifier,
-) {
     LazyVerticalStaggeredGrid(
         state = state.apply { OnBottomReached(onLoadMore::invoke) },
         columns = StaggeredGridCells.Fixed(2),
-        modifier = modifier,
+        modifier = Modifier.fillMaxSize()
+            .semantics { contentDescription = "imagesGrid" }
+            .testTag("imagesGrid"),
     ) {
         items(
             items = images.images,
@@ -222,7 +205,6 @@ fun PlatformSpecificMjImagesGrid(
         }
     }
 }
-
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
