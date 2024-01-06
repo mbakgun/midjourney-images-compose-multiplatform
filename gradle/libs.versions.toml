@@ -15,7 +15,7 @@ androidxUiTestJunit4 = { module = "androidx.compose.ui:ui-test-junit4", version.
 androidxUiTestManifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref="androidxUiTest" }
 androidxCoreKtx = { module = "androidx.core:core-ktx", version="1.12.0" }
 kmmViewmodelCore = { module = "com.rickclephas.kmm:kmm-viewmodel-core", version="1.0.0-ALPHA-17" }
-imageLoader = { module = "io.github.qdsfdhvh:image-loader", version="1.7.1" }
+imageLoader = { module = "io.github.qdsfdhvh:image-loader", version="1.7.2" }
 koin = { module = "io.insert-koin:koin-android", version.ref="koin" }
 koinCore = { module = "io.insert-koin:koin-core", version.ref="koin" }
 koinTest = { module = "io.insert-koin:koin-test", version="3.5.3" }
