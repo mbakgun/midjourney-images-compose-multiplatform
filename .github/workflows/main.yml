@@ -18,7 +18,7 @@ jobs:
           cache: 'gradle'
 
       - name: Run instrumented tests
-        uses: ReactiveCircus/android-emulator-runner@v2.29.0
+        uses: ReactiveCircus/android-emulator-runner@v2.30.0
         with:
           api-level: 29
           script: ./gradlew connectedCheck
