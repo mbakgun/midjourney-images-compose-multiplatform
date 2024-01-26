@@ -37,7 +37,7 @@ jobs:
           java-version: 17
 
       - name: Run Detekt
-        uses: eskatos/gradle-command-action@v2
+        uses: eskatos/gradle-command-action@v3
         with:
           arguments: detekt
 
