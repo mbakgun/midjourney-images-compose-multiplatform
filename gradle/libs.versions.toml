@@ -5,7 +5,7 @@ ktorClient = "2.3.7"
 kotlinxCoroutines = "1.7.3"
 
 [plugins]
-detekt = { id = "io.gitlab.arturbosch.detekt", version = "1.23.4" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version = "1.23.5" }
 serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version = "1.9.22" }
 
 [libraries]
