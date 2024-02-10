@@ -98,10 +98,13 @@ Dieses Projekt kann für Windows, Debian und MacOS erstellt werden.
 ## Web Application
 
 Diese Projekt kann für Web(JS) erstellt werden.
+[Demo](https://mj.akgns.com/compose)
 
 ```
 ./gradlew :compose-web:jsBrowserDevelopmentRun
 ```
+
+<img src="image-assets/web.gif" alt="web-compose"/>
 
 ## Tests
 

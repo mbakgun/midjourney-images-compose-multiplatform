@@ -101,10 +101,12 @@ Bu proje Windows, Debian ve MacOS için oluşturulabilir.
 ## Web Application
 
 Bu proje Web(JS) için oluşturulabilir.
+[Demo](https://mj.akgns.com/compose)
 
 ```
 ./gradlew :compose-web:jsBrowserDevelopmentRun
 ```
+<img src="image-assets/web.gif" alt="web-compose"/>
 
 ## Test
 

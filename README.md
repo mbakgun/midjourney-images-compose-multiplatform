@@ -97,11 +97,13 @@ This project can be built for Windows, Debian, and MacOS.
 
 ## Web Application
 
-This project can be for the Compose for Web(JS). 
+This project can be for the Compose for Web(JS).
+[Demo](https://mj.akgns.com/compose)
 
 ```
 ./gradlew :compose-web:jsBrowserDevelopmentRun
 ```
+<img src="image-assets/web.gif" alt="web-compose"/>
 
 ## Testing
 
