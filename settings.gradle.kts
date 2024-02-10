@@ -6,6 +6,7 @@ include(":shared")
 include(":wearApp")
 include(":televisionApp")
 include(":automotiveApp")
+include(":webApp")
 
 pluginManagement {
     repositories {

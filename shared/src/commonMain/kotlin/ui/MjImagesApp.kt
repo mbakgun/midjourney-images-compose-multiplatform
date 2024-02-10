@@ -86,6 +86,7 @@ import kotlinx.coroutines.launch
 import ui.theme.AppTheme
 import util.OnBottomReached
 import util.generateImageLoader
+import util.getImageProvider
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -189,7 +190,7 @@ fun MjImagesList(
 ) {
     LazyVerticalStaggeredGrid(
         state = state.apply { OnBottomReached(onLoadMore::invoke) },
-        columns = StaggeredGridCells.Fixed(2),
+        columns = StaggeredGridCells.Fixed(getImageProvider().columnCount),
         modifier = Modifier.fillMaxSize()
             .semantics { contentDescription = "imagesGrid" }
             .testTag("imagesGrid"),
@@ -213,7 +214,8 @@ fun MjImageItem(
     showPreviewDialog: (imageUrl: String) -> Unit,
 ) {
     val uriHandler = LocalUriHandler.current
-    val height = remember { derivedStateOf((180 * image.ratio)::dp) }
+    val height =
+        remember { derivedStateOf((getImageProvider().itemHeight.value * image.ratio)::dp) }
 
     Surface(
         modifier = Modifier

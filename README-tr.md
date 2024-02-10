@@ -5,7 +5,7 @@
 #### [Google Dev](https://devlibrary.withgoogle.com/products/android/repos/mbakgun-midjourney-images-compose-multiplatform) Öne Çıkanlar
 
 Bu uygulama, çoklu platform desteği ile MidJourney'ın oluşturduğu resimleri göstermek için geliştirilmiştir. Uygulama,
-Compose Multiplatform ile geliştirilmiştir. Uygulama, Android, iOS, Wear OS, Android Automotive, Android TV platformlarında çalışmaktadır.
+Compose Multiplatform ile geliştirilmiştir. Uygulama, Android, iOS, Web, Wear OS, Android Automotive, Android TV platformlarında çalışmaktadır.
 
 <p align="center"><img src="image-assets/1.gif" alt="kmm-compose-header" /><br><br></p>
 Kotlin ve Jetpack Compose kullanılarak MVVM konseptinde geliştirtirildi. Network request state'leri, endless pagination, image loading ve image caching işlemleri yapılmıştır.
@@ -97,6 +97,14 @@ Bu proje Windows, Debian ve MacOS için oluşturulabilir.
 ```
 
 <img src="image-assets/desktop.gif" alt="desktop-compose"/>
+
+## Web Application
+
+Bu proje Web(JS) için oluşturulabilir.
+
+```
+./gradlew :compose-web:jsBrowserDevelopmentRun
+```
 
 ## Test
 

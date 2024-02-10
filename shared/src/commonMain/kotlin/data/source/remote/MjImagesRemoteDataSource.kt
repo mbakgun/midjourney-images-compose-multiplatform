@@ -5,7 +5,7 @@ import data.source.remote.model.MjImagesResponse
 import kotlinx.coroutines.withContext
 import util.DispatcherProvider
 
-class MjImagesRemoteDataSource constructor(
+class MjImagesRemoteDataSource(
     private val service: MjImagesService,
     private val dispatcherProvider: DispatcherProvider,
 ) : MjImagesDataSource.Remote {
