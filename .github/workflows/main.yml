@@ -120,4 +120,4 @@ jobs:
           distribution: 'zulu'
           java-version: 17
       - name: Build web app
-        run: ./gradlew :webApp:jsBrowserDistribution
+        run: ./gradlew :webApp:jsBrowserDevelopmentExecutableDistribution

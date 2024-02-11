@@ -107,6 +107,7 @@ This project can be built for the Compose for Web(JS).
 ### Building web distribution
 
 ```
+./gradlew :webApp:jsBrowserDevelopmentExecutableDistribution
 ./gradlew :webApp:jsBrowserDistribution
 ```
 

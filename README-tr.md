@@ -110,6 +110,7 @@ Bu proje Web(JS) için oluşturulabilir.
 ### Web için dağıtım oluşturma
 
 ```
+./gradlew :webApp:jsBrowserDevelopmentExecutableDistribution
 ./gradlew :webApp:jsBrowserDistribution
 ```
 

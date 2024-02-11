@@ -107,6 +107,7 @@ Diese Projekt kann für Web(JS) erstellt werden.
 ### Erstellen einer Web-Distribution
 
 ```
+./gradlew :webApp:jsBrowserDevelopmentExecutableDistribution
 ./gradlew :webApp:jsBrowserDistribution
 ```
 
