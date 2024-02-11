@@ -101,11 +101,11 @@ jobs:
     timeout-minutes: 20
 
     steps:
+      - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
           java-version: 17
-
       - name: Build desktop app
         run: ./gradlew :desktop:packageDistributionForCurrentOS
 
@@ -114,10 +114,10 @@ jobs:
     timeout-minutes: 20
 
     steps:
+      - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
           java-version: 17
-
       - name: Build web app
         run: ./gradlew :webApp:jsBrowserDistribution
