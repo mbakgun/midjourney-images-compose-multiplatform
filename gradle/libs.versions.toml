@@ -32,4 +32,4 @@ kotlinxCoroutinesCore = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-cor
 kotlinxCoroutinesTest = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref="kotlinxCoroutines" }
 kotlinxSerializationCore = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version="1.6.2" }
 multiplatformSettings = { module = "com.russhwolf:multiplatform-settings-no-arg", version="1.1.1" }
-okio-fakefilesystem = { module = "com.squareup.okio:okio-fakefilesystem", version = "3.7.0" }
+okio-fakefilesystem = { module = "com.squareup.okio:okio-fakefilesystem", version = "3.8.0" }
