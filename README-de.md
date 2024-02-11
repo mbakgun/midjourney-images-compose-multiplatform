@@ -104,6 +104,13 @@ Diese Projekt kann für Web(JS) erstellt werden.
 ./gradlew :compose-web:jsBrowserDevelopmentRun
 ```
 
+### Erstellen einer Web-Distribution
+
+```
+./gradlew :webApp:jsBrowserDevelopmentExecutableDistribution
+./gradlew :webApp:jsBrowserDistribution
+```
+
 <img src="image-assets/web.gif" alt="web-compose"/>
 
 ## Tests
