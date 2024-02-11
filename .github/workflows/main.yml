@@ -95,3 +95,29 @@ jobs:
         with:
           name: apk
           path: androidApp/build/outputs/apk/debug/androidApp-debug.apk
+
+  desktop-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: 17
+
+      - name: Build desktop app
+        run: ./gradlew :desktop:packageDistributionForCurrentOS
+
+  web-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: 17
+
+      - name: Build web app
+        run: ./gradlew :webApp:jsBrowserDistribution

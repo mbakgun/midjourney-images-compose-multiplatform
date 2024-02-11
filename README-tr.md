@@ -89,7 +89,7 @@ Bu proje Windows, Debian ve MacOS için oluşturulabilir.
 ./gradlew desktopApp:run
 ```
 
-### Dağıtım oluşturma
+### Desktop için dağıtım oluşturma
 
 ```
 ./gradlew :desktop:packageDistributionForCurrentOS
@@ -106,6 +106,13 @@ Bu proje Web(JS) için oluşturulabilir.
 ```
 ./gradlew :compose-web:jsBrowserDevelopmentRun
 ```
+
+### Web için dağıtım oluşturma
+
+```
+./gradlew :webApp:jsBrowserDistribution
+```
+
 <img src="image-assets/web.gif" alt="web-compose"/>
 
 ## Test

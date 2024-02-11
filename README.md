@@ -103,6 +103,13 @@ This project can be built for the Compose for Web(JS).
 ```
 ./gradlew :compose-web:jsBrowserDevelopmentRun
 ```
+
+### Building web distribution
+
+```
+./gradlew :webApp:jsBrowserDistribution
+```
+
 <img src="image-assets/web.gif" alt="web-compose"/>
 
 ## Testing
