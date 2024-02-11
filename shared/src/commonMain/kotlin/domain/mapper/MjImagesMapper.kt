@@ -6,7 +6,7 @@ import domain.model.MjImages
 import kotlinx.coroutines.withContext
 import util.DispatcherProvider
 
-class MjImagesMapper constructor(
+class MjImagesMapper(
     private val dispatcherProvider: DispatcherProvider,
 ) {
 

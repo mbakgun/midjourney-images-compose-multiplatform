@@ -2,13 +2,11 @@
 <SmellBaseline>
   <ManuallySuppressedIssues></ManuallySuppressedIssues>
   <CurrentIssues>
-    <ID>FunctionNaming:GridStateExt.kt$@Composable fun LazyGridState.OnBottomReached( loadMore: () -&gt; Unit )</ID>
     <ID>FunctionNaming:GridStateExt.kt$@Composable fun LazyStaggeredGridState.OnBottomReached( loadMore: () -&gt; Unit )</ID>
     <ID>FunctionNaming:MjImagesApp.kt$@Composable fun DraggableThemeSelection( useDarkTheme: Boolean, onClick: (Boolean) -&gt; Unit )</ID>
     <ID>FunctionNaming:MjImagesApp.kt$@Composable fun EmptyScreen( onRefresh: () -&gt; Unit )</ID>
     <ID>FunctionNaming:MjImagesApp.kt$@Composable fun ErrorScreen( onRefresh: () -&gt; Unit )</ID>
     <ID>FunctionNaming:MjImagesApp.kt$@Composable fun MjImagesList( images: MjImages, state: LazyStaggeredGridState, onLoadMore: () -&gt; Unit, showPreviewDialog: (imageUrl: String) -&gt; Unit, )</ID>
-    <ID>FunctionNaming:MjImagesApp.kt$@Composable fun PlatformSpecificMjImagesGrid( state: LazyStaggeredGridState, images: MjImages, showPreviewDialog: (imageUrl: String) -&gt; Unit, onLoadMore: () -&gt; Unit, modifier: Modifier = Modifier, )</ID>
     <ID>FunctionNaming:MjImagesApp.kt$@Composable fun PreviewDialog( imageUrl: String, onDismissed: () -&gt; Unit, )</ID>
     <ID>FunctionNaming:MjImagesApp.kt$@Composable fun PreviewImage(imageUrl: String)</ID>
     <ID>FunctionNaming:MjImagesApp.kt$@Composable fun ScrollToTopButton( onClick: () -&gt; Unit, modifier: Modifier = Modifier )</ID>
@@ -32,15 +30,17 @@
     <ID>MagicNumber:Colors.kt$0xFFFFFFFF</ID>
     <ID>MagicNumber:ImageLoader.kt$0.25</ID>
     <ID>MagicNumber:ImageLoader.kt$1024</ID>
+    <ID>MagicNumber:ImageLoader.kt$256L</ID>
     <ID>MagicNumber:ImageLoader.kt$32</ID>
+    <ID>MagicNumber:ImageLoader.kt$512</ID>
     <ID>MagicNumber:ImageLoader.kt$512L</ID>
     <ID>MagicNumber:MjImagesApp.kt$.2f</ID>
     <ID>MagicNumber:MjImagesApp.kt$.8f</ID>
-    <ID>MagicNumber:MjImagesApp.kt$180</ID>
     <ID>MagicNumber:MjImagesApp.kt$230f</ID>
     <ID>MagicNumber:MjImagesApp.kt$24f</ID>
     <ID>UnusedPrivateProperty:build.gradle.kts$val androidInstrumentedTest by getting { dependencies { implementation(libs.androidxUiTestJunit4) implementation(libs.androidxUiTestManifest) } }</ID>
     <ID>UnusedPrivateProperty:build.gradle.kts$val androidMain by getting { dependencies { implementation(project(":shared")) api(libs.androidxActivityCompose) api(libs.androidxAppcompat) api(libs.androidxCoreKtx) } }</ID>
+    <ID>UnusedPrivateProperty:build.gradle.kts$val jsMain by getting { dependencies { implementation(compose.runtime) implementation(compose.foundation) implementation(project(":shared")) } }</ID>
     <ID>UnusedPrivateProperty:build.gradle.kts$val jvmMain by getting { dependencies { implementation(project(":shared")) implementation(compose.desktop.currentOs) } }</ID>
     <ID>UseCheckOrError:ImageLoader.kt$throw IllegalStateException("Unsupported operating system")</ID>
   </CurrentIssues>

@@ -4,7 +4,7 @@
 [![Build & Ship](https://github.com/mbakgun/midjourney-images-compose-multiplatform/actions/workflows/main.yml/badge.svg)](https://github.com/mbakgun/midjourney-images-compose-multiplatform/actions/workflows/main.yml)
 #### Vorgestellt auf [Google Dev Bibliothek](https://devlibrary.withgoogle.com/products/android/repos/mbakgun-midjourney-images-compose-multiplatform)
 
-Diese Anwendung wurde entwickelt, um die Bilder von MidJourney anzuzeigen. Die Anwendung wurde mit Compose Multiplatform entwickelt. Die Anwendung läuft auf den Plattformen Android, iOS, Wear OS, Android Automotive, Android TV
+Diese Anwendung wurde entwickelt, um die Bilder von MidJourney anzuzeigen. Die Anwendung wurde mit Compose Multiplatform entwickelt. Die Anwendung läuft auf den Plattformen Android, iOS, Web, Wear OS, Android Automotive, Android TV
 
 <p align="center"><img src="image-assets/1.gif" alt="kmm-compose-header" /><br><br></p>
 Die Anwendung wurde im MVVM-Konzept mit Kotlin und Jetpack Compose entwickelt. Es wurden Netzwerkanforderungszustände, Endlos-Pagination, Bildladeprozesse und Bildcaching durchgeführt.
@@ -94,6 +94,17 @@ Dieses Projekt kann für Windows, Debian und MacOS erstellt werden.
 ```
 
 <img src="image-assets/desktop.gif" alt="desktop-compose"/>
+
+## Web Application
+
+Diese Projekt kann für Web(JS) erstellt werden.
+[Demo](https://mj.akgns.com/compose)
+
+```
+./gradlew :compose-web:jsBrowserDevelopmentRun
+```
+
+<img src="image-assets/web.gif" alt="web-compose"/>
 
 ## Tests
 

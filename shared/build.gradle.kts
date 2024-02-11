@@ -15,6 +15,11 @@ kotlin {
     iosArm64()
     iosSimulatorArm64()
 
+    js(IR) {
+        browser()
+        binaries.executable()
+    }
+
     cocoapods {
         version = "1.0.0"
         summary = "MidJourney Shared Module"
@@ -29,33 +34,33 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-                implementation(compose.runtime)
-                implementation(compose.foundation)
-                implementation(compose.material)
-                implementation(compose.materialIconsExtended)
+            implementation(compose.runtime)
+            implementation(compose.foundation)
+            implementation(compose.material)
+            implementation(compose.materialIconsExtended)
 
-                //sharedVm
-                api(libs.kmmViewmodelCore)
+            //sharedVm
+            api(libs.kmmViewmodelCore)
 
-                //di
-                api(libs.koinCore)
+            //di
+            api(libs.koinCore)
 
-                //network
-                implementation(libs.ktorClientCore)
-                implementation(libs.ktorClientJson)
-                implementation(libs.ktorClientLogging)
-                implementation(libs.ktorClientContentNegotiation)
-                implementation(libs.ktorSerializationKotlinxJson)
-                implementation(libs.kotlinxSerializationCore)
+            //network
+            implementation(libs.ktorClientCore)
+            implementation(libs.ktorClientJson)
+            implementation(libs.ktorClientLogging)
+            implementation(libs.ktorClientContentNegotiation)
+            implementation(libs.ktorSerializationKotlinxJson)
+            implementation(libs.kotlinxSerializationCore)
 
-                //imageloading
-                implementation(libs.imageLoader)
+            //imageLoading
+            implementation(libs.imageLoader)
 
-                //coroutines
-                implementation(libs.kotlinxCoroutinesCore)
+            //coroutines
+            implementation(libs.kotlinxCoroutinesCore)
 
-                //local
-                implementation(libs.multiplatformSettings)
+            //local
+            implementation(libs.multiplatformSettings)
         }
 
         androidMain.dependencies {
@@ -68,7 +73,12 @@ kotlin {
         }
 
         jvmMain.dependencies {
-                implementation(libs.ktorClientJvm)
+            implementation(libs.ktorClientJvm)
+        }
+
+        jsMain.dependencies {
+            implementation(libs.okio.fakefilesystem)
+            implementation(libs.ktorClientJs)
         }
 
         commonTest.dependencies {
@@ -119,5 +129,10 @@ kotlin {
         all {
             languageSettings.optIn("kotlinx.cinterop.ExperimentalForeignApi")
         }
+    }
+}
+
+compose.experimental {
+    web.application {
     }
 }

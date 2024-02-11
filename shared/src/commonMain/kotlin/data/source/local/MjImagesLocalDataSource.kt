@@ -6,7 +6,7 @@ import data.source.MjImagesDataSource
 import kotlinx.coroutines.withContext
 import util.DispatcherProvider
 
-class MjImagesLocalDataSource constructor(
+class MjImagesLocalDataSource(
     private val settings: Settings,
     private val dispatcherProvider: DispatcherProvider,
 ) : MjImagesDataSource.Local {
