@@ -101,7 +101,7 @@ This project can be built for the Compose for Web(JS).
 [Demo](https://mj.akgns.com/compose)
 
 ```
-./gradlew :compose-web:jsBrowserDevelopmentRun
+./gradlew :webApp:jsBrowserDevelopmentRun
 ```
 
 ### Building web distribution

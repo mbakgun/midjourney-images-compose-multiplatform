@@ -77,7 +77,6 @@ kotlin {
         }
 
         jsMain.dependencies {
-            implementation(libs.okio.fakefilesystem)
             implementation(libs.ktorClientJs)
         }
 
