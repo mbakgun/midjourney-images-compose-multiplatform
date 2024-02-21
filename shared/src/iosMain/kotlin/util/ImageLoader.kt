@@ -2,7 +2,9 @@ package util
 
 import com.seiko.imageloader.ImageLoader
 import com.seiko.imageloader.component.setupDefaultComponents
-import com.seiko.imageloader.defaultImageResultMemoryCache
+import com.seiko.imageloader.intercept.bitmapMemoryCacheConfig
+import com.seiko.imageloader.intercept.imageMemoryCacheConfig
+import com.seiko.imageloader.intercept.painterMemoryCacheConfig
 import okio.Path.Companion.toPath
 import platform.Foundation.NSCachesDirectory
 import platform.Foundation.NSSearchPathForDirectoriesInDomains
@@ -14,10 +16,14 @@ actual fun generateImageLoader(): ImageLoader {
             setupDefaultComponents()
         }
         interceptor {
-            // cache 100 success image result, without bitmap
-            defaultImageResultMemoryCache()
-            memoryCacheConfig {
-                maxSizeBytes(32 * 1024 * 1024) // 32MB
+            bitmapMemoryCacheConfig {
+                maxSize(32 * 1024 * 1024)
+            }
+            imageMemoryCacheConfig {
+                maxSize(50)
+            }
+            painterMemoryCacheConfig {
+                maxSize(50)
             }
             diskCacheConfig {
                 directory(getCacheDir().toPath().resolve("image_cache"))
