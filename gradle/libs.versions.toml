@@ -6,7 +6,7 @@ kotlinxCoroutines = "1.8.0"
 
 [plugins]
 detekt = { id = "io.gitlab.arturbosch.detekt", version = "1.23.5" }
-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version = "1.9.22" }
+serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version = "1.9.23" }
 
 [libraries]
 androidxActivityCompose = { module = "androidx.activity:activity-compose", version="1.8.2" }
