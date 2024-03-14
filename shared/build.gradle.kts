@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
+
 plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
@@ -16,6 +18,12 @@ kotlin {
     iosSimulatorArm64()
 
     js(IR) {
+        browser()
+        binaries.executable()
+    }
+
+    @OptIn(ExperimentalWasmDsl::class)
+    wasmJs {
         browser()
         binaries.executable()
     }
@@ -85,6 +93,12 @@ kotlin {
             implementation(kotlin("test-annotations-common"))
             implementation(libs.kotlinxCoroutinesTest)
             implementation(libs.koinTest)
+        }
+
+        val wasmJsMain by getting {
+            dependencies {
+                implementation(libs.ktorClientWasmJs)
+            }
         }
 
         val androidInstrumentedTest by getting {
