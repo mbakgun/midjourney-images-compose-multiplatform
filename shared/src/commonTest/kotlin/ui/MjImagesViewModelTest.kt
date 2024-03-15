@@ -45,7 +45,7 @@ class MjImagesViewModelTest : KoinTest {
     }
 
     @Test
-    fun `when fetch images gets success then state should be updated`() = runTest {
+    fun whenFetchImagesGetsSuccessThenStateShouldBeUpdated() = runTest {
         // given
         setupDataSource(SuccessMjImagesDataSource())
 
@@ -59,7 +59,7 @@ class MjImagesViewModelTest : KoinTest {
     }
 
     @Test
-    fun `when fetch images gets success then images should be updated`() = runTest {
+    fun whenFetchImagesGetsSuccessThenImagesShouldBeUpdated() = runTest {
         // given
         setupDataSource(SuccessMjImagesDataSource())
 
@@ -73,7 +73,7 @@ class MjImagesViewModelTest : KoinTest {
     }
 
     @Test
-    fun `when refresh images called images should be empty`() = runTest {
+    fun whenRefreshImagesCalledImagesShouldBeEmpty() = runTest {
         // given
         setupDataSource(SuccessMjImagesDataSource())
 
@@ -88,7 +88,7 @@ class MjImagesViewModelTest : KoinTest {
     }
 
     @Test
-    fun `when load more called with page=maxPage then nothing happens`() = runTest {
+    fun whenLoadMoreCalledWithPageMaxPageThenNothingHappens() = runTest {
         // given
         setupDataSource(SuccessMjImagesDataSource())
 
@@ -103,7 +103,7 @@ class MjImagesViewModelTest : KoinTest {
     }
 
     @Test
-    fun `when fetch images gets error then state should be updated`() = runTest {
+    fun whenFetchImagesGetsErrorThenStateShouldBeUpdated() = runTest {
         // given
         setupDataSource(ErrorMjImagesDataSource())
 
@@ -117,7 +117,7 @@ class MjImagesViewModelTest : KoinTest {
     }
 
     @Test
-    fun `when fetch images gets empty result then images should be updated`() = runTest {
+    fun whenFetchImagesGetsEmptyResultThenImagesShouldBeUpdated() = runTest {
         // given
         setupDataSource(EmptyMjImagesDataSource())
 
