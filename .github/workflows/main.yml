@@ -121,3 +121,16 @@ jobs:
           java-version: 17
       - name: Build web app
         run: ./gradlew :webApp:jsBrowserDevelopmentExecutableDistribution
+
+  wasm-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: 17
+      - name: Build wasm app
+        run: ./gradlew :wasmApp:wasmBrowserDevelopmentExecutableDistribution

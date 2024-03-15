@@ -111,6 +111,21 @@ This project can be built for the Compose for Web(JS).
 ./gradlew :webApp:jsBrowserDistribution
 ```
 
+## Wasm Application
+This project can be built for the Compose for Web(Wasm).
+[Demo](https://mj.akgns.com/wasm)
+
+```
+./gradlew :wasmApp:wasmBrowserDevelopmentRun
+```
+
+### Building wasm distribution
+
+```
+./gradlew :wasmApp:wasmBrowserDevelopmentExecutableDistribution
+./gradlew :wasmApp:wasmJsBrowserDistribution
+```
+
 <img src="image-assets/web.gif" alt="web-compose"/>
 
 ## Testing

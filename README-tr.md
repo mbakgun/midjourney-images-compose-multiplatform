@@ -114,6 +114,21 @@ Bu proje Web(JS) için oluşturulabilir.
 ./gradlew :webApp:jsBrowserDistribution
 ```
 
+## Wasm Application
+Bu proje Web(Wasm) için oluşturulabilir.
+[Demo](https://mj.akgns.com/wasm)
+
+```
+./gradlew :wasmApp:wasmBrowserDevelopmentRun
+```
+
+### Wasm için dağıtım oluşturma
+
+```
+./gradlew :wasmApp:wasmBrowserDevelopmentExecutableDistribution
+./gradlew :wasmApp:wasmJsBrowserDistribution
+```
+
 <img src="image-assets/web.gif" alt="web-compose"/>
 
 ## Test

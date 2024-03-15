@@ -19,7 +19,7 @@ class MjImagesMapperTest {
     }
 
     @Test
-    fun `given null currentPage when mapMjImages called then currentPage returns zero`() = runTest {
+    fun givenNullCurrentPageWhenMapMjImagesCalledThenCurrentPageReturnsZero() = runTest {
         // given
         val response = mockMjImagesResponse(currentPage = null)
 
@@ -31,7 +31,7 @@ class MjImagesMapperTest {
     }
 
     @Test
-    fun `given null totalPages when mapMjImages called then totalPages returns zero`() = runTest {
+    fun givenNullTotalPagesWhenMapMjImagesCalledThenTotalPagesReturnsZero() = runTest {
         // given
         val response = mockMjImagesResponse(totalPages = null)
 
@@ -43,7 +43,7 @@ class MjImagesMapperTest {
     }
 
     @Test
-    fun `given null mjImageResponses when mapMjImages called then images returns empty`() =
+    fun givenNullMjImageResponsesWhenMapMjImagesCalledThenImagesReturnsEmpty() =
         runTest {
             // given
             val response = mockMjImagesResponse(mjImageResponses = null)
@@ -56,7 +56,7 @@ class MjImagesMapperTest {
         }
 
     @Test
-    fun `given null date when mapMjImages called then images returns empty`() = runTest {
+    fun givenNullDateWhenMapMjImagesCalledThenImagesReturnsEmpty() = runTest {
         // given
         val response = mockMjImagesResponse(
             mjImageResponses = listOf(
@@ -71,7 +71,7 @@ class MjImagesMapperTest {
     }
 
     @Test
-    fun `given null imageUrl when mapMjImages called then images returns empty`() = runTest {
+    fun givenNullImageUrlWhenMapMjImagesCalledThenImagesReturnsEmpty() = runTest {
         // given
         val response = mockMjImagesResponse(
             mjImageResponses = listOf(
@@ -86,7 +86,7 @@ class MjImagesMapperTest {
     }
 
     @Test
-    fun `given null ratio when mapMjImages called then images returns empty`() = runTest {
+    fun givenNullRatioWhenMapMjImagesCalledThenImagesReturnsEmpty() = runTest {
         // given
         val response = mockMjImagesResponse(
             mjImageResponses = listOf(
@@ -101,7 +101,7 @@ class MjImagesMapperTest {
     }
 
     @Test
-    fun `given valid response when mapMjImages called then images returns valid`() = runTest {
+    fun givenValidResponseWhenMapMjImagesCalledThenImagesReturnsValid() = runTest {
         // given
         val response = mockMjImagesResponse(
             mjImageResponses = listOf(
@@ -129,7 +129,7 @@ class MjImagesMapperTest {
     }
 
     @Test
-    fun `given valid response when mapMjImages called then images returns list`() = runTest {
+    fun givenValidResponseWhenMapMjImagesCalledThenImagesReturnsList() = runTest {
         // given
         val response = mockMjImagesResponse(
             mjImageResponses = listOf(

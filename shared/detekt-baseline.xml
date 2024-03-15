@@ -41,6 +41,8 @@
     <ID>UnusedPrivateProperty:build.gradle.kts$val androidMain by getting { dependencies { implementation(project(":shared")) api(libs.androidxActivityCompose) api(libs.androidxAppcompat) api(libs.androidxCoreKtx) } }</ID>
     <ID>UnusedPrivateProperty:build.gradle.kts$val jsMain by getting { dependencies { implementation(compose.runtime) implementation(compose.foundation) implementation(project(":shared")) } }</ID>
     <ID>UnusedPrivateProperty:build.gradle.kts$val jvmMain by getting { dependencies { implementation(project(":shared")) implementation(compose.desktop.currentOs) } }</ID>
+    <ID>UnusedPrivateProperty:build.gradle.kts$val wasmJsMain by getting { dependencies { implementation(compose.runtime) implementation(compose.foundation) implementation(project(":shared")) } }</ID>
+    <ID>UnusedPrivateProperty:build.gradle.kts$val wasmJsMain by getting { dependencies { implementation(libs.ktorClientWasmJs) } }</ID>
     <ID>UseCheckOrError:ImageLoader.kt$throw IllegalStateException("Unsupported operating system")</ID>
   </CurrentIssues>
 </SmellBaseline>
