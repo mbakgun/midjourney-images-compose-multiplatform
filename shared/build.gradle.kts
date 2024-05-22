@@ -5,6 +5,7 @@ plugins {
     kotlin("native.cocoapods")
     id("com.android.library")
     id("org.jetbrains.compose")
+    id("org.jetbrains.kotlin.plugin.compose")
     alias(libs.plugins.detekt)
     alias(libs.plugins.serialization)
 }
@@ -89,7 +90,7 @@ kotlin {
         }
 
         commonTest.dependencies {
-            implementation(kotlin("test-junit"))
+            implementation(kotlin("test"))
             implementation(libs.kotlinxCoroutinesTest)
             implementation(libs.koinTest)
         }
