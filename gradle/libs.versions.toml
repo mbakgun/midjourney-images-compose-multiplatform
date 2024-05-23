@@ -30,10 +30,12 @@ ktorClientCore = { module = "io.ktor:ktor-client-core", version.ref="ktorClient"
 ktorClientIos = { module = "io.ktor:ktor-client-darwin", version.ref="ktorClient" }
 ktorClientWasmJs = { module = "io.ktor:ktor-client-js-wasm-js", version.ref = "ktorClient" }
 ktorClientJvm = { module = "io.ktor:ktor-client-jvm", version.ref="ktorClient" }
+ktorClientJava = { module = "io.ktor:ktor-client-java", version.ref="ktorClient" }
 ktorClientJson = { module = "io.ktor:ktor-client-json", version.ref="ktorClient" }
 ktorClientLogging = { module = "io.ktor:ktor-client-logging", version.ref="ktorClient" }
 ktorSerializationKotlinxJson = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref="ktorClient" }
 kotlinxCoroutinesCore = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref="kotlinxCoroutines" }
+kotlinxCoroutinesSwing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref="kotlinxCoroutines" }
 kotlinxCoroutinesTest = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref="kotlinxCoroutines" }
 kotlinxSerializationCore = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version="1.6.3" }
 multiplatformSettings = { module = "com.russhwolf:multiplatform-settings-no-arg", version="1.1.1" }
