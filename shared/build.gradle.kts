@@ -86,6 +86,8 @@ kotlin {
 
         jvmMain.dependencies {
             implementation(libs.ktorClientJvm)
+            implementation(libs.ktorClientJava)
+            implementation(libs.kotlinxCoroutinesSwing)
         }
 
         jsMain.dependencies {
