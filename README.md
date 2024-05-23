@@ -16,7 +16,7 @@ Application developed in the MVVM concept using Kotlin and Jetpack Compose. Netw
 - [Koin](https://insert-koin.io/)
 - [Kotlinx Serialization](https://kotlinlang.org/docs/serialization.html)
 - [Kotlinx Coroutines](https://kotlinlang.org/docs/coroutines-overview.html)
-- [Compose ImageLoader](https://github.com/qdsfdhvh/compose-imageloader)
+- [Coil](https://coil-kt.github.io/coil/)
 - [KMM-ViewModel](https://github.com/rickclephas/KMM-ViewModel)
 - [Multiplatform Settings](https://github.com/russhwolf/multiplatform-settings)
 
