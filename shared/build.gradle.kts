@@ -63,7 +63,10 @@ kotlin {
             implementation(libs.kotlinxSerializationCore)
 
             //imageLoading
-            implementation(libs.imageLoader)
+            implementation(libs.coil.compose.core)
+            implementation(libs.coil.compose)
+            implementation(libs.coil.mp)
+            implementation(libs.coil.network.ktor)
 
             //coroutines
             implementation(libs.kotlinxCoroutinesCore)

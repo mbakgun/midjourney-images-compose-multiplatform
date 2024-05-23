@@ -11,10 +11,10 @@
     <ID>FunctionNaming:MjImagesApp.kt$@Composable fun PreviewImage(imageUrl: String)</ID>
     <ID>FunctionNaming:MjImagesApp.kt$@Composable fun ScrollToTopButton( onClick: () -&gt; Unit, modifier: Modifier = Modifier )</ID>
     <ID>FunctionNaming:MjImagesApp.kt$@OptIn(ExperimentalFoundationApi::class) @Composable fun MjImageItem( image: MjImage, showPreviewDialog: (imageUrl: String) -&gt; Unit, )</ID>
-    <ID>FunctionNaming:MjImagesApp.kt$@OptIn(ExperimentalMaterialApi::class) @Composable fun MjImagesApp( viewModel: MjImagesViewModel )</ID>
+    <ID>FunctionNaming:MjImagesApp.kt$@OptIn(ExperimentalMaterialApi::class, ExperimentalCoilApi::class) @Composable fun MjImagesApp( viewModel: MjImagesViewModel )</ID>
     <ID>FunctionNaming:Theme.kt$@Composable fun AppTheme( useDarkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -&gt; Unit )</ID>
     <ID>FunctionNaming:main.ios.kt$fun MainViewController(viewModel: MjImagesViewModel): UIViewController</ID>
-    <ID>LongMethod:MjImagesApp.kt$@OptIn(ExperimentalMaterialApi::class) @Composable fun MjImagesApp( viewModel: MjImagesViewModel )</ID>
+    <ID>LongMethod:MjImagesApp.kt$@OptIn(ExperimentalMaterialApi::class, ExperimentalCoilApi::class) @Composable fun MjImagesApp( viewModel: MjImagesViewModel )</ID>
     <ID>MagicNumber:Colors.kt$0xFF1F1B16</ID>
     <ID>MagicNumber:Colors.kt$0xFF3E2D16</ID>
     <ID>MagicNumber:Colors.kt$0xFF452B00</ID>
@@ -28,10 +28,7 @@
     <ID>MagicNumber:Colors.kt$0xFFFFB951</ID>
     <ID>MagicNumber:Colors.kt$0xFFFFFBFF</ID>
     <ID>MagicNumber:Colors.kt$0xFFFFFFFF</ID>
-    <ID>MagicNumber:ImageLoader.kt$0.25</ID>
     <ID>MagicNumber:ImageLoader.kt$1024</ID>
-    <ID>MagicNumber:ImageLoader.kt$32</ID>
-    <ID>MagicNumber:ImageLoader.kt$50</ID>
     <ID>MagicNumber:ImageLoader.kt$512L</ID>
     <ID>MagicNumber:MjImagesApp.kt$.2f</ID>
     <ID>MagicNumber:MjImagesApp.kt$.8f</ID>
@@ -43,6 +40,5 @@
     <ID>UnusedPrivateProperty:build.gradle.kts$val jvmMain by getting { dependencies { implementation(project(":shared")) implementation(compose.desktop.currentOs) } }</ID>
     <ID>UnusedPrivateProperty:build.gradle.kts$val wasmJsMain by getting { dependencies { implementation(compose.runtime) implementation(compose.foundation) implementation(project(":shared")) } }</ID>
     <ID>UnusedPrivateProperty:build.gradle.kts$val wasmJsMain by getting { dependencies { implementation(libs.ktorClientWasmJs) } }</ID>
-    <ID>UseCheckOrError:ImageLoader.kt$throw IllegalStateException("Unsupported operating system")</ID>
   </CurrentIssues>
 </SmellBaseline>

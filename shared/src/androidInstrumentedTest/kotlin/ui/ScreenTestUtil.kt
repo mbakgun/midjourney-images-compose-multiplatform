@@ -1,7 +1,6 @@
 package ui
 
 import android.content.Context
-import androidx.compose.ui.platform.LocalContext
 import data.source.MjImagesDataSource
 import data.source.remote.model.MjImageResponse
 import data.source.remote.model.MjImagesResponse
@@ -9,7 +8,6 @@ import di.initKoin
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
-import util.appContext
 import java.io.IOException
 
 // setAppContext for ImageLoader &-init koin - mock response - return viewModel
@@ -17,7 +15,6 @@ fun initAppAndMockViewModel(
     context: Context,
     dataSource: MjImagesDataSource.Remote? = null
 ): MjImagesViewModel {
-    appContext = context.applicationContext
     return initKoin {
         androidContext(androidContext = context)
         if (dataSource != null) {

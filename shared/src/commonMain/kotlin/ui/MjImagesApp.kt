@@ -47,7 +47,6 @@ import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
@@ -74,10 +73,10 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Popup
 import androidx.compose.ui.window.PopupProperties
-import com.seiko.imageloader.LocalImageLoader
-import com.seiko.imageloader.model.ImageResult
-import com.seiko.imageloader.rememberImageAction
-import com.seiko.imageloader.rememberImageActionPainter
+import coil3.annotation.ExperimentalCoilApi
+import coil3.compose.AsyncImagePainter.State.Success
+import coil3.compose.rememberAsyncImagePainter
+import coil3.compose.setSingletonImageLoaderFactory
 import domain.model.MjImage
 import domain.model.MjImages
 import domain.model.State
@@ -85,96 +84,95 @@ import kotlin.math.roundToInt
 import kotlinx.coroutines.launch
 import ui.theme.AppTheme
 import util.OnBottomReached
-import util.generateImageLoader
+import util.getAsyncImageLoader
 import util.getImageProvider
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterialApi::class, ExperimentalCoilApi::class)
 @Composable
 fun MjImagesApp(
     viewModel: MjImagesViewModel
 ) {
-    CompositionLocalProvider(
-        LocalImageLoader provides remember { generateImageLoader() },
-    ) {
-        val useDarkTheme by viewModel.useDarkTheme.collectAsState(false)
-        AppTheme(useDarkTheme = useDarkTheme) {
+    setSingletonImageLoaderFactory { context ->
+        getAsyncImageLoader(context)
+    }
+    val useDarkTheme by viewModel.useDarkTheme.collectAsState(false)
+    AppTheme(useDarkTheme = useDarkTheme) {
 
-            val images: MjImages by viewModel.images.collectAsState()
-            val state: State by viewModel.state.collectAsState()
-            val previewUrl by viewModel.dialogPreviewUrl.collectAsState()
-            val onRefresh = viewModel::refreshImages
+        val images: MjImages by viewModel.images.collectAsState()
+        val state: State by viewModel.state.collectAsState()
+        val previewUrl by viewModel.dialogPreviewUrl.collectAsState()
+        val onRefresh = viewModel::refreshImages
 
-            val scaffoldState: ScaffoldState = rememberScaffoldState()
-            val listState = rememberLazyStaggeredGridState()
-            val scope = rememberCoroutineScope()
+        val scaffoldState: ScaffoldState = rememberScaffoldState()
+        val listState = rememberLazyStaggeredGridState()
+        val scope = rememberCoroutineScope()
 
-            val showButton by remember {
+        val showButton by remember {
+            derivedStateOf {
+                listState.firstVisibleItemIndex > 0
+            }
+        }
+
+        LaunchedEffect(Unit) {
+            if (viewModel.isEligibleToShowSnackBar()) {
+                scaffoldState.snackbarHostState.showSnackbar(SNACK_MESSAGE)
+                viewModel.setSnackMessageShown()
+            }
+        }
+
+        Scaffold(scaffoldState = scaffoldState) {
+            val isRefreshing = remember {
                 derivedStateOf {
-                    listState.firstVisibleItemIndex > 0
+                    state == State.LOADING
                 }
             }
+            val pullRefreshState = rememberPullRefreshState(isRefreshing.value, onRefresh)
 
-            LaunchedEffect(Unit) {
-                if (viewModel.isEligibleToShowSnackBar()) {
-                    scaffoldState.snackbarHostState.showSnackbar(SNACK_MESSAGE)
-                    viewModel.setSnackMessageShown()
-                }
-            }
-
-            Scaffold(scaffoldState = scaffoldState) {
-                val isRefreshing = remember {
-                    derivedStateOf {
-                        state == State.LOADING
+            Box(
+                Modifier
+                    .fillMaxSize()
+                    .pullRefresh(state = pullRefreshState)
+            ) {
+                when (state) {
+                    State.ERROR -> ErrorScreen(onRefresh)
+                    State.EMPTY -> EmptyScreen(onRefresh)
+                    else -> MjImagesList(
+                        onLoadMore = viewModel::loadMore,
+                        images = images,
+                        state = listState,
+                    ) { imageUrl ->
+                        viewModel.showPreviewDialog(imageUrl)
                     }
                 }
-                val pullRefreshState = rememberPullRefreshState(isRefreshing.value, onRefresh)
+                PullRefreshIndicator(
+                    refreshing = isRefreshing.value,
+                    state = pullRefreshState,
+                    modifier = Modifier.align(Alignment.TopCenter)
+                        .semantics { contentDescription = "pullRefreshIndicator" }
+                        .testTag("pullRefreshIndicator"))
 
-                Box(
-                    Modifier
-                        .fillMaxSize()
-                        .pullRefresh(state = pullRefreshState)
+                AnimatedVisibility(
+                    visible = showButton,
+                    enter = fadeIn(),
+                    exit = fadeOut(),
                 ) {
-                    when (state) {
-                        State.ERROR -> ErrorScreen(onRefresh)
-                        State.EMPTY -> EmptyScreen(onRefresh)
-                        else -> MjImagesList(
-                            onLoadMore = viewModel::loadMore,
-                            images = images,
-                            state = listState,
-                        ) { imageUrl ->
-                            viewModel.showPreviewDialog(imageUrl)
+                    ScrollToTopButton(onClick = {
+                        scope.launch {
+                            listState.animateScrollToItem(0)
                         }
-                    }
-                    PullRefreshIndicator(
-                        refreshing = isRefreshing.value,
-                        state = pullRefreshState,
-                        modifier = Modifier.align(Alignment.TopCenter)
-                            .semantics { contentDescription = "pullRefreshIndicator" }
-                            .testTag("pullRefreshIndicator"))
+                    })
+                }
 
-                    AnimatedVisibility(
-                        visible = showButton,
-                        enter = fadeIn(),
-                        exit = fadeOut(),
-                    ) {
-                        ScrollToTopButton(onClick = {
-                            scope.launch {
-                                listState.animateScrollToItem(0)
-                            }
-                        })
-                    }
+                DraggableThemeSelection(
+                    useDarkTheme,
+                    viewModel::setDarkMode
+                )
 
-                    DraggableThemeSelection(
-                        useDarkTheme,
-                        viewModel::setDarkMode
+                if (previewUrl.isNotEmpty()) {
+                    PreviewDialog(
+                        imageUrl = previewUrl,
+                        onDismissed = viewModel::dismissPreviewDialog
                     )
-
-                    if (previewUrl.isNotEmpty()) {
-                        PreviewDialog(
-                            imageUrl = previewUrl,
-                            onDismissed = viewModel::dismissPreviewDialog
-                        )
-                    }
                 }
             }
         }
@@ -230,14 +228,13 @@ fun MjImageItem(
         shape = RoundedCornerShape(8.dp)
     ) {
 
-        val action by rememberImageAction(
-            url = image.imageUrl
+        val painter = rememberAsyncImagePainter(
+            model = image.imageUrl,
+            filterQuality = FilterQuality.None
         )
 
-        val painter = rememberImageActionPainter(action, filterQuality = FilterQuality.None)
-
         val transition by animateFloatAsState(
-            targetValue = if (action is ImageResult) 1f else 0f
+            targetValue = if (painter.state is Success) 1f else 0f
         )
 
         Image(painter = painter, contentDescription = null, modifier = Modifier.graphicsLayer {
@@ -345,13 +342,13 @@ fun PreviewDialog(
 
 @Composable
 fun PreviewImage(imageUrl: String) {
-    val action by rememberImageAction(
-        url = imageUrl
+    val painter = rememberAsyncImagePainter(
+        model = imageUrl,
+        filterQuality = FilterQuality.None
     )
-    val painter = rememberImageActionPainter(action)
 
     val transition by animateFloatAsState(
-        targetValue = if (action is ImageResult) 1f else 0f
+        targetValue = if (painter.state is Success) 1f else 0f
     )
 
     Image(

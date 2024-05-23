@@ -1,5 +1,10 @@
 package util
 
-import com.seiko.imageloader.ImageLoader
+import coil3.ImageLoader
+import coil3.PlatformContext
+import coil3.request.CachePolicy
+import coil3.util.DebugLogger
 
-expect fun generateImageLoader(): ImageLoader
+fun getAsyncImageLoader(context: PlatformContext) =
+    ImageLoader.Builder(context).diskCachePolicy(CachePolicy.ENABLED)
+        .networkCachePolicy(CachePolicy.ENABLED).logger(DebugLogger()).build()
