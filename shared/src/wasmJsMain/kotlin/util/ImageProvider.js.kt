@@ -10,9 +10,9 @@ internal actual fun getImageProvider(width: Dp): ImageProvider =
     )
 
 fun fromWidth(width: Dp): Int {
-    return if (width < 600.dp) {
+    return if (width < 1080.dp) {
         2
-    } else if (width < 1200.dp) {
+    } else if (width < 1440.dp) {
         3
     } else {
         4
