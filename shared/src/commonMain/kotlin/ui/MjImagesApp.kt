@@ -14,6 +14,7 @@ import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -65,10 +66,12 @@ import androidx.compose.ui.graphics.FilterQuality
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Popup
@@ -186,21 +189,31 @@ fun MjImagesList(
     onLoadMore: () -> Unit,
     showPreviewDialog: (imageUrl: String) -> Unit,
 ) {
-    LazyVerticalStaggeredGrid(
-        state = state.apply { OnBottomReached(onLoadMore::invoke) },
-        columns = StaggeredGridCells.Fixed(getImageProvider().columnCount),
-        modifier = Modifier.fillMaxSize()
-            .semantics { contentDescription = "imagesGrid" }
-            .testTag("imagesGrid"),
-    ) {
-        items(
-            items = images.images,
-            key = MjImage::imageUrl
-        ) { image ->
-            MjImageItem(
-                image = image,
-                showPreviewDialog = showPreviewDialog,
-            )
+    BoxWithConstraints {
+        val density = LocalDensity.current
+        val imageSpecs by derivedStateOf {
+            with(density) {
+                getImageProvider(constraints.maxWidth.toDp())
+            }
+        }
+
+        LazyVerticalStaggeredGrid(
+            state = state.apply { OnBottomReached(onLoadMore::invoke) },
+            columns = StaggeredGridCells.Fixed(imageSpecs.columnCount),
+            modifier = Modifier.fillMaxSize()
+                .semantics { contentDescription = "imagesGrid" }
+                .testTag("imagesGrid"),
+        ) {
+            items(
+                items = images.images,
+                key = MjImage::imageUrl
+            ) { image ->
+                MjImageItem(
+                    image = image,
+                    showPreviewDialog = showPreviewDialog,
+                    imageSpecs.itemHeight,
+                )
+            }
         }
     }
 }
@@ -210,10 +223,11 @@ fun MjImagesList(
 fun MjImageItem(
     image: MjImage,
     showPreviewDialog: (imageUrl: String) -> Unit,
+    itemHeight: Dp,
 ) {
     val uriHandler = LocalUriHandler.current
     val height =
-        remember { derivedStateOf((getImageProvider().itemHeight.value * image.ratio)::dp) }
+        remember { derivedStateOf((itemHeight.value * image.ratio)::dp) }
 
     Surface(
         modifier = Modifier
