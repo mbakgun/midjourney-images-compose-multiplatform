@@ -6,11 +6,11 @@
     <ID>FunctionNaming:MjImagesApp.kt$@Composable fun DraggableThemeSelection( useDarkTheme: Boolean, onClick: (Boolean) -&gt; Unit )</ID>
     <ID>FunctionNaming:MjImagesApp.kt$@Composable fun EmptyScreen( onRefresh: () -&gt; Unit )</ID>
     <ID>FunctionNaming:MjImagesApp.kt$@Composable fun ErrorScreen( onRefresh: () -&gt; Unit )</ID>
-    <ID>FunctionNaming:MjImagesApp.kt$@Composable fun MjImagesList( images: MjImages, state: LazyStaggeredGridState, onLoadMore: () -&gt; Unit, showPreviewDialog: (imageUrl: String) -&gt; Unit, )</ID>
-    <ID>FunctionNaming:MjImagesApp.kt$@Composable fun PreviewDialog( imageUrl: String, onDismissed: () -&gt; Unit, )</ID>
-    <ID>FunctionNaming:MjImagesApp.kt$@Composable fun PreviewImage(imageUrl: String)</ID>
+    <ID>FunctionNaming:MjImagesApp.kt$@Composable fun MjImagesList( images: MjImages, state: LazyStaggeredGridState, onLoadMore: () -&gt; Unit, showPreviewDialog: (hqImageUrl: String) -&gt; Unit, )</ID>
+    <ID>FunctionNaming:MjImagesApp.kt$@Composable fun PreviewDialog( hqImageUrl: String, onDismissed: () -&gt; Unit, )</ID>
+    <ID>FunctionNaming:MjImagesApp.kt$@Composable fun PreviewImage(hqImageUrl: String)</ID>
     <ID>FunctionNaming:MjImagesApp.kt$@Composable fun ScrollToTopButton( onClick: () -&gt; Unit, modifier: Modifier = Modifier )</ID>
-    <ID>FunctionNaming:MjImagesApp.kt$@OptIn(ExperimentalFoundationApi::class) @Composable fun MjImageItem( image: MjImage, showPreviewDialog: (imageUrl: String) -&gt; Unit, itemHeight: Dp, )</ID>
+    <ID>FunctionNaming:MjImagesApp.kt$@OptIn(ExperimentalFoundationApi::class) @Composable fun MjImageItem( image: MjImage, itemHeight: Dp, showPreviewDialog: (hqImageUrl: String) -&gt; Unit, )</ID>
     <ID>FunctionNaming:MjImagesApp.kt$@OptIn(ExperimentalMaterialApi::class, ExperimentalCoilApi::class) @Composable fun MjImagesApp( viewModel: MjImagesViewModel )</ID>
     <ID>FunctionNaming:Theme.kt$@Composable fun AppTheme( useDarkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -&gt; Unit )</ID>
     <ID>FunctionNaming:main.ios.kt$fun MainViewController(viewModel: MjImagesViewModel): UIViewController</ID>
