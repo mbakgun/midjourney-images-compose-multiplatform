@@ -32,6 +32,7 @@ class SuccessMjImagesDataSource : MjImagesDataSource.Remote {
                     date = "2023-21-04",
                     imageUrl = "https://mj.akgns.com",
                     ratio = 1.0,
+                    hqImageUrl = "https://mj.akgns.com/hq",
                 )
             ),
             pageSize = null,

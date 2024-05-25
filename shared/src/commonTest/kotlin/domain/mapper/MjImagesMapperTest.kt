@@ -86,6 +86,21 @@ class MjImagesMapperTest {
     }
 
     @Test
+    fun givenNullHQImageUrlWhenMapMjImagesCalledThenImagesReturnsEmpty() = runTest {
+        // given
+        val response = mockMjImagesResponse(
+            mjImageResponses = listOf(
+                mockMjImageResponse(hqImageUrl = null)
+            )
+        )
+        // when
+        val result = mapper.mapMjImages(response)
+
+        // then
+        assertEquals(emptyList(), result.images)
+    }
+
+    @Test
     fun givenNullRatioWhenMapMjImagesCalledThenImagesReturnsEmpty() = runTest {
         // given
         val response = mockMjImagesResponse(
@@ -108,7 +123,8 @@ class MjImagesMapperTest {
                 mockMjImageResponse(
                     date = "2023-21-04",
                     imageUrl = "https://mj.akgns.com",
-                    ratio = 1.0
+                    ratio = 1.0,
+                    hqImageUrl = "https://mj.akgns.com/hq",
                 )
             )
         )
@@ -121,7 +137,8 @@ class MjImagesMapperTest {
                 MjImage(
                     date = "2023-21-04",
                     imageUrl = "https://mj.akgns.com",
-                    ratio = 1.0
+                    ratio = 1.0,
+                    hqImageUrl = "https://mj.akgns.com/hq",
                 )
             ),
             result.images
@@ -134,13 +151,15 @@ class MjImagesMapperTest {
         val response = mockMjImagesResponse(
             mjImageResponses = listOf(
                 mockMjImageResponse(
-                    date = "2023-21-04",
+                    date = "2024-21-04",
                     imageUrl = "https://mj.akgns.com",
-                    ratio = 1.0
+                    hqImageUrl = "https://mj.akgns.com/hq",
+                    ratio = 1.0,
                 ),
                 mockMjImageResponse(
                     date = "2023-21-04",
                     imageUrl = "https://mj.akgns.com/images",
+                    hqImageUrl = "https://mj.akgns.com/hq",
                     ratio = 1.0
                 )
             )
@@ -152,13 +171,15 @@ class MjImagesMapperTest {
         assertEquals(
             listOf(
                 MjImage(
-                    date = "2023-21-04",
+                    date = "2024-21-04",
                     imageUrl = "https://mj.akgns.com",
-                    ratio = 1.0
+                    ratio = 1.0,
+                    hqImageUrl = "https://mj.akgns.com/hq",
                 ),
                 MjImage(
                     date = "2023-21-04",
                     imageUrl = "https://mj.akgns.com/images",
+                    hqImageUrl = "https://mj.akgns.com/hq",
                     ratio = 1.0
                 )
             ),
@@ -182,11 +203,13 @@ class MjImagesMapperTest {
     private fun mockMjImageResponse(
         date: String? = null,
         imageUrl: String? = null,
-        ratio: Double? = null
+        ratio: Double? = null,
+        hqImageUrl: String? = null,
     ): MjImageResponse =
         MjImageResponse(
             date = date,
             imageUrl = imageUrl,
             ratio = ratio,
+            hqImageUrl = hqImageUrl,
         )
 }
