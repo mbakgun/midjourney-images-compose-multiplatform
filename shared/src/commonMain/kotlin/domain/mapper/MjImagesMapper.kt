@@ -30,6 +30,7 @@ class MjImagesMapper(
                 MjImage(
                     date = it?.date ?: return@map null,
                     imageUrl = it.imageUrl ?: return@map null,
+                    hqImageUrl = it.hqImageUrl ?: return@map null,
                     ratio = it.ratio ?: return@map null
                 )
             }

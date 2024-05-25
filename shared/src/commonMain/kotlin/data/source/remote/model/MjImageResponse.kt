@@ -9,6 +9,8 @@ data class MjImageResponse(
     val date: String?,
     @SerialName("imageUrl")
     val imageUrl: String?,
+    @SerialName("hqImageUrl")
+    val hqImageUrl: String?,
     @SerialName("ratio")
     val ratio: Double?
 )

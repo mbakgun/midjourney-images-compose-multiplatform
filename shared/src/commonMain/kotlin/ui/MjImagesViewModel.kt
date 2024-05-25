@@ -89,9 +89,9 @@ class MjImagesViewModel(
         }
     }
 
-    fun showPreviewDialog(imageUrl: String) {
+    fun showPreviewDialog(hqImageUrl: String) {
         viewModelScope.coroutineScope.launch {
-            _dialogPreviewUrl.emit(imageUrl)
+            _dialogPreviewUrl.emit(hqImageUrl)
         }
     }
 

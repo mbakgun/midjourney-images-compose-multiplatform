@@ -103,7 +103,7 @@ fun MjImagesApp(
 
         val images: MjImages by viewModel.images.collectAsState()
         val state: State by viewModel.state.collectAsState()
-        val previewUrl by viewModel.dialogPreviewUrl.collectAsState()
+        val hqImageUrl by viewModel.dialogPreviewUrl.collectAsState()
         val onRefresh = viewModel::refreshImages
 
         val scaffoldState: ScaffoldState = rememberScaffoldState()
@@ -143,8 +143,8 @@ fun MjImagesApp(
                         onLoadMore = viewModel::loadMore,
                         images = images,
                         state = listState,
-                    ) { imageUrl ->
-                        viewModel.showPreviewDialog(imageUrl)
+                    ) { hqImageUrl ->
+                        viewModel.showPreviewDialog(hqImageUrl)
                     }
                 }
                 PullRefreshIndicator(
@@ -171,9 +171,9 @@ fun MjImagesApp(
                     viewModel::setDarkMode
                 )
 
-                if (previewUrl.isNotEmpty()) {
+                if (hqImageUrl.isNotEmpty()) {
                     PreviewDialog(
-                        imageUrl = previewUrl,
+                        hqImageUrl = hqImageUrl,
                         onDismissed = viewModel::dismissPreviewDialog
                     )
                 }
@@ -187,7 +187,7 @@ fun MjImagesList(
     images: MjImages,
     state: LazyStaggeredGridState,
     onLoadMore: () -> Unit,
-    showPreviewDialog: (imageUrl: String) -> Unit,
+    showPreviewDialog: (hqImageUrl: String) -> Unit,
 ) {
     BoxWithConstraints {
         val density = LocalDensity.current
@@ -211,7 +211,7 @@ fun MjImagesList(
                 MjImageItem(
                     image = image,
                     showPreviewDialog = showPreviewDialog,
-                    imageSpecs.itemHeight,
+                    itemHeight = imageSpecs.itemHeight,
                 )
             }
         }
@@ -222,8 +222,8 @@ fun MjImagesList(
 @Composable
 fun MjImageItem(
     image: MjImage,
-    showPreviewDialog: (imageUrl: String) -> Unit,
     itemHeight: Dp,
+    showPreviewDialog: (hqImageUrl: String) -> Unit,
 ) {
     val uriHandler = LocalUriHandler.current
     val height =
@@ -235,8 +235,8 @@ fun MjImageItem(
             .fillMaxWidth()
             .height(height.value)
             .combinedClickable(
-                onClick = { uriHandler.openUri(image.imageUrl) },
-                onLongClick = { showPreviewDialog.invoke(image.imageUrl) },
+                onClick = { uriHandler.openUri(image.hqImageUrl) },
+                onLongClick = { showPreviewDialog.invoke(image.hqImageUrl) },
             ),
         elevation = 8.dp,
         shape = RoundedCornerShape(8.dp)
@@ -322,7 +322,7 @@ fun ErrorScreen(
 
 @Composable
 fun PreviewDialog(
-    imageUrl: String,
+    hqImageUrl: String,
     onDismissed: () -> Unit,
 ) {
     Popup(
@@ -334,7 +334,7 @@ fun PreviewDialog(
         ),
         content = {
             Box(contentAlignment = Alignment.TopEnd) {
-                PreviewImage(imageUrl)
+                PreviewImage(hqImageUrl)
                 Button(
                     onClick = { onDismissed() },
                     modifier = Modifier
@@ -355,9 +355,9 @@ fun PreviewDialog(
 }
 
 @Composable
-fun PreviewImage(imageUrl: String) {
+fun PreviewImage(hqImageUrl: String) {
     val painter = rememberAsyncImagePainter(
-        model = imageUrl,
+        model = hqImageUrl,
         filterQuality = FilterQuality.None
     )
 
