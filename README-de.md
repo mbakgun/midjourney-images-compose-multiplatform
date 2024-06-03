@@ -164,6 +164,7 @@ Für weitere Informationen schauen Sie sich den [Medium](https://mbakgun.medium.
 ## Beiträge 👏
 
 Bitte zögern Sie nicht, ein Problem zu eröffnen - alle Beiträge werden geschätzt! Im Voraus vielen Dank.
+
 <a href="https://github.com/mbakgun/midjourney-images-compose-multiplatform/graphs/contributors">
 <img src="https://contrib.rocks/image?repo=mbakgun/midjourney-images-compose-multiplatform" />
 </a>

@@ -169,6 +169,7 @@ Daha fazla bilgi için [Medium](https://mbakgun.medium.com/mj-compose-multiplatf
 
 Lütfen issue açmakta özgür hissedin; her türlü katkı memnuniyetle karşılanacaktır! Şimdiden elinize
 sağlık ✌️
+
 <a href="https://github.com/mbakgun/midjourney-images-compose-multiplatform/graphs/contributors">
 <img src="https://contrib.rocks/image?repo=mbakgun/midjourney-images-compose-multiplatform" />
 </a>
