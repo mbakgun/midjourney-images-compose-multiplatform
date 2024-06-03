@@ -49,7 +49,7 @@ fun Project.configureAndroid() {
         }
 
         kotlin {
-            jvmToolchain(11)
+            jvmToolchain((findProperty("jdkVersion") as String).toInt())
         }
     }
 }
