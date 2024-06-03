@@ -10,6 +10,7 @@ include(":webApp")
 include(":wasmApp")
 
 pluginManagement {
+    includeBuild("gradle/build-logic")
     repositories {
         gradlePluginPortal()
         maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")

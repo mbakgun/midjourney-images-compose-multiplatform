@@ -39,3 +39,8 @@ kotlinxCoroutinesSwing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-sw
 kotlinxCoroutinesTest = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref="kotlinxCoroutines" }
 kotlinxSerializationCore = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version="1.6.3" }
 multiplatformSettings = { module = "com.russhwolf:multiplatform-settings-no-arg", version="1.1.1" }
+
+# build-logic
+build-gradle-plugin = { module = "com.android.tools.build:gradle", version = "8.4.1" }
+kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version = "2.0.0" }
+compose-compiler-plugin = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version = "2.0.0" }
