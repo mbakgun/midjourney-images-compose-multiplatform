@@ -1,4 +1,5 @@
 # MidJourney Images Compose Multiplatform Mobile Application
+![kotlin-version](https://img.shields.io/badge/kotlin-2.0.0-blue?logo=kotlin)
 [![Android Weekly #567](https://androidweekly.net/issues/issue-567/badge)](https://androidweekly.net/issues/issue-567)
 <a href="https://mailchi.mp/kotlinweekly/kotlin-weekly-352"><img alt="Kotlin Weekly" src="image-assets/kotlin-weekly.svg"/></a>
 [![Build & Ship](https://github.com/mbakgun/midjourney-images-compose-multiplatform/actions/workflows/main.yml/badge.svg)](https://github.com/mbakgun/midjourney-images-compose-multiplatform/actions/workflows/main.yml)
@@ -163,6 +164,9 @@ Für weitere Informationen schauen Sie sich den [Medium](https://mbakgun.medium.
 ## Beiträge 👏
 
 Bitte zögern Sie nicht, ein Problem zu eröffnen - alle Beiträge werden geschätzt! Im Voraus vielen Dank.
+<a href="https://github.com/mbakgun/midjourney-images-compose-multiplatform/graphs/contributors">
+<img src="https://contrib.rocks/image?repo=mbakgun/midjourney-images-compose-multiplatform" />
+</a>
 
 ## Kontakt
 
