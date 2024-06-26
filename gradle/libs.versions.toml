@@ -3,7 +3,7 @@ androidxUiTest = "1.6.8"
 koin = "3.6.0-wasm-alpha2"
 ktorClient = "3.0.0-wasm2"
 kotlinxCoroutines = "1.8.1"
-coil3 = "3.0.0-alpha06"
+coil3 = "3.0.0-alpha07"
 
 [plugins]
 detekt = { id = "io.gitlab.arturbosch.detekt", version = "1.23.6" }
