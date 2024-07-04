@@ -12,6 +12,7 @@
     <ID>FunctionNaming:MjImagesApp.kt$@Composable fun PreviewImage(hqImageUrl: String)</ID>
     <ID>FunctionNaming:MjImagesApp.kt$@Composable fun ScrollToTopButton( onClick: () -&gt; Unit, modifier: Modifier = Modifier )</ID>
     <ID>FunctionNaming:MjImagesApp.kt$@OptIn(ExperimentalMaterialApi::class, ExperimentalCoilApi::class) @Composable fun MjImagesApp( viewModel: MjImagesViewModel )</ID>
+    <ID>FunctionNaming:String0.commonMain.kt$private fun init_snack_message(): StringResource</ID>
     <ID>FunctionNaming:Theme.kt$@Composable fun AppTheme( useDarkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -&gt; Unit )</ID>
     <ID>FunctionNaming:main.ios.kt$fun MainViewController(viewModel: MjImagesViewModel): UIViewController</ID>
     <ID>LongMethod:MjImagesApp.kt$@OptIn(ExperimentalMaterialApi::class, ExperimentalCoilApi::class) @Composable fun MjImagesApp( viewModel: MjImagesViewModel )</ID>
@@ -34,6 +35,8 @@
     <ID>MagicNumber:MjImagesApp.kt$.8f</ID>
     <ID>MagicNumber:MjImagesApp.kt$230f</ID>
     <ID>MagicNumber:MjImagesApp.kt$24f</ID>
+    <ID>MagicNumber:String0.commonMain.kt$10</ID>
+    <ID>MagicNumber:String0.commonMain.kt$109</ID>
     <ID>UnusedPrivateProperty:build.gradle.kts$val androidInstrumentedTest by getting { dependencies { implementation(libs.androidxUiTestJunit4) implementation(libs.androidxUiTestManifest) } }</ID>
     <ID>UnusedPrivateProperty:build.gradle.kts$val jsMain by getting { dependencies { implementation(compose.runtime) implementation(compose.foundation) implementation(project(":shared")) } }</ID>
     <ID>UnusedPrivateProperty:build.gradle.kts$val jvmMain by getting { dependencies { implementation(project(":shared")) implementation(compose.desktop.currentOs) } }</ID>
