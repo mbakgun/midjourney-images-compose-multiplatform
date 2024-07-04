@@ -85,6 +85,9 @@ import domain.model.MjImages
 import domain.model.State
 import kotlin.math.roundToInt
 import kotlinx.coroutines.launch
+import midjourneyimagescomposemultiplatform.shared.generated.resources.Res
+import midjourneyimagescomposemultiplatform.shared.generated.resources.snack_message
+import org.jetbrains.compose.resources.getString
 import ui.theme.AppTheme
 import util.OnBottomReached
 import util.getAsyncImageLoader
@@ -100,7 +103,6 @@ fun MjImagesApp(
     }
     val useDarkTheme by viewModel.useDarkTheme.collectAsStateWithLifecycle(false)
     AppTheme(useDarkTheme = useDarkTheme) {
-
         val images: MjImages by viewModel.images.collectAsStateWithLifecycle()
         val state: State by viewModel.state.collectAsStateWithLifecycle()
         val hqImageUrl by viewModel.dialogPreviewUrl.collectAsStateWithLifecycle()
@@ -118,7 +120,7 @@ fun MjImagesApp(
 
         LaunchedEffect(Unit) {
             if (viewModel.isEligibleToShowSnackBar()) {
-                scaffoldState.snackbarHostState.showSnackbar(SNACK_MESSAGE)
+                scaffoldState.snackbarHostState.showSnackbar(getString(Res.string.snack_message))
                 viewModel.setSnackMessageShown()
             }
         }
@@ -446,6 +448,3 @@ fun ScrollToTopButton(
         }
     }
 }
-
-const val SNACK_MESSAGE = "1) Click image to open in browser\n" +
-        "2) Long click to preview image"

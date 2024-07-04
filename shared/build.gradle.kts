@@ -47,6 +47,7 @@ kotlin {
             implementation(compose.foundation)
             implementation(compose.material)
             implementation(compose.materialIconsExtended)
+            implementation(compose.components.resources)
             implementation(libs.lifecycle.runtime.compose)
 
             //sharedVm
@@ -123,11 +124,19 @@ android {
 
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     sourceSets["main"].res.srcDirs("src/androidMain/res")
+    sourceSets["main"].resources.srcDirs("src/commonMain/resources")
 
     defaultConfig {
         minSdk = (findProperty("android.minSdk") as String).toInt()
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
+
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
