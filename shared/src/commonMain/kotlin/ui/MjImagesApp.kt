@@ -247,8 +247,10 @@ fun MjImageItem(
             filterQuality = FilterQuality.None
         )
 
+        val state by painter.state.collectAsState()
+
         val transition by animateFloatAsState(
-            targetValue = if (painter.state is Success) 1f else 0f
+            targetValue = if (state is Success) 1f else 0f
         )
 
         Image(painter = painter, contentDescription = null, modifier = Modifier.graphicsLayer {
@@ -361,8 +363,10 @@ fun PreviewImage(hqImageUrl: String) {
         filterQuality = FilterQuality.None
     )
 
+    val state by painter.state.collectAsState()
+
     val transition by animateFloatAsState(
-        targetValue = if (painter.state is Success) 1f else 0f
+        targetValue = if (state is Success) 1f else 0f
     )
 
     Image(
