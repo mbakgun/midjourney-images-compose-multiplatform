@@ -49,7 +49,6 @@ import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -76,6 +75,7 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Popup
 import androidx.compose.ui.window.PopupProperties
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.annotation.ExperimentalCoilApi
 import coil3.compose.AsyncImagePainter.State.Success
 import coil3.compose.rememberAsyncImagePainter
@@ -85,6 +85,9 @@ import domain.model.MjImages
 import domain.model.State
 import kotlin.math.roundToInt
 import kotlinx.coroutines.launch
+import midjourneyimagescomposemultiplatform.shared.generated.resources.Res
+import midjourneyimagescomposemultiplatform.shared.generated.resources.snack_message
+import org.jetbrains.compose.resources.getString
 import ui.theme.AppTheme
 import util.OnBottomReached
 import util.getAsyncImageLoader
@@ -98,12 +101,11 @@ fun MjImagesApp(
     setSingletonImageLoaderFactory { context ->
         getAsyncImageLoader(context)
     }
-    val useDarkTheme by viewModel.useDarkTheme.collectAsState(false)
+    val useDarkTheme by viewModel.useDarkTheme.collectAsStateWithLifecycle(false)
     AppTheme(useDarkTheme = useDarkTheme) {
-
-        val images: MjImages by viewModel.images.collectAsState()
-        val state: State by viewModel.state.collectAsState()
-        val hqImageUrl by viewModel.dialogPreviewUrl.collectAsState()
+        val images: MjImages by viewModel.images.collectAsStateWithLifecycle()
+        val state: State by viewModel.state.collectAsStateWithLifecycle()
+        val hqImageUrl by viewModel.dialogPreviewUrl.collectAsStateWithLifecycle()
         val onRefresh = viewModel::refreshImages
 
         val scaffoldState: ScaffoldState = rememberScaffoldState()
@@ -118,7 +120,7 @@ fun MjImagesApp(
 
         LaunchedEffect(Unit) {
             if (viewModel.isEligibleToShowSnackBar()) {
-                scaffoldState.snackbarHostState.showSnackbar(SNACK_MESSAGE)
+                scaffoldState.snackbarHostState.showSnackbar(getString(Res.string.snack_message))
                 viewModel.setSnackMessageShown()
             }
         }
@@ -218,7 +220,6 @@ fun MjImagesList(
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun MjImageItem(
     image: MjImage,
@@ -247,8 +248,10 @@ fun MjImageItem(
             filterQuality = FilterQuality.None
         )
 
+        val state by painter.state.collectAsStateWithLifecycle()
+
         val transition by animateFloatAsState(
-            targetValue = if (painter.state is Success) 1f else 0f
+            targetValue = if (state is Success) 1f else 0f
         )
 
         Image(painter = painter, contentDescription = null, modifier = Modifier.graphicsLayer {
@@ -361,8 +364,10 @@ fun PreviewImage(hqImageUrl: String) {
         filterQuality = FilterQuality.None
     )
 
+    val state by painter.state.collectAsStateWithLifecycle()
+
     val transition by animateFloatAsState(
-        targetValue = if (painter.state is Success) 1f else 0f
+        targetValue = if (state is Success) 1f else 0f
     )
 
     Image(
@@ -443,6 +448,3 @@ fun ScrollToTopButton(
         }
     }
 }
-
-const val SNACK_MESSAGE = "1) Click image to open in browser\n" +
-        "2) Long click to preview image"

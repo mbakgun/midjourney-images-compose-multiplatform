@@ -6,6 +6,9 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import domain.model.State
+import midjourneyimagescomposemultiplatform.shared.generated.resources.Res
+import midjourneyimagescomposemultiplatform.shared.generated.resources.snack_message
+import org.jetbrains.compose.resources.stringResource
 import org.junit.After
 import org.junit.Rule
 import org.junit.Test
@@ -107,12 +110,14 @@ class MjImagesScreenTest {
     @Test
     fun testMjImagesSnackMessage() {
         var viewModel: MjImagesViewModel? = null
+        var snackMessage = ""
 
         composeTestRule.setContent {
             MjImagesApp(initAppAndMockViewModel(
                 LocalContext.current,
                 SuccessMjImagesDataSource()
             ).also { viewModel = it })
+            snackMessage = stringResource(Res.string.snack_message)
         }
 
         composeTestRule
@@ -121,7 +126,7 @@ class MjImagesScreenTest {
             }
 
         composeTestRule
-            .onNodeWithText(SNACK_MESSAGE)
+            .onNodeWithText(snackMessage)
             .assertIsDisplayed()
     }
 }
