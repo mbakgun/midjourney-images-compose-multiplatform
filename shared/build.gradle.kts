@@ -47,6 +47,7 @@ kotlin {
             implementation(compose.foundation)
             implementation(compose.material)
             implementation(compose.materialIconsExtended)
+            implementation(libs.lifecycle.runtime.compose)
 
             //sharedVm
             api(libs.kmmViewmodelCore)
@@ -78,6 +79,7 @@ kotlin {
         androidMain.dependencies {
             api(libs.koin)
             implementation(libs.ktorClient)
+            implementation(libs.lifecycle.runtime.android)
         }
 
         iosMain.dependencies {
