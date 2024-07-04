@@ -25,7 +25,7 @@ private val apiModule = module {
 private val repositoryModule = module {
     single { MjImagesRepository() }
     factory { Settings() }
-    factory<MjImagesDataSource.Remote> { MjImagesRemoteDataSource(get(), get()) }
+    factory<MjImagesDataSource.Remote> { MjImagesRemoteDataSource(get()) }
     factory<MjImagesDataSource.Local> { MjImagesLocalDataSource(get(), get()) }
 }
 
