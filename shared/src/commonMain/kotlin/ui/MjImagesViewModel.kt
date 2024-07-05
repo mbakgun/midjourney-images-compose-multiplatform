@@ -1,7 +1,7 @@
 package ui
 
-import com.rickclephas.kmm.viewmodel.KMMViewModel
-import com.rickclephas.kmm.viewmodel.coroutineScope
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import domain.model.MjImages
 import domain.model.State
 import domain.usecase.MjImagesFetchUseCase
@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 class MjImagesViewModel(
     private val fetchUseCase: MjImagesFetchUseCase,
     private val useCase: MjImagesUseCase,
-) : KMMViewModel() {
+) : ViewModel() {
 
     private val _state = MutableStateFlow(State.LOADING)
     val state: StateFlow<State> = _state.asStateFlow()
@@ -61,12 +61,12 @@ class MjImagesViewModel(
                     _state.value = State.EMPTY
                 } else {
                     _state.value = State.CONTENT
-                    _images.value = _images.value + images
+                    _images.value += images
                 }
             }.catch {
                 _state.value = State.ERROR
             }
-            .launchIn(viewModelScope.coroutineScope)
+            .launchIn(viewModelScope)
     }
 
     suspend fun isEligibleToShowSnackBar(): Boolean =
@@ -77,26 +77,26 @@ class MjImagesViewModel(
     }
 
     fun setDarkMode(isEnabled: Boolean) {
-        viewModelScope.coroutineScope.launch {
+        viewModelScope.launch {
             _useDarkTheme.emit(isEnabled)
             useCase.setDarkMode(isEnabled)
         }
     }
 
     private fun checkTheme() {
-        viewModelScope.coroutineScope.launch {
+        viewModelScope.launch {
             _useDarkTheme.emit(useCase.isDarkModeEnabled())
         }
     }
 
     fun showPreviewDialog(hqImageUrl: String) {
-        viewModelScope.coroutineScope.launch {
+        viewModelScope.launch {
             _dialogPreviewUrl.emit(hqImageUrl)
         }
     }
 
     fun dismissPreviewDialog() {
-        viewModelScope.coroutineScope.launch {
+        viewModelScope.launch {
             _dialogPreviewUrl.emit("")
         }
     }

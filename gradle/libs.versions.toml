@@ -14,7 +14,6 @@ serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version = "2
 [libraries]
 androidxUiTestJunit4 = { module = "androidx.compose.ui:ui-test-junit4", version.ref="androidxUiTest" }
 androidxUiTestManifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref="androidxUiTest" }
-kmmViewmodelCore = { module = "com.rickclephas.kmm:kmm-viewmodel-core", version="1.0.0-ALPHA-21" }
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil3" }
 coil-compose-core = { module = "io.coil-kt.coil3:coil-compose-core", version.ref = "coil3" }
 coil-network-ktor = { module = "io.coil-kt.coil3:coil-network-ktor", version.ref = "coil3" }
@@ -40,6 +39,7 @@ kotlinxSerializationCore = { module = "org.jetbrains.kotlinx:kotlinx-serializati
 lifecycle-runtime-android = { module = "androidx.lifecycle:lifecycle-runtime-android", version.ref = "lifecycleRuntimeAndroid" }
 multiplatformSettings = { module = "com.russhwolf:multiplatform-settings-no-arg", version="1.1.1" }
 lifecycle-runtime-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycle" }
+androidx-lifecycle-viewmodel-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle" }
 
 # build-logic
 build-gradle-plugin = { module = "com.android.tools.build:gradle", version = "8.5.0" }

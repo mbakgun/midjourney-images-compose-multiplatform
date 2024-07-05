@@ -8,7 +8,7 @@
 Bu uygulama, çoklu platform desteği ile MidJourney'ın oluşturduğu resimleri göstermek için geliştirilmiştir. Uygulama,
 Compose Multiplatform ile geliştirilmiştir. Uygulama, Android, iOS, Web, Wear OS, Android Automotive, Android TV platformlarında çalışmaktadır.
 
-<p align="center"><img src="image-assets/1.gif" alt="kmm-compose-header" /><br><br></p>
+<p align="center"><img src="image-assets/1.gif" alt="compose-header" /><br><br></p>
 Kotlin ve Jetpack Compose kullanılarak MVVM konseptinde geliştirtirildi. Network request state'leri, endless pagination, image loading ve image caching işlemleri yapılmıştır.
 
 ## Kullanılan Kütüphaneler
@@ -19,7 +19,6 @@ Kotlin ve Jetpack Compose kullanılarak MVVM konseptinde geliştirtirildi. Netwo
 - [Kotlinx Serialization](https://kotlinlang.org/docs/serialization.html)
 - [Kotlinx Coroutines](https://kotlinlang.org/docs/coroutines-overview.html)
 - [Coil](https://coil-kt.github.io/coil/)
-- [KMM-ViewModel](https://github.com/rickclephas/KMM-ViewModel)
 - [Multiplatform Settings](https://github.com/russhwolf/multiplatform-settings)
 
 <div style="text-align: center;"><img src="image-assets/venn.png" alt="decisions"></div>
