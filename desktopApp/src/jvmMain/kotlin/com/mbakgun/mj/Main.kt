@@ -1,7 +1,5 @@
 package com.mbakgun.mj
 
-import androidx.compose.ui.input.key.Key
-import androidx.compose.ui.input.key.key
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import di.initKoin
@@ -22,16 +20,6 @@ fun main() {
         Window(
             onCloseRequest = ::exitApplication,
             title = "MjImages",
-            onKeyEvent = {
-                when (it.key) {
-                    Key.R -> {
-                        viewModel.refreshImages()
-                        true
-                    }
-
-                    else -> false
-                }
-            }
         ) {
             MjImagesApp(viewModel)
         }
