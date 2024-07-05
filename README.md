@@ -7,7 +7,7 @@
 
 This application is developed to display the images created by MidJourney. The application is developed with Compose Multiplatform and works on Android, iOS, Web, Wear OS, Android Automotive, Android TV platforms.
 
-<p align="center"><img src="image-assets/1.gif" alt="kmm-compose-header" /><br><br></p>
+<p align="center"><img src="image-assets/1.gif" alt="compose-header" /><br><br></p>
 Application developed in the MVVM concept using Kotlin and Jetpack Compose. Network request states, endless pagination, image loading, and image caching processes were performed.
 
 ## Libraries Used
@@ -18,7 +18,6 @@ Application developed in the MVVM concept using Kotlin and Jetpack Compose. Netw
 - [Kotlinx Serialization](https://kotlinlang.org/docs/serialization.html)
 - [Kotlinx Coroutines](https://kotlinlang.org/docs/coroutines-overview.html)
 - [Coil](https://coil-kt.github.io/coil/)
-- [KMM-ViewModel](https://github.com/rickclephas/KMM-ViewModel)
 - [Multiplatform Settings](https://github.com/russhwolf/multiplatform-settings)
 
 <div style="text-align: center;"><img src="image-assets/venn.png" alt="decisions"></div>

@@ -49,9 +49,7 @@ kotlin {
             implementation(compose.materialIconsExtended)
             implementation(compose.components.resources)
             implementation(libs.lifecycle.runtime.compose)
-
-            //sharedVm
-            api(libs.kmmViewmodelCore)
+            implementation(libs.androidx.lifecycle.viewmodel.compose)
 
             //di
             api(libs.koinCore)
