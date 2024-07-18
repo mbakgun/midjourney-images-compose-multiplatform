@@ -27,4 +27,4 @@ jobs:
       - uses: mobile-dev-inc/action-maestro-cloud@v1.8.1
         with:
           api-key: ${{ secrets.MAESTRO_CLOUD_API_KEY }}
-          app-file: iosApp.app
+          app-file: MidJourney Images Compose Multiplatform.app
