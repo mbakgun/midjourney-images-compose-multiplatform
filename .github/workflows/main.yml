@@ -34,3 +34,8 @@ jobs:
         with:
           api-key: ${{ secrets.MAESTRO_CLOUD_API_KEY }}
           app-file: ${{ env.APP_PATH }}
+
+      - name: Access Outputs
+        if: always()
+        run: |
+          echo "Flow Results: ${{ steps.upload.outputs.MAESTRO_CLOUD_FLOW_RESULTS }}"
