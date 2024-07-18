@@ -24,7 +24,13 @@ jobs:
       - name: Build iOS app
         run: xcodebuild build -workspace iosApp/iosApp.xcworkspace -configuration Debug -scheme iosApp -sdk iphoneos -destination name='iPhone 14' -verbose
 
+      - name: Find app file path
+        run: |
+            APP_PATH=$(find ~/Library/Developer/Xcode/DerivedData -name "*.app" | head -n 1)
+            echo "APP_PATH=$APP_PATH" >> $GITHUB_ENV
+
+      - name: Run Maestro Tests
       - uses: mobile-dev-inc/action-maestro-cloud@v1.8.1
         with:
           api-key: ${{ secrets.MAESTRO_CLOUD_API_KEY }}
-          app-file: MidJourney Images Compose Multiplatform.app
+          app-file: ${{ env.APP_PATH }}
