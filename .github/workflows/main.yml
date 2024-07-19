@@ -29,11 +29,12 @@ jobs:
             APP_PATH=$(find ~/Library/Developer/Xcode/DerivedData -name "*.app" | head -n 1)
             echo "APP_PATH=$APP_PATH" >> $GITHUB_ENV
 
-      - name: Run Maestro Tests
+      - id: upload
         uses: mobile-dev-inc/action-maestro-cloud@v1.8.1
         with:
           api-key: ${{ secrets.MAESTRO_CLOUD_API_KEY }}
           app-file: ${{ env.APP_PATH }}
+          ios-version: 14
 
       - name: Access Outputs
         if: always()
