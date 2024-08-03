@@ -3,7 +3,7 @@ androidxUiTest = "1.6.8"
 koin = "3.6.0-wasm-alpha2"
 ktorClient = "3.0.0-wasm2"
 kotlinxCoroutines = "1.8.1"
-coil3 = "3.0.0-alpha08"
+coil3 = "3.0.0-alpha09"
 lifecycleRuntimeAndroid = "2.8.4"
 lifecycle = "2.8.0"
 
@@ -16,7 +16,7 @@ androidxUiTestJunit4 = { module = "androidx.compose.ui:ui-test-junit4", version.
 androidxUiTestManifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref="androidxUiTest" }
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil3" }
 coil-compose-core = { module = "io.coil-kt.coil3:coil-compose-core", version.ref = "coil3" }
-coil-network-ktor = { module = "io.coil-kt.coil3:coil-network-ktor", version.ref = "coil3" }
+coil-network-ktor = { module = "io.coil-kt.coil3:coil-network-ktor", version = "3.0.0-alpha08" }
 coil-mp = { module = "io.coil-kt.coil3:coil", version.ref = "coil3" }
 koin = { module = "io.insert-koin:koin-android", version.ref="koin" }
 koinCore = { module = "io.insert-koin:koin-core", version.ref="koin" }
