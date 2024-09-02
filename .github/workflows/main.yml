@@ -86,7 +86,7 @@ jobs:
           distribution: 'adopt'
           cache: 'gradle'
       - run: ./gradlew :androidApp:assembleDebug
-      - uses: mobile-dev-inc/action-maestro-cloud@v1.9.0
+      - uses: mobile-dev-inc/action-maestro-cloud@v1.9.1
         with:
           api-key: ${{ secrets.MAESTRO_CLOUD_API_KEY }}
           app-file: androidApp/build/outputs/apk/debug/androidApp-debug.apk
