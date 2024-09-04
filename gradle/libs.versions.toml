@@ -4,7 +4,7 @@ koin = "3.6.0-wasm-alpha2"
 ktorClient = "3.0.0-wasm2"
 kotlinxCoroutines = "1.8.1"
 coil3 = "3.0.0-alpha10"
-lifecycleRuntimeAndroid = "2.8.4"
+lifecycleRuntimeAndroid = "2.8.5"
 lifecycle = "2.8.1"
 
 [plugins]
