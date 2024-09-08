@@ -8,7 +8,7 @@ lifecycleRuntimeAndroid = "2.8.5"
 lifecycle = "2.8.1"
 
 [plugins]
-detekt = { id = "io.gitlab.arturbosch.detekt", version = "1.23.6" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version = "1.23.7" }
 serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version = "2.0.20" }
 
 [libraries]
