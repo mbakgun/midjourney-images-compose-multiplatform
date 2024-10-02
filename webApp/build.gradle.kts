@@ -6,21 +6,20 @@ plugins {
 
 kotlin {
     js(IR) {
-        browser()
+        browser {
+            commonWebpackConfig {
+                configDirectory = file(".")
+            }
+        }
         binaries.executable()
     }
     sourceSets {
-       val jsMain by getting {
+        val jsMain by getting {
             dependencies {
                 implementation(compose.runtime)
                 implementation(compose.foundation)
                 implementation(project(":shared"))
             }
         }
-    }
-}
-
-compose.experimental {
-    web.application {
     }
 }
