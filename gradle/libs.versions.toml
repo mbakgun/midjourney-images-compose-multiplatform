@@ -9,7 +9,7 @@ lifecycle = "2.8.3+build1877-release-1.7"
 
 [plugins]
 detekt = { id = "io.gitlab.arturbosch.detekt", version = "1.23.7" }
-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version = "2.0.20" }
+serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version = "2.0.21" }
 
 [libraries]
 androidxUiTestJunit4 = { module = "androidx.compose.ui:ui-test-junit4", version.ref="androidxUiTest" }
