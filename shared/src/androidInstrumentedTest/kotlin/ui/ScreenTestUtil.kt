@@ -6,7 +6,7 @@ import data.source.remote.model.MjImageResponse
 import data.source.remote.model.MjImagesResponse
 import di.initKoin
 import org.koin.android.ext.koin.androidContext
-import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 import java.io.IOException
 
@@ -16,17 +16,13 @@ fun initAppAndMockViewModel(
     dataSource: MjImagesDataSource.Remote? = null
 ): MjImagesViewModel {
     return initKoin {
-        androidContext(androidContext = context)
-        if (dataSource != null) {
-            modules(
-                module { factory { dataSource } },
-                module { viewModel { MjImagesViewModel(get(), get()) } }
-            )
-        } else {
-            modules(
-                module { viewModel { MjImagesViewModel(get(), get()) } }
-            )
-        }
+        androidContext(context)
+        modules(
+            module {
+                dataSource?.let { factory { it } }
+                viewModelOf(::MjImagesViewModel)
+            }
+        )
     }.koin.get()
 }
 
