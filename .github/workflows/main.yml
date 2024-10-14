@@ -5,7 +5,7 @@ on:
 jobs:
   compose-ui-tests:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 30
 
     steps:
       - uses: actions/checkout@v4
@@ -23,39 +23,39 @@ jobs:
           sudo udevadm control --reload-rules
           sudo udevadm trigger --name-match=kvm
 
+      - name: Set up Android Emulator
+        uses: ReactiveCircus/android-emulator-runner@v2.33.0
+        with:
+          api-level: 29
+          script: echo "Emulator is ready"
+
       - name: Run instrumented tests
         uses: nick-fields/retry@v2
         with:
           timeout_minutes: 25
           max_attempts: 3
-          command: |
-            uses: ReactiveCircus/android-emulator-runner@v2.33.0
-            with:
-              api-level: 29
-              script: ./gradlew connectedCheck
+          command: ./gradlew connectedCheck
 
   unit-tests-and-detekt:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set Java 17
+      - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
           java-version: 17
+          distribution: 'adopt'
+          cache: 'gradle'
 
       - name: Run Detekt
         uses: nick-fields/retry@v2
         with:
           timeout_minutes: 15
           max_attempts: 3
-          command: |
-            uses: eskatos/gradle-command-action@v3
-            with:
-              arguments: detekt
+          command: ./gradlew detekt
 
       - name: Run Unit Tests
         uses: nick-fields/retry@v2
@@ -66,12 +66,13 @@ jobs:
 
   iOS-build:
     runs-on: macos-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
 
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-java@v4
+      - name: Set up Java
+        uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
           java-version: 17
@@ -84,12 +85,7 @@ jobs:
           command: ./gradlew :shared:compileKotlinIosSimulatorArm64
 
       - name: iOS set up
-        uses: nick-fields/retry@v2
-        with:
-          timeout_minutes: 25
-          max_attempts: 3
-          command: |
-            uses: ./.github/actions/ios-action
+        uses: ./.github/actions/ios-action
 
       - name: Build iOS app
         uses: nick-fields/retry@v2
@@ -100,34 +96,33 @@ jobs:
 
   maestro-ui-tests-and-upload-apk:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
 
     outputs:
       app: androidApp/build/outputs/apk/debug
     steps:
       - uses: actions/checkout@v4
+
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
           java-version: 17
           distribution: 'adopt'
           cache: 'gradle'
+
       - name: Assemble Debug APK
         uses: nick-fields/retry@v2
         with:
           timeout_minutes: 20
           max_attempts: 3
           command: ./gradlew :androidApp:assembleDebug
+
       - name: Run Maestro Tests
-        uses: nick-fields/retry@v2
+        uses: mobile-dev-inc/action-maestro-cloud@v1.9.2
         with:
-          timeout_minutes: 20
-          max_attempts: 3
-          command: |
-            uses: mobile-dev-inc/action-maestro-cloud@v1.9.2
-            with:
-              api-key: ${{ secrets.MAESTRO_CLOUD_API_KEY }}
-              app-file: androidApp/build/outputs/apk/debug/androidApp-debug.apk
+          api-key: ${{ secrets.MAESTRO_CLOUD_API_KEY }}
+          app-file: androidApp/build/outputs/apk/debug/androidApp-debug.apk
+
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
@@ -136,14 +131,17 @@ jobs:
 
   desktop-build:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
 
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
           java-version: 17
+
       - name: Build desktop app
         uses: nick-fields/retry@v2
         with:
@@ -153,14 +151,17 @@ jobs:
 
   web-build:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
 
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
           java-version: 17
+
       - name: Build web app
         uses: nick-fields/retry@v2
         with:
@@ -170,14 +171,17 @@ jobs:
 
   wasm-build:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
 
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
           java-version: 17
+
       - name: Build wasm app
         uses: nick-fields/retry@v2
         with:
