@@ -8,7 +8,7 @@
 Diese Anwendung wurde entwickelt, um die Bilder von MidJourney anzuzeigen. Die Anwendung wurde mit Compose Multiplatform entwickelt. Die Anwendung läuft auf den Plattformen Android, iOS, Web, Wear OS, Android Automotive, Android TV
 
 <p align="center"><img src="image-assets/1.gif" alt="compose-header" /><br><br></p>
-Die Anwendung wurde im MVVM-Konzept mit Kotlin und Jetpack Compose entwickelt. Es wurden Netzwerkanforderungszustände, Endlos-Pagination, Bildladeprozesse und Bildcaching durchgeführt.
+Die Anwendung wurde im MVVM-Konzept mit Kotlin und Jetpack Compose entwickelt. Es wurden Netzwerkanforderungszustände, Endlos-Pagination, Bildladeprozesse, Offline-Modus und Bildcaching durchgeführt.
 
 ## Verwendete Bibliotheken
 

@@ -14,7 +14,7 @@ data class MjImages(
     operator fun plus(images: MjImages): MjImages =
         MjImages(
             currentPage = images.currentPage,
-            images = this.images + images.images,
+            images = (this.images + images.images).distinct(),
             totalPages = images.totalPages
         )
 }

@@ -156,15 +156,6 @@ jobs:
           name: apk
           path: androidApp/build/outputs/apk/debug/androidApp-debug.apk
 
-      - name: Upload Maestro Test Results
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: maestro-test-results
-          path: |
-            ${{ github.workspace }}/report*.xml
-            ~/.maestro/tests/**/*
-
   desktop-build:
     runs-on: ubuntu-latest
     timeout-minutes: 45

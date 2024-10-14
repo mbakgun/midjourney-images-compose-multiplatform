@@ -6,14 +6,20 @@ import domain.model.MjImages
 import domain.model.State
 import domain.usecase.MjImagesFetchUseCase
 import domain.usecase.MjImagesUseCase
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
+import midjourneyimagescomposemultiplatform.shared.generated.resources.Res
+import midjourneyimagescomposemultiplatform.shared.generated.resources.failed_fetch_message
+import org.jetbrains.compose.resources.getString
 
 class MjImagesViewModel(
     private val fetchUseCase: MjImagesFetchUseCase,
@@ -32,6 +38,9 @@ class MjImagesViewModel(
     private val _dialogPreviewUrl: MutableStateFlow<String> = MutableStateFlow("")
     val dialogPreviewUrl: StateFlow<String> = _dialogPreviewUrl.asStateFlow()
 
+    private val _snackMessage: MutableSharedFlow<String> = MutableSharedFlow()
+    val snackMessage: SharedFlow<String> = _snackMessage.asSharedFlow()
+
     init {
         checkTheme()
         fetchImages()
@@ -46,8 +55,11 @@ class MjImagesViewModel(
     }
 
     fun refreshImages() {
-        _images.value = MjImages()
-        fetchImages()
+        viewModelScope.launch {
+            useCase.clearImages()
+            _images.value = MjImages()
+            fetchImages()
+        }
     }
 
     private fun fetchImages(
@@ -57,20 +69,25 @@ class MjImagesViewModel(
             .getImages(page)
             .onStart { _state.value = State.LOADING }
             .onEach { images ->
-                if (images.isEmpty()) {
+                if (_images.value.images.isEmpty() && images.isEmpty()) {
                     _state.value = State.EMPTY
                 } else {
                     _state.value = State.CONTENT
                     _images.value += images
                 }
             }.catch {
-                _state.value = State.ERROR
+                it.printStackTrace()
+                if (_images.value.isEmpty()) {
+                    _state.value = State.ERROR
+                } else {
+                    _snackMessage.emit(getString(Res.string.failed_fetch_message))
+                }
             }
             .launchIn(viewModelScope)
     }
 
     suspend fun isEligibleToShowSnackBar(): Boolean =
-        useCase.isEligibleToShowSnackMessage()
+        useCase.isEligibleToShowSnackMessage() && _images.value.images.isNotEmpty()
 
     suspend fun setSnackMessageShown() {
         useCase.setSnackMessageShown()
