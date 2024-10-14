@@ -61,28 +61,18 @@ class ErrorMjImagesDataSource : MjImagesDataSource.Remote {
 
 class OfflineMjImagesLocalDataSource : MjImagesDataSource.Local {
 
-    override suspend fun isEligibleToShowSnackMessage(): Boolean {
-        return false
-    }
+    override suspend fun isEligibleToShowSnackMessage(): Boolean = false
 
-    override suspend fun setSnackMessageShown() {
-        // no-op
-    }
+    override suspend fun setSnackMessageShown() = Unit
 
-    override suspend fun isDarkModeEnabled(): Boolean {
-        return false
-    }
+    override suspend fun isDarkModeEnabled(): Boolean = false
 
-    override suspend fun setDarkMode(enabled: Boolean) {
-        // no-op
-    }
+    override suspend fun setDarkMode(enabled: Boolean) = Unit
 
-    override suspend fun isCacheValid(): Boolean {
-        return true
-    }
+    override suspend fun isCacheValid(): Boolean = true
 
-    override suspend fun getImages(page: Int): MjImagesResponse? {
-        return MjImagesResponse(
+    override suspend fun getImages(page: Int): MjImagesResponse =
+        MjImagesResponse(
             currentPage = 1,
             totalPages = 1,
             mjImageResponses = listOf(
@@ -96,13 +86,8 @@ class OfflineMjImagesLocalDataSource : MjImagesDataSource.Local {
             pageSize = null,
             totalImages = null,
         )
-    }
 
-    override suspend fun clearImages() {
-        // no-op
-    }
+    override suspend fun clearImages() = Unit
 
-    override suspend fun saveImages(page: Int, response: MjImagesResponse) {
-        // no-op
-    }
+    override suspend fun saveImages(page: Int, response: MjImagesResponse) = Unit
 }
