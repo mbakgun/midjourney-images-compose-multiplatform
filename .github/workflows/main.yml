@@ -161,7 +161,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: maestro-test-results
-          path: maestro/test-results/
+          path: |
+            ${{ github.workspace }}/report*.xml
+            ~/.maestro/tests/**/*
 
   desktop-build:
     runs-on: ubuntu-latest
