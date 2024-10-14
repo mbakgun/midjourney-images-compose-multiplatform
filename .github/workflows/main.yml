@@ -5,7 +5,7 @@ on:
 jobs:
   compose-ui-tests:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
 
     steps:
       - uses: actions/checkout@v4
@@ -23,18 +23,24 @@ jobs:
           sudo udevadm control --reload-rules
           sudo udevadm trigger --name-match=kvm
 
-      - name: Set up Android Emulator
+      - name: Set up Emulator, Build and Run Tests
         uses: ReactiveCircus/android-emulator-runner@v2.33.0
         with:
           api-level: 29
-          script: echo "Emulator is ready"
+          script: |
+            adb devices
+            ./gradlew assembleDebug
+            ./gradlew connectedCheck -PtestBuildType=debug --info
 
-      - name: Run instrumented tests
+      - name: Retry Tests if Failed
         uses: nick-fields/retry@v2
+        if: failure()
         with:
-          timeout_minutes: 25
+          timeout_minutes: 30
           max_attempts: 3
-          command: ./gradlew connectedCheck
+          command: |
+            adb devices
+            ./gradlew connectedCheck -PtestBuildType=debug --info
 
   unit-tests-and-detekt:
     runs-on: ubuntu-latest
