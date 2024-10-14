@@ -5,7 +5,7 @@ on:
 jobs:
   compose-ui-tests:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 60
 
     steps:
       - uses: actions/checkout@v4
@@ -36,15 +36,15 @@ jobs:
         uses: nick-fields/retry@v2
         if: failure()
         with:
-          timeout_minutes: 30
-          max_attempts: 3
+          timeout_minutes: 15
+          max_attempts: 2
           command: |
             adb devices
             ./gradlew connectedCheck -PtestBuildType=debug --info
 
   unit-tests-and-detekt:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 45
 
     steps:
       - uses: actions/checkout@v4
@@ -60,19 +60,19 @@ jobs:
         uses: nick-fields/retry@v2
         with:
           timeout_minutes: 15
-          max_attempts: 3
+          max_attempts: 2
           command: ./gradlew detekt
 
       - name: Run Unit Tests
         uses: nick-fields/retry@v2
         with:
           timeout_minutes: 15
-          max_attempts: 3
+          max_attempts: 2
           command: ./gradlew test --stacktrace
 
   iOS-build:
     runs-on: macos-latest
-    timeout-minutes: 25
+    timeout-minutes: 60
 
     steps:
       - uses: actions/checkout@v4
@@ -87,7 +87,7 @@ jobs:
         uses: nick-fields/retry@v2
         with:
           timeout_minutes: 20
-          max_attempts: 3
+          max_attempts: 2
           command: ./gradlew :shared:compileKotlinIosSimulatorArm64
 
       - name: iOS set up
@@ -97,12 +97,12 @@ jobs:
         uses: nick-fields/retry@v2
         with:
           timeout_minutes: 25
-          max_attempts: 3
+          max_attempts: 2
           command: xcodebuild build -workspace iosApp/iosApp.xcworkspace -configuration Debug -scheme iosApp -sdk iphoneos -destination name='iPhone 14' -verbose
 
   maestro-ui-tests-and-upload-apk:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 45
 
     outputs:
       app: androidApp/build/outputs/apk/debug
@@ -120,7 +120,7 @@ jobs:
         uses: nick-fields/retry@v2
         with:
           timeout_minutes: 20
-          max_attempts: 3
+          max_attempts: 2
           command: ./gradlew :androidApp:assembleDebug
 
       - name: Run Maestro Tests
@@ -137,7 +137,7 @@ jobs:
 
   desktop-build:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 45
 
     steps:
       - uses: actions/checkout@v4
@@ -152,12 +152,12 @@ jobs:
         uses: nick-fields/retry@v2
         with:
           timeout_minutes: 20
-          max_attempts: 3
+          max_attempts: 2
           command: ./gradlew :desktop:packageDistributionForCurrentOS
 
   web-build:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 45
 
     steps:
       - uses: actions/checkout@v4
@@ -172,12 +172,12 @@ jobs:
         uses: nick-fields/retry@v2
         with:
           timeout_minutes: 20
-          max_attempts: 3
+          max_attempts: 2
           command: ./gradlew :webApp:jsBrowserDevelopmentExecutableDistribution
 
   wasm-build:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 45
 
     steps:
       - uses: actions/checkout@v4
@@ -192,5 +192,5 @@ jobs:
         uses: nick-fields/retry@v2
         with:
           timeout_minutes: 20
-          max_attempts: 3
+          max_attempts: 2
           command: ./gradlew :wasmApp:wasmBrowserDevelopmentExecutableDistribution
