@@ -5,8 +5,7 @@ import data.source.remote.model.MjImagesResponse
 
 class MjImagesLocalFakeDataSource : MjImagesDataSource.Local {
 
-    override suspend fun isEligibleToShowSnackMessage(): Boolean =
-        true
+    override suspend fun isEligibleToShowSnackMessage(): Boolean = true
 
     override suspend fun setSnackMessageShown() = Unit
 
@@ -20,7 +19,8 @@ class MjImagesLocalFakeDataSource : MjImagesDataSource.Local {
 
     override suspend fun clearImages() = Unit
 
-    override suspend fun saveImages(
-        page: Int, response: MjImagesResponse
+    override suspend fun cacheResponse(
+        page: Int,
+        response: MjImagesResponse
     ) = Unit
 }

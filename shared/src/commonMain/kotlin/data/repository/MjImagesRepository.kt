@@ -21,7 +21,7 @@ class MjImagesRepository : KoinComponent {
         }
 
         val mjImagesResponse = remoteSource.getImages(page)
-        localSource.saveImages(page,mjImagesResponse)
+        localSource.cacheResponse(page,mjImagesResponse)
         emit(mjImagesResponse)
     }
 
@@ -37,9 +37,5 @@ class MjImagesRepository : KoinComponent {
 
      suspend fun setDarkMode(enabled: Boolean) {
         localSource.setDarkMode(enabled)
-    }
-
-    suspend fun clearImages() {
-        localSource.clearImages()
     }
 }

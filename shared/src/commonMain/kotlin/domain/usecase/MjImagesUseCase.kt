@@ -21,8 +21,4 @@ class MjImagesUseCase : KoinComponent {
     suspend fun setDarkMode(enabled: Boolean) {
         repository.setDarkMode(enabled)
     }
-
-    suspend fun clearImages() {
-        repository.clearImages()
-    }
 }

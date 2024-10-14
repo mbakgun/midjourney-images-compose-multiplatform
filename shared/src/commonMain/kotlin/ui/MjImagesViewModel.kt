@@ -55,11 +55,8 @@ class MjImagesViewModel(
     }
 
     fun refreshImages() {
-        viewModelScope.launch {
-            useCase.clearImages()
-            _images.value = MjImages()
-            fetchImages()
-        }
+        _images.value = MjImages()
+        fetchImages()
     }
 
     private fun fetchImages(

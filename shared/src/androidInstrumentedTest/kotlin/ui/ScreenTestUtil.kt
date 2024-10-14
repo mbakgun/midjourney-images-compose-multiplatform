@@ -89,5 +89,5 @@ class OfflineMjImagesLocalDataSource : MjImagesDataSource.Local {
 
     override suspend fun clearImages() = Unit
 
-    override suspend fun saveImages(page: Int, response: MjImagesResponse) = Unit
+    override suspend fun cacheResponse(page: Int, response: MjImagesResponse) = Unit
 }

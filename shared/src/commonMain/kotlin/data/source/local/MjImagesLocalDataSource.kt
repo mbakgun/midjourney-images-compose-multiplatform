@@ -42,7 +42,8 @@ class MjImagesLocalDataSource(
 
     override suspend fun getImages(page: Int): MjImagesResponse? =
         withContext(dispatcherProvider.io) {
-            val jsonString = settings.getStringOrNull(CACHE_PREFIX_KEY + page) ?: return@withContext null
+            val jsonString =
+                settings.getStringOrNull(CACHE_PREFIX_KEY + page) ?: return@withContext null
             Json.decodeFromString<MjImagesResponse?>(jsonString)
         }
 
@@ -56,7 +57,7 @@ class MjImagesLocalDataSource(
         }
     }
 
-    override suspend fun saveImages(page: Int, response: MjImagesResponse) {
+    override suspend fun cacheResponse(page: Int, response: MjImagesResponse) {
         withContext(dispatcherProvider.io) {
             if (response.mjImageResponses.isNullOrEmpty()) return@withContext
             if (page == 1) clearImages()

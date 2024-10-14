@@ -13,7 +13,7 @@ interface MjImagesDataSource {
         suspend fun isCacheValid(): Boolean
         suspend fun getImages(page: Int): MjImagesResponse?
         suspend fun clearImages()
-        suspend fun saveImages(page: Int, response: MjImagesResponse)
+        suspend fun cacheResponse(page: Int, response: MjImagesResponse)
     }
 
     interface Remote {
