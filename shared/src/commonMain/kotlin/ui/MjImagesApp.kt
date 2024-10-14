@@ -127,13 +127,6 @@ fun MjImagesApp(
             }
         }
 
-        LaunchedEffect(Unit) {
-            if (viewModel.isEligibleToShowSnackBar()) {
-                scaffoldState.snackbarHostState.showSnackbar(getString(Res.string.snack_message))
-                viewModel.setSnackMessageShown()
-            }
-        }
-
         Scaffold(scaffoldState = scaffoldState) {
             val isRefreshing = remember {
                 derivedStateOf {
@@ -150,12 +143,21 @@ fun MjImagesApp(
                 when (state) {
                     State.ERROR -> ErrorScreen(onRefresh)
                     State.EMPTY -> EmptyScreen(onRefresh)
-                    else -> MjImagesList(
-                        onLoadMore = viewModel::loadMore,
-                        images = images,
-                        state = listState,
-                    ) { hqImageUrl ->
-                        viewModel.showPreviewDialog(hqImageUrl)
+                    else -> {
+                        LaunchedEffect(Unit) {
+                            if (viewModel.isEligibleToShowSnackBar()) {
+                                scaffoldState.snackbarHostState.showSnackbar(getString(Res.string.snack_message))
+                                viewModel.setSnackMessageShown()
+                            }
+                        }
+
+                        MjImagesList(
+                            onLoadMore = viewModel::loadMore,
+                            images = images,
+                            state = listState,
+                        ) { hqImageUrl ->
+                            viewModel.showPreviewDialog(hqImageUrl)
+                        }
                     }
                 }
                 PullRefreshIndicator(

@@ -30,8 +30,8 @@ class MjImagesScreenTest {
 
         composeTestRule.setContent {
             MjImagesApp(initAppAndMockViewModel(
-                LocalContext.current,
-                EmptyMjImagesDataSource()
+                context = LocalContext.current,
+                remoteDataSource = EmptyMjImagesDataSource(),
             ).also { viewModel = it })
         }
 
@@ -46,23 +46,24 @@ class MjImagesScreenTest {
     }
 
     @Test
-    fun testErrorScreenUi() {
+    fun testOfflineScreenUi() {
         var viewModel: MjImagesViewModel? = null
 
         composeTestRule.setContent {
             MjImagesApp(initAppAndMockViewModel(
-                LocalContext.current,
-                ErrorMjImagesDataSource()
+                context = LocalContext.current,
+                remoteDataSource = ErrorMjImagesDataSource(),
+                localDataSource = OfflineMjImagesLocalDataSource(),
             ).also { viewModel = it })
         }
 
         composeTestRule
             .waitUntil(3000) {
-                viewModel?.state?.value == State.ERROR
+                viewModel?.state?.value == State.CONTENT
             }
 
         composeTestRule
-            .onNodeWithText("Error")
+            .onNodeWithText("offline", substring = true)
             .assertIsDisplayed()
     }
 
@@ -72,8 +73,8 @@ class MjImagesScreenTest {
 
         composeTestRule.setContent {
             MjImagesApp(initAppAndMockViewModel(
-                LocalContext.current,
-                SuccessMjImagesDataSource()
+                context = LocalContext.current,
+                remoteDataSource = SuccessMjImagesDataSource(),
             ).also { viewModel = it })
         }
 
@@ -114,8 +115,8 @@ class MjImagesScreenTest {
 
         composeTestRule.setContent {
             MjImagesApp(initAppAndMockViewModel(
-                LocalContext.current,
-                SuccessMjImagesDataSource()
+                context = LocalContext.current,
+                remoteDataSource = SuccessMjImagesDataSource(),
             ).also { viewModel = it })
             snackMessage = stringResource(Res.string.snack_message)
         }

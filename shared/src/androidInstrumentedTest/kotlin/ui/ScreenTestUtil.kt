@@ -14,10 +14,12 @@ import java.io.IOException
 // setAppContext for ImageLoader &-init koin - mock response - return viewModel
 fun initAppAndMockViewModel(
     context: Context,
-    dataSource: MjImagesDataSource.Remote? = null
+    remoteDataSource: MjImagesDataSource.Remote? = null,
+    localDataSource: MjImagesDataSource.Local? = null
 ): MjImagesViewModel = initKoin {
     androidContext(androidContext = context)
-    if (dataSource != null) modules(module { factory { dataSource } })
+    if (remoteDataSource != null) modules(module { factory { remoteDataSource } })
+    if (localDataSource != null) modules(module { factory { localDataSource } })
     loadKoinModules(module { viewModelOf(::MjImagesViewModel) })
 }.koin.get()
 
@@ -46,14 +48,7 @@ class EmptyMjImagesDataSource : MjImagesDataSource.Remote {
 
     override suspend fun getImages(
         page: Int
-    ): MjImagesResponse =
-        MjImagesResponse(
-            currentPage = 0,
-            totalPages = 0,
-            mjImageResponses = null,
-            pageSize = null,
-            totalImages = null,
-        )
+    ): MjImagesResponse = MjImagesResponse()
 }
 
 class ErrorMjImagesDataSource : MjImagesDataSource.Remote {
@@ -62,4 +57,52 @@ class ErrorMjImagesDataSource : MjImagesDataSource.Remote {
         page: Int
     ): MjImagesResponse =
         throw IOException("Unknown")
+}
+
+class OfflineMjImagesLocalDataSource : MjImagesDataSource.Local {
+
+    override suspend fun isEligibleToShowSnackMessage(): Boolean {
+        return false
+    }
+
+    override suspend fun setSnackMessageShown() {
+        // no-op
+    }
+
+    override suspend fun isDarkModeEnabled(): Boolean {
+        return false
+    }
+
+    override suspend fun setDarkMode(enabled: Boolean) {
+        // no-op
+    }
+
+    override suspend fun isCacheValid(): Boolean {
+        return true
+    }
+
+    override suspend fun getImages(page: Int): MjImagesResponse? {
+        return MjImagesResponse(
+            currentPage = 1,
+            totalPages = 1,
+            mjImageResponses = listOf(
+                MjImageResponse(
+                    date = "",
+                    imageUrl = "",
+                    ratio = 1.0,
+                    hqImageUrl = ""
+                )
+            ),
+            pageSize = null,
+            totalImages = null,
+        )
+    }
+
+    override suspend fun clearImages() {
+        // no-op
+    }
+
+    override suspend fun saveImages(page: Int, response: MjImagesResponse) {
+        // no-op
+    }
 }

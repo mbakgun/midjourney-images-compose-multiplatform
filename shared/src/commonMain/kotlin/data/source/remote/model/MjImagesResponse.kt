@@ -6,13 +6,13 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class MjImagesResponse(
     @SerialName("currentPage")
-    val currentPage: Int?,
+    val currentPage: Int? = null,
     @SerialName("images")
-    val mjImageResponses: List<MjImageResponse?>?,
+    val mjImageResponses: List<MjImageResponse?>? = null,
     @SerialName("pageSize")
-    val pageSize: Int?,
+    val pageSize: Int? = null,
     @SerialName("totalImages")
-    val totalImages: Int?,
+    val totalImages: Int? = null,
     @SerialName("totalPages")
-    val totalPages: Int?
+    val totalPages: Int? = null
 )

@@ -87,7 +87,7 @@ class MjImagesViewModel(
     }
 
     suspend fun isEligibleToShowSnackBar(): Boolean =
-        useCase.isEligibleToShowSnackMessage() && _images.value.images.isNotEmpty()
+        useCase.isEligibleToShowSnackMessage()
 
     suspend fun setSnackMessageShown() {
         useCase.setSnackMessageShown()
