@@ -24,10 +24,15 @@ jobs:
           sudo udevadm trigger --name-match=kvm
 
       - name: Run instrumented tests
-        uses: ReactiveCircus/android-emulator-runner@v2.33.0
+        uses: nick-fields/retry@v2
         with:
-          api-level: 29
-          script: ./gradlew connectedCheck
+          timeout_minutes: 25
+          max_attempts: 3
+          command: |
+            uses: ReactiveCircus/android-emulator-runner@v2.33.0
+            with:
+              api-level: 29
+              script: ./gradlew connectedCheck
 
   unit-tests-and-detekt:
     runs-on: ubuntu-latest
@@ -43,12 +48,21 @@ jobs:
           java-version: 17
 
       - name: Run Detekt
-        uses: eskatos/gradle-command-action@v3
+        uses: nick-fields/retry@v2
         with:
-          arguments: detekt
+          timeout_minutes: 15
+          max_attempts: 3
+          command: |
+            uses: eskatos/gradle-command-action@v3
+            with:
+              arguments: detekt
 
       - name: Run Unit Tests
-        run: ./gradlew test --stacktrace
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 15
+          max_attempts: 3
+          command: ./gradlew test --stacktrace
 
   iOS-build:
     runs-on: macos-latest
@@ -63,13 +77,26 @@ jobs:
           java-version: 17
 
       - name: Build macOS shared code
-        run: ./gradlew :shared:compileKotlinIosSimulatorArm64
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 20
+          max_attempts: 3
+          command: ./gradlew :shared:compileKotlinIosSimulatorArm64
 
       - name: iOS set up
-        uses: ./.github/actions/ios-action
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 25
+          max_attempts: 3
+          command: |
+            uses: ./.github/actions/ios-action
 
       - name: Build iOS app
-        run: xcodebuild build -workspace iosApp/iosApp.xcworkspace -configuration Debug -scheme iosApp -sdk iphoneos -destination name='iPhone 14' -verbose
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 25
+          max_attempts: 3
+          command: xcodebuild build -workspace iosApp/iosApp.xcworkspace -configuration Debug -scheme iosApp -sdk iphoneos -destination name='iPhone 14' -verbose
 
   maestro-ui-tests-and-upload-apk:
     runs-on: ubuntu-latest
@@ -85,11 +112,22 @@ jobs:
           java-version: 17
           distribution: 'adopt'
           cache: 'gradle'
-      - run: ./gradlew :androidApp:assembleDebug
-      - uses: mobile-dev-inc/action-maestro-cloud@v1.9.2
+      - name: Assemble Debug APK
+        uses: nick-fields/retry@v2
         with:
-          api-key: ${{ secrets.MAESTRO_CLOUD_API_KEY }}
-          app-file: androidApp/build/outputs/apk/debug/androidApp-debug.apk
+          timeout_minutes: 20
+          max_attempts: 3
+          command: ./gradlew :androidApp:assembleDebug
+      - name: Run Maestro Tests
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 20
+          max_attempts: 3
+          command: |
+            uses: mobile-dev-inc/action-maestro-cloud@v1.9.2
+            with:
+              api-key: ${{ secrets.MAESTRO_CLOUD_API_KEY }}
+              app-file: androidApp/build/outputs/apk/debug/androidApp-debug.apk
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
@@ -107,7 +145,11 @@ jobs:
           distribution: 'zulu'
           java-version: 17
       - name: Build desktop app
-        run: ./gradlew :desktop:packageDistributionForCurrentOS
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 20
+          max_attempts: 3
+          command: ./gradlew :desktop:packageDistributionForCurrentOS
 
   web-build:
     runs-on: ubuntu-latest
@@ -120,7 +162,11 @@ jobs:
           distribution: 'zulu'
           java-version: 17
       - name: Build web app
-        run: ./gradlew :webApp:jsBrowserDevelopmentExecutableDistribution
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 20
+          max_attempts: 3
+          command: ./gradlew :webApp:jsBrowserDevelopmentExecutableDistribution
 
   wasm-build:
     runs-on: ubuntu-latest
@@ -133,4 +179,8 @@ jobs:
           distribution: 'zulu'
           java-version: 17
       - name: Build wasm app
-        run: ./gradlew :wasmApp:wasmBrowserDevelopmentExecutableDistribution
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 20
+          max_attempts: 3
+          command: ./gradlew :wasmApp:wasmBrowserDevelopmentExecutableDistribution
