@@ -1,13 +1,15 @@
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 import org.jetbrains.kotlin.compose.compiler.gradle.ComposeCompilerGradlePluginExtension
+import org.jetbrains.kotlin.compose.compiler.gradle.ComposeFeatureFlag
 
 fun Project.composeCompiler(block: ComposeCompilerGradlePluginExtension.() -> Unit) {
     extensions.configure<ComposeCompilerGradlePluginExtension>(block)
 }
+
 fun Project.configureCompose() {
     composeCompiler {
-        enableStrongSkippingMode.set(true)
+        featureFlags.add(ComposeFeatureFlag.StrongSkipping)
 
         includeSourceInformation.set(true)
 
