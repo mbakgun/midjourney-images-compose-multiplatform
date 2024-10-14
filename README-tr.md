@@ -9,7 +9,7 @@ Bu uygulama, çoklu platform desteği ile MidJourney'ın oluşturduğu resimleri
 Compose Multiplatform ile geliştirilmiştir. Uygulama, Android, iOS, Web, Wear OS, Android Automotive, Android TV platformlarında çalışmaktadır.
 
 <p align="center"><img src="image-assets/1.gif" alt="compose-header" /><br><br></p>
-Kotlin ve Jetpack Compose kullanılarak MVVM konseptinde geliştirtirildi. Network request state'leri, endless pagination, image loading ve image caching işlemleri yapılmıştır.
+Kotlin ve Jetpack Compose kullanılarak MVVM konseptinde geliştirtirildi. Network request state'leri, endless pagination, image loading, çevrimdışı modu ve image caching işlemleri yapılmıştır.
 
 ## Kullanılan Kütüphaneler
 

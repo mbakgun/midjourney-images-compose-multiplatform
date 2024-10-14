@@ -15,9 +15,14 @@ class MjImagesRepository : KoinComponent {
     fun getImages(
         page: Int,
     ): Flow<MjImagesResponse> = flow {
-        emit(
-            remoteSource.getImages(page)
-        )
+        if (localSource.isCacheValid()) {
+            val imagesCache = localSource.getImages(page)
+            imagesCache?.let { emit(it) }
+        }
+
+        val mjImagesResponse = remoteSource.getImages(page)
+        localSource.cacheResponse(page,mjImagesResponse)
+        emit(mjImagesResponse)
     }
 
     suspend fun isEligibleToShowSnackMessage(): Boolean =

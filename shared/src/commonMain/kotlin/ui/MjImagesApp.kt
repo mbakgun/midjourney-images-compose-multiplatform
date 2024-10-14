@@ -75,8 +75,8 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Popup
 import androidx.compose.ui.window.PopupProperties
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import coil3.annotation.ExperimentalCoilApi
 import coil3.compose.AsyncImagePainter.State.Success
 import coil3.compose.rememberAsyncImagePainter
 import coil3.compose.setSingletonImageLoaderFactory
@@ -93,7 +93,7 @@ import util.OnBottomReached
 import util.getAsyncImageLoader
 import util.getImageProvider
 
-@OptIn(ExperimentalMaterialApi::class, ExperimentalCoilApi::class)
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun MjImagesApp(
     viewModel: MjImagesViewModel
@@ -118,10 +118,12 @@ fun MjImagesApp(
             }
         }
 
-        LaunchedEffect(Unit) {
-            if (viewModel.isEligibleToShowSnackBar()) {
-                scaffoldState.snackbarHostState.showSnackbar(getString(Res.string.snack_message))
-                viewModel.setSnackMessageShown()
+        LaunchedEffect(
+            viewModel.snackMessage,
+            LocalLifecycleOwner.current
+        ) {
+            viewModel.snackMessage.collect {
+                scaffoldState.snackbarHostState.showSnackbar(it)
             }
         }
 
@@ -141,12 +143,21 @@ fun MjImagesApp(
                 when (state) {
                     State.ERROR -> ErrorScreen(onRefresh)
                     State.EMPTY -> EmptyScreen(onRefresh)
-                    else -> MjImagesList(
-                        onLoadMore = viewModel::loadMore,
-                        images = images,
-                        state = listState,
-                    ) { hqImageUrl ->
-                        viewModel.showPreviewDialog(hqImageUrl)
+                    else -> {
+                        LaunchedEffect(Unit) {
+                            if (viewModel.isEligibleToShowSnackBar()) {
+                                scaffoldState.snackbarHostState.showSnackbar(getString(Res.string.snack_message))
+                                viewModel.setSnackMessageShown()
+                            }
+                        }
+
+                        MjImagesList(
+                            onLoadMore = viewModel::loadMore,
+                            images = images,
+                            state = listState,
+                        ) { hqImageUrl ->
+                            viewModel.showPreviewDialog(hqImageUrl)
+                        }
                     }
                 }
                 PullRefreshIndicator(
