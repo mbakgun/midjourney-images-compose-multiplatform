@@ -1,4 +1,4 @@
 <resources>
     <string name="snack_message">1) Click image to open in browser\n2) Long click to preview image</string>
-    <string name="failed_fetch_message">Failed to fetch images, using offline mode</string>
+    <string name="failed_fetch_message">Offline mode is being utilised as latest photos cannot be collected..</string>
 </resources>

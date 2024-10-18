@@ -219,7 +219,7 @@ fun MjImagesList(
         ) {
             items(
                 items = images.images,
-                key = MjImage::imageUrl
+                key = MjImage::id,
             ) { image ->
                 MjImageItem(
                     image = image,

@@ -11,10 +11,10 @@ data class MjImages(
 
     fun isEmpty() = images.isEmpty()
 
-    operator fun plus(images: MjImages): MjImages =
+    operator fun plus(other: MjImages): MjImages =
         MjImages(
-            currentPage = images.currentPage,
-            images = (this.images + images.images).distinct(),
-            totalPages = images.totalPages
+            currentPage = other.currentPage,
+            images = (this.images + other.images).distinctBy(MjImage::imageUrl),
+            totalPages = other.totalPages
         )
 }
