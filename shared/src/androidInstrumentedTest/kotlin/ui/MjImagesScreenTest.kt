@@ -63,7 +63,7 @@ class MjImagesScreenTest {
             }
 
         composeTestRule
-            .onNodeWithText("offline", substring = true)
+            .onNodeWithText("offline", substring = true, ignoreCase = true)
             .assertIsDisplayed()
     }
 
