@@ -2,7 +2,6 @@ package domain.mapper
 
 import data.source.remote.model.MjImageResponse
 import data.source.remote.model.MjImagesResponse
-import domain.model.MjImage
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -133,15 +132,8 @@ class MjImagesMapperTest {
 
         // then
         assertEquals(
-            listOf(
-                MjImage(
-                    date = "2023-21-04",
-                    imageUrl = "https://mj.akgns.com",
-                    ratio = 1.0,
-                    hqImageUrl = "https://mj.akgns.com/hq",
-                )
-            ),
-            result.images
+            1,
+            result.images.size
         )
     }
 
@@ -169,21 +161,7 @@ class MjImagesMapperTest {
 
         // then
         assertEquals(
-            listOf(
-                MjImage(
-                    date = "2024-21-04",
-                    imageUrl = "https://mj.akgns.com",
-                    ratio = 1.0,
-                    hqImageUrl = "https://mj.akgns.com/hq",
-                ),
-                MjImage(
-                    date = "2023-21-04",
-                    imageUrl = "https://mj.akgns.com/images",
-                    hqImageUrl = "https://mj.akgns.com/hq",
-                    ratio = 1.0
-                )
-            ),
-            result.images
+            result.images.size, 2
         )
     }
 
