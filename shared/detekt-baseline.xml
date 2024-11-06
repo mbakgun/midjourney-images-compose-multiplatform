@@ -11,13 +11,13 @@
     <ID>FunctionNaming:MjImagesApp.kt$@Composable fun PreviewDialog( hqImageUrl: String, onDismissed: () -&gt; Unit, )</ID>
     <ID>FunctionNaming:MjImagesApp.kt$@Composable fun PreviewImage(hqImageUrl: String)</ID>
     <ID>FunctionNaming:MjImagesApp.kt$@Composable fun ScrollToTopButton( onClick: () -&gt; Unit, modifier: Modifier = Modifier )</ID>
-    <ID>FunctionNaming:MjImagesApp.kt$@OptIn(ExperimentalMaterialApi::class) @Composable fun MjImagesApp( viewModel: MjImagesViewModel )</ID>
+    <ID>FunctionNaming:MjImagesApp.kt$@OptIn(ExperimentalMaterialApi::class) @Composable fun MjImagesApp( viewModel: MjImagesViewModel = koinViewModel&lt;MjImagesViewModel&gt;() )</ID>
     <ID>FunctionNaming:String0.commonMain.kt$@InternalResourceApi internal fun _collectCommonMainString0Resources(map: MutableMap&lt;String, StringResource&gt;)</ID>
     <ID>FunctionNaming:String0.commonMain.kt$private fun init_failed_fetch_message(): StringResource</ID>
     <ID>FunctionNaming:String0.commonMain.kt$private fun init_snack_message(): StringResource</ID>
     <ID>FunctionNaming:Theme.kt$@Composable fun AppTheme( useDarkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -&gt; Unit )</ID>
-    <ID>FunctionNaming:main.ios.kt$fun MainViewController(viewModel: MjImagesViewModel): UIViewController</ID>
-    <ID>LongMethod:MjImagesApp.kt$@OptIn(ExperimentalMaterialApi::class) @Composable fun MjImagesApp( viewModel: MjImagesViewModel )</ID>
+    <ID>FunctionNaming:main.ios.kt$fun MainViewController(): UIViewController</ID>
+    <ID>LongMethod:MjImagesApp.kt$@OptIn(ExperimentalMaterialApi::class) @Composable fun MjImagesApp( viewModel: MjImagesViewModel = koinViewModel&lt;MjImagesViewModel&gt;() )</ID>
     <ID>MagicNumber:Colors.kt$0xFF1F1B16</ID>
     <ID>MagicNumber:Colors.kt$0xFF3E2D16</ID>
     <ID>MagicNumber:Colors.kt$0xFF452B00</ID>

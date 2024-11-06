@@ -1,9 +1,8 @@
 import androidx.compose.ui.window.ComposeUIViewController
 import platform.UIKit.UIViewController
 import ui.MjImagesApp
-import ui.MjImagesViewModel
 
-fun MainViewController(viewModel: MjImagesViewModel): UIViewController =
+fun MainViewController(): UIViewController =
     ComposeUIViewController {
-        MjImagesApp(viewModel)
+        MjImagesApp()
     }

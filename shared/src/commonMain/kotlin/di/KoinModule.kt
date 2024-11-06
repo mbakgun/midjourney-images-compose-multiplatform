@@ -10,8 +10,10 @@ import domain.mapper.MjImagesMapper
 import domain.usecase.MjImagesFetchUseCase
 import domain.usecase.MjImagesUseCase
 import org.koin.core.context.startKoin
+import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.KoinAppDeclaration
 import org.koin.dsl.module
+import ui.MjImagesViewModel
 import util.getDispatcherProvider
 
 private val utilityModule = module {
@@ -35,7 +37,12 @@ private val useCaseModule = module {
     factory { MjImagesUseCase() }
 }
 
-private val sharedModules = listOf(useCaseModule, repositoryModule, apiModule, utilityModule)
+private val uiModule = module {
+    viewModelOf(::MjImagesViewModel)
+}
+
+private val sharedModules =
+    listOf(uiModule, useCaseModule, repositoryModule, apiModule, utilityModule)
 
 fun initKoin(appDeclaration: KoinAppDeclaration) = startKoin {
     modules(sharedModules)

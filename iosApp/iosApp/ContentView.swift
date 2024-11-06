@@ -5,18 +5,13 @@ import shared
 struct ComposeView: UIViewControllerRepresentable {
     
     func makeUIViewController(context: Context) -> UIViewController {
-        let viewModel = MjImagesViewModel.init(
-        fetchUseCase: MjImagesFetchUseCase.init(),
-        useCase: MjImagesUseCase.init()
-        )
-        return Main_iosKt.MainViewController(viewModel: viewModel)
+        return Main_iosKt.MainViewController()
     }
     
     func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
 }
 
 struct ContentView: View {
-    
     init() {
        KoinModuleKt.doInitKoin()
     }
