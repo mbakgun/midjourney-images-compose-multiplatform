@@ -145,7 +145,7 @@ jobs:
           command: ./gradlew :androidApp:assembleDebug
 
       - name: Run Maestro Tests
-        uses: mobile-dev-inc/action-maestro-cloud@v1.9.3
+        uses: mobile-dev-inc/action-maestro-cloud@v1.9.4
         with:
           api-key: ${{ secrets.MAESTRO_CLOUD_API_KEY }}
           app-file: androidApp/build/outputs/apk/debug/androidApp-debug.apk
