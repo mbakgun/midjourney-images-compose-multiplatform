@@ -54,6 +54,7 @@ kotlin {
 
             //di
             api(libs.koinCore)
+            api(libs.koinComposeViewmodel)
 
             //network
             implementation(libs.ktorClientCore)
@@ -77,7 +78,7 @@ kotlin {
         }
 
         androidMain.dependencies {
-            api(libs.koin)
+            api(libs.koinAndroid)
             implementation(libs.ktorClient)
             implementation(libs.lifecycle.runtime.android)
         }

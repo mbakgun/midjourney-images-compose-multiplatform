@@ -88,6 +88,7 @@ import kotlinx.coroutines.launch
 import midjourneyimagescomposemultiplatform.shared.generated.resources.Res
 import midjourneyimagescomposemultiplatform.shared.generated.resources.snack_message
 import org.jetbrains.compose.resources.getString
+import org.koin.compose.viewmodel.koinViewModel
 import ui.theme.AppTheme
 import util.OnBottomReached
 import util.getAsyncImageLoader
@@ -96,7 +97,7 @@ import util.getImageProvider
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun MjImagesApp(
-    viewModel: MjImagesViewModel
+    viewModel: MjImagesViewModel = koinViewModel<MjImagesViewModel>()
 ) {
     setSingletonImageLoaderFactory { context ->
         getAsyncImageLoader(context)
