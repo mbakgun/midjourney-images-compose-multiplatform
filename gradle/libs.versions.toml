@@ -5,7 +5,7 @@ ktorClient = "3.0.1"
 kotlinxCoroutines = "1.9.0"
 coil3 = "3.0.2"
 lifecycleRuntimeAndroid = "2.8.7"
-lifecycle = "2.8.3"
+lifecycle = "2.8.4"
 
 [plugins]
 detekt = { id = "io.gitlab.arturbosch.detekt", version = "1.23.7" }
