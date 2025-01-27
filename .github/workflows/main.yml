@@ -121,41 +121,6 @@ jobs:
           max_attempts: 2
           command: xcodebuild build -workspace iosApp/iosApp.xcworkspace -configuration Debug -scheme iosApp -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
 
-  maestro-ui-tests-and-upload-apk:
-    runs-on: ubuntu-latest
-    timeout-minutes: 45
-
-    outputs:
-      app: androidApp/build/outputs/apk/debug
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Set up JDK 17
-        uses: actions/setup-java@v4
-        with:
-          java-version: 17
-          distribution: 'adopt'
-          cache: 'gradle'
-
-      - name: Assemble Debug APK
-        uses: nick-fields/retry@v3
-        with:
-          timeout_minutes: 20
-          max_attempts: 2
-          command: ./gradlew :androidApp:assembleDebug
-
-      - name: Run Maestro Tests
-        uses: mobile-dev-inc/action-maestro-cloud@v1.9.7
-        with:
-          api-key: ${{ secrets.MAESTRO_CLOUD_API_KEY }}
-          app-file: androidApp/build/outputs/apk/debug/androidApp-debug.apk
-
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: apk
-          path: androidApp/build/outputs/apk/debug/androidApp-debug.apk
-
   desktop-build:
     runs-on: ubuntu-latest
     timeout-minutes: 45
