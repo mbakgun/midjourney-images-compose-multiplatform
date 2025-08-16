@@ -6,6 +6,11 @@ runs:
     - shell: bash
       run: ./gradlew :shared:generateDummyFramework
 
+    - name: Setup Xcode
+      uses: maxim-lobanov/setup-xcode@v1
+      with:
+        xcode-version: latest-stable
+
     - name: Set up cocoapods
       uses: maxim-lobanov/setup-cocoapods@v1
       with:
