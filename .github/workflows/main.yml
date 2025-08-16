@@ -119,7 +119,7 @@ jobs:
         with:
           timeout_minutes: 25
           max_attempts: 2
-          command: xcodebuild build -workspace iosApp/iosApp.xcworkspace -configuration Debug -scheme iosApp -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
+          command: xcodebuild build -workspace iosApp/iosApp.xcworkspace -configuration Debug -scheme iosApp -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 16' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
 
   desktop-build:
     runs-on: ubuntu-latest
