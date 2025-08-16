@@ -9,7 +9,7 @@ runs:
     - name: Set up cocoapods
       uses: maxim-lobanov/setup-cocoapods@v1
       with:
-        version: latest
+        version: latest-stable
 
     - shell: bash
       name: Install Dependencies
