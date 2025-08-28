@@ -43,6 +43,6 @@ lifecycle-runtime-compose = { module = "org.jetbrains.androidx.lifecycle:lifecyc
 androidx-lifecycle-viewmodel-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle" }
 
 # build-logic
-build-gradle-plugin = { module = "com.android.tools.build:gradle", version = "8.12.1" }
+build-gradle-plugin = { module = "com.android.tools.build:gradle", version = "8.12.2" }
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version = "2.2.10" }
 compose-compiler-plugin = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version = "2.2.10" }
