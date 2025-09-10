@@ -8,7 +8,6 @@ plugins {
 
 kotlin {
     jvm {
-        withJava()
     }
     sourceSets {
         val jvmMain by getting {
