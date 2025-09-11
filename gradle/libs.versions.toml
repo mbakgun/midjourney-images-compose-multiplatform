@@ -1,7 +1,7 @@
 [versions]
 androidxUiTest = "1.9.1"
 koin = "4.1.1"
-ktorClient = "3.2.3"
+ktorClient = "3.3.0"
 kotlinxCoroutines = "1.10.2"
 coil3 = "3.3.0"
 lifecycleRuntimeAndroid = "2.9.3"
