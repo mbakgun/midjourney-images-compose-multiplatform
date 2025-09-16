@@ -1,7 +1,7 @@
 package com.mbakgun.mj
 
 import androidx.compose.ui.ExperimentalComposeUiApi
-import androidx.compose.ui.window.CanvasBasedWindow
+import androidx.compose.ui.window.ComposeViewport
 import di.initKoin
 import kotlinx.browser.document
 import org.jetbrains.skiko.wasm.onWasmReady
@@ -11,7 +11,7 @@ import ui.MjImagesApp
 fun main() {
     initKoin()
     onWasmReady {
-        CanvasBasedWindow("MjImagesApp") {
+        ComposeViewport("MjImagesApp") {
             MjImagesApp()
         }
         document.getElementById("loader-container")?.remove()
