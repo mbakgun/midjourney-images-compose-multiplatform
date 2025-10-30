@@ -44,7 +44,7 @@ jobs:
 
       - name: Upload Compose UI Test Results
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: compose-ui-test-results
           path: '**/build/reports/androidTests/'
@@ -79,14 +79,14 @@ jobs:
 
       - name: Upload Unit Test Results
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: unit-test-results
           path: '**/build/reports/tests/'
 
       - name: Upload Detekt Results
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: detekt-results
           path: '**/build/reports/detekt/'
