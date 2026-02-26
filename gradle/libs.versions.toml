@@ -3,7 +3,7 @@ androidxUiTest = "1.10.4"
 koin = "4.1.1"
 ktorClient = "3.4.0"
 kotlinxCoroutines = "1.10.2"
-coil3 = "3.3.0"
+coil3 = "3.4.0"
 lifecycleRuntimeAndroid = "2.10.0"
 lifecycle = "2.9.6"
 
