@@ -33,7 +33,7 @@ jobs:
             ./gradlew connectedCheck -PtestBuildType=debug --info
 
       - name: Retry Tests if Failed
-        uses: nick-fields/retry@v3
+        uses: nick-fields/retry@v4
         if: failure()
         with:
           timeout_minutes: 15
@@ -64,14 +64,14 @@ jobs:
           cache: 'gradle'
 
       - name: Run Detekt
-        uses: nick-fields/retry@v3
+        uses: nick-fields/retry@v4
         with:
           timeout_minutes: 15
           max_attempts: 2
           command: ./gradlew detekt
 
       - name: Run Unit Tests
-        uses: nick-fields/retry@v3
+        uses: nick-fields/retry@v4
         with:
           timeout_minutes: 15
           max_attempts: 2
@@ -105,7 +105,7 @@ jobs:
           java-version: 17
 
       - name: Build macOS shared code
-        uses: nick-fields/retry@v3
+        uses: nick-fields/retry@v4
         with:
           timeout_minutes: 20
           max_attempts: 2
@@ -115,7 +115,7 @@ jobs:
         uses: ./.github/actions/ios-action
 
       - name: Build iOS app
-        uses: nick-fields/retry@v3
+        uses: nick-fields/retry@v4
         with:
           timeout_minutes: 25
           max_attempts: 2
@@ -135,7 +135,7 @@ jobs:
           java-version: 17
 
       - name: Build desktop app
-        uses: nick-fields/retry@v3
+        uses: nick-fields/retry@v4
         with:
           timeout_minutes: 20
           max_attempts: 2
@@ -155,7 +155,7 @@ jobs:
           java-version: 17
 
       - name: Build web app
-        uses: nick-fields/retry@v3
+        uses: nick-fields/retry@v4
         with:
           timeout_minutes: 20
           max_attempts: 2
@@ -175,7 +175,7 @@ jobs:
           java-version: 17
 
       - name: Build wasm app
-        uses: nick-fields/retry@v3
+        uses: nick-fields/retry@v4
         with:
           timeout_minutes: 20
           max_attempts: 2
