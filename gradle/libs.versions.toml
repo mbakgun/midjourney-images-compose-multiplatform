@@ -1,5 +1,5 @@
 [versions]
-androidxUiTest = "1.11.1"
+androidxUiTest = "1.11.3"
 koin = "4.1.1"
 ktorClient = "3.4.3"
 kotlinxCoroutines = "1.11.0"
